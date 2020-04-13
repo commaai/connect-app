@@ -1,0 +1,1 @@
+../../../react-native-mapbox-gl/ios/RCTMGL/CameraMode.h

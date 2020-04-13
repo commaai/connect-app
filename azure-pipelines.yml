@@ -1,0 +1,30 @@
+pr: none
+
+variables:
+- group: shared-variables
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - '*'
+
+jobs:
+- job: build
+  timeoutInMinutes: 0
+  pool:
+    name: MacOS
+  steps:
+  - checkout: self
+    lfs: false
+    submodules: false
+    persistCredentials: true
+    path: s/connect
+  - script: |
+      yarn
+      bundle install
+      bundle exec fastlane ios build_for_testing
+    env:
+      NPM_TOKEN: $(NPM_TOKEN)
+      COMMA_JWT: $(COMMA_JWT)
+    displayName: 'Build'

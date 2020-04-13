@@ -1,0 +1,7 @@
+devices(["iPhone XS Max", "iPhone 8 Plus"])
+
+scheme("commaUITests")
+
+launch_arguments(["-jwt " + ENV["COMMA_JWT"])
+
+output_directory("./screenshots")

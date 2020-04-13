@@ -1,0 +1,1 @@
+../../../ReactNativePermissions/ios/Permissions/RNPBluetooth.h

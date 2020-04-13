@@ -1,0 +1,213 @@
+import { StyleSheet, Platform } from 'react-native';
+
+export default StyleSheet.create({
+  mapContainer: {
+    backgroundColor: '#080808',
+    flex: 1,
+    flexDirection: 'column',
+  },
+  mapHeader: {
+    flexDirection: 'row',
+    paddingLeft: '6%',
+    paddingRight: '6%',
+    paddingBottom: 10,
+    width: '100%',
+    top: Platform.OS === 'android' ? 40 : 60,
+    position: 'absolute',
+  },
+  mapHeaderAccount: {
+    backgroundColor: '#191919',
+    borderRadius: 25,
+    overflow: 'hidden',
+    resizeMode: 'cover',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    maxHeight: 40,
+    maxWidth: 40,
+    flex: 1,
+  },
+  mapHeaderAccountAvatar: {
+    overflow: 'hidden',
+    resizeMode: 'cover',
+  },
+  mapHeaderOption: {
+    alignItems: 'center',
+    height: 50,
+    justifyContent: 'center',
+  },
+  mapHeaderTitle: {
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
+  mapHeaderFilter: {
+    flex: 8,
+    maxHeight: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mapHeaderFilterPill: {
+    flex: 1,
+    backgroundColor: '#191919',
+    borderColor: 'rgba(255,255,255,0.3)',
+    borderWidth: 1,
+    borderRadius: 25,
+    minWidth: 180,
+    maxHeight: 50,
+  },
+  mapHeaderFilterTitle: {
+    textAlign: 'center',
+    paddingTop: 12.5,
+  },
+  mapHeaderSearchIcon: {
+    maxHeight: 20,
+  },
+  mapHeaderHelpers: {
+    height: 115,
+    flex: 1,
+    paddingBottom: 10,
+  },
+  mapHeaderHelpersInner: {
+    maxWidth: 50,
+    flex: 1,
+  },
+  mapHeaderCompass: {
+    marginLeft: -9,
+    height: null,
+    width: null,
+  },
+  mapView: {
+    flex: 1,
+  },
+  annotationContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80,
+    width: 260/3.0,
+  },
+  annotationPin: {
+    zIndex: -5,
+    elevation: -5,
+    height: 80,
+    width: 260/3.0,
+  },
+  annotationCallout: {
+    backgroundColor: '#191919',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 20,
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 14,
+    zIndex: 5,
+  },
+  annotationCalloutTip: {
+    marginTop: -30,
+    opacity: 0.0,
+    zIndex: -2,
+    elevation: -2,
+  },
+  sheet: {
+    backgroundColor: '#191919',
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  sheetZeroState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '80%',
+    width: '100%',
+  },
+  sheetHeaderContainer: {
+    height: 72,
+    width: '100%',
+  },
+  sheetHeader: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    height: 40,
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    width: '100%',
+  },
+  sheetHeaderTitle: {},
+  sheetHeaderAction: {
+    marginLeft: 'auto',
+  },
+  sheetHeaderActionSpinner: {
+    display: 'none',
+    marginRight: 5,
+  },
+  sheetHeaderActionSpinnerLoading: {
+    display: 'flex',
+  },
+  sheetHeaderActionButton: {
+    alignItems: 'center',
+    backgroundColor: '#222222',
+    borderRadius: 20,
+    flexDirection: 'row',
+    marginBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 25,
+  },
+  sheetDevices: {
+    padding: '5%',
+    paddingTop: 0,
+  },
+  sheetDevice: {
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(255, 255, 255, 0.05)',
+    flexDirection: 'row',
+    height: 80,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  sheetDeviceAvatar: {
+    backgroundColor: '#222222',
+    borderWidth: 2,
+    borderColor: 'transparent',
+    borderRadius: 40,
+    height: 60,
+    justifyContent: 'center',
+    marginRight: 10,
+    overflow: 'hidden',
+    padding: 5,
+    width: 60,
+  },
+  sheetDeviceAvatarImage: {
+    minHeight: 80,
+  },
+  sheetDeviceAvatarImageHolder: {
+    tintColor: '#343434',
+  },
+  sheetDeviceInfo: {
+    marginLeft: '5%',
+    justifyContent: 'center',
+    width: '50%',
+  },
+  sheetDeviceInfoTitle: {
+    paddingBottom: 3,
+  },
+  sheetDeviceInfoStatus: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  sheetDeviceInfoOnlineBubble: {
+    backgroundColor: '#178644',
+    borderRadius: 5,
+    display: 'flex',
+    height: 10,
+    marginRight: 5,
+    width: 10,
+  },
+  sheetDeviceArrow: {
+    marginLeft: 'auto',
+    width: '4%',
+    opacity: 0.1,
+    transform: [{
+      rotate: '180deg',
+    }],
+  },
+});

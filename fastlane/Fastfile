@@ -1,0 +1,77 @@
+default_platform(:ios)
+
+platform :android do
+  lane :ci_test do
+    ENV['GRADLE_OPTS'] = "-Xmx64m -Dorg.gradle.jvmargs='-Xmx256m -XX:MaxPermSize=64m'"
+    test
+  end
+
+  lane :test do
+    gradle(task: "test", project_dir: 'android/')
+  end
+
+  lane :internal_beta do
+    release(track: "internal")
+  end
+
+  lane :closed_beta do
+    release(track: "alpha")
+  end
+
+  lane :public_beta do
+    release(track: "beta")
+  end
+
+  lane :production do
+    release(track: "production")
+  end
+
+  lane :release do |options|
+    increment_version_code(gradle_file_path: "android/app/build.gradle")
+    gradle(task: "clean", project_dir: 'android/')
+    gradle(task: "assembleRelease", project_dir: 'android/')
+
+    upload_to_play_store(track: options[:track], package_name: "ai.comma.connect", json_key_data: ENV['PLAY_STORE_KEY'])
+  end
+end
+
+platform :ios do
+  TEST_PLATFORM = "platform=iOS Simulator,name=iPhone 7,OS=13.2"
+
+  lane :ci_test do
+    setup_circle_ci
+    sh("xcrun simctl delete 'iPhone 7'") { |e| e }
+    sh("xcrun simctl create 'iPhone 7' com.apple.CoreSimulator.SimDeviceType.iPhone-7 com.apple.CoreSimulator.SimRuntime.iOS-13-2") { |e| e }
+    test
+  end
+
+  lane :build_for_testing do
+    derived_data_path = File.expand_path("..", Dir.pwd) + '/ios/DerivedData'
+    xcargs = '-sdk iphonesimulator build-for-testing -destination "' + TEST_PLATFORM + '" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE='
+    xcodebuild(workspace: "ios/connect.xcworkspace", scheme: "connect", xcargs: xcargs, derivedDataPath: derived_data_path, raw_buildlog: true)
+  end
+
+  desc "Run tests"
+  lane :test do |options|
+     build_for_testing
+     run_tests(scheme: "commaUITests", derived_data_path: derived_data_path, test_without_building: true, destination: TEST_PLATFORM, project: "ios/connect.xcodeproj")
+  end
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    increment_build_number(xcodeproj: "ios/connect.xcodeproj")
+    build_app(workspace: "ios/connect.xcworkspace", scheme: "connect", export_xcargs: "-allowProvisioningUpdates")
+    upload_to_testflight(wait_for_uploaded_build: true, demo_account_required: true, changelog: "Locate vehicles, review drives, set up devices", distribute_external: false)
+  end
+
+  lane :production do
+    increment_build_number(xcodeproj: "ios/connect.xcodeproj")
+    build_app(workspace: "ios/connect.xcworkspace", scheme: "connect", export_xcargs: "-allowProvisioningUpdates")
+    upload_to_app_store
+  end
+
+
+  lane :snapshots do
+    snapshot(workspace: "ios/connect.xcworkspace", reinstall_app: true)
+  end
+end

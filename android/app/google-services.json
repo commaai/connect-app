@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "45471411055",
+    "project_id": "comma-community"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45471411055:android:53b89a50f7e3568e",
+        "android_client_info": {
+          "package_name": "ai.comma.connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45471411055-r0sub1897gheupnaib67k22cbr6r9bu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBvNykeSt12wmsy9S6DuaZhRSN3i-7Rdk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,75 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# BUCK
+buck-out/
+\.buckd/
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+fastlane/report.xml
+fastlane/README.md
+fastlane/Preview.html
+fastlane/screenshots
+screenshots/
+fastlane/test_output
+
+# ios certs
+*.cer
+*.p12
+*.certSigningRequest
+
+# Bundle artifact
+*.jsbundle
+
+.expo/
+
+*.p12
+
+# release key, see infra-keys repo
+
+api-4947562210441717148-970505-baa086ac3170.json
+connect.app.dSYM.zip
+
+ios.bundle.map
+android.bundle.map

@@ -1,0 +1,34 @@
+{
+  "name": "RNAnalyticsIntegration-Mixpanel",
+  "version": "0.0.1-test-publish-ci.1",
+  "summary": "Mixpanel Integration for Segment's React-Native analytics library.",
+  "description": "Analytics for React-Native provides a single API that lets you\nintegrate with over 100s of tools.\n\nThis is the Mixpanel integration for the React-Native library.",
+  "homepage": "http://segment.com/",
+  "license": {
+    "type": "MIT"
+  },
+  "authors": {
+    "Segment": "friends@segment.com"
+  },
+  "source": {
+    "git": "https://github.com/segmentio/analytics-react-native.git",
+    "tag": "0.0.1-test-publish-ci.1"
+  },
+  "social_media_url": "https://twitter.com/segment",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "ios/main.m",
+  "static_framework": true,
+  "dependencies": {
+    "Segment-Mixpanel": [
+
+    ],
+    "Analytics": [
+
+    ],
+    "React": [
+
+    ]
+  }
+}

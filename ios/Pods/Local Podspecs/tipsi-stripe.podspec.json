@@ -1,0 +1,30 @@
+{
+  "name": "tipsi-stripe",
+  "version": "7.5.0",
+  "summary": "React Native Stripe binding for iOS/Andriod platforms",
+  "description": "React Native Stripe binding for iOS/Andriod platforms",
+  "license": "MIT",
+  "authors": "Tipsi",
+  "homepage": "https://github.com/tipsi/tipsi-stripe#readme",
+  "source": {
+    "git": "https://github.com/tipsi/tipsi-stripe",
+    "tag": "7.5.0"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "ios": "9.0"
+  },
+  "preserve_paths": [
+    "LICENSE",
+    "README.md"
+  ],
+  "source_files": "ios/TPSStripe/**/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ],
+    "Stripe": [
+      "~> 14.0.0"
+    ]
+  }
+}

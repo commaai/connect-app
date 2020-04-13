@@ -1,0 +1,1 @@
+../../../react-native-camera/ios/RN/TextDetectorManagerStub.h
