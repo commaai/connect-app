@@ -43,6 +43,6 @@ target 'connect' do
   pod 'RNSentry', :podspec => '../node_modules/@sentry/react-native/RNSentry.podspec'
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
   pod 'react-native-ios-launch-arguments', :podspec => '../node_modules/react-native-ios-launch-arguments/react-native-ios-launch-arguments.podspec'
-  pod 'tipsi-stripe', :podspec => '../node_modules/tipsi-stripe/tipsi-stripe.podspec'
+  pod 'tipsi-stripe', :podspec => '../node_modules/@commaai/tipsi-stripe/tipsi-stripe.podspec'
 
  end

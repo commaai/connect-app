@@ -662,10 +662,10 @@
   resolved "https://registry.yarnpkg.com/@commaai/jsc-android/-/jsc-android-250230.0.0.tgz#be98b887ead57d663295850af7424e5e59720433"
   integrity sha512-YSjdlSoAdOoFahQW7FIrUcRQzeuCf4aFVO2qWbLLJGfk+wbre9XXJHHyXDMSaMCwPhIQZmoBiniSiSbsSbGKPQ==
 
-"@commaai/tipsi-stripe@7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@commaai/tipsi-stripe/-/tipsi-stripe-7.5.1.tgz#e228d985484ca973ced5464507db58462854cd55"
-  integrity sha512-3GvVUGCjTUqO8H8n3btpcz8QIPVYVb0vGeN0ZblMSaprI6ZpWiBMcJBDzeIUMyTpCoonCG9G6+Op3SfwaI9Cxw==
+"@commaai/tipsi-stripe@7.5.6":
+  version "7.5.6"
+  resolved "https://registry.yarnpkg.com/@commaai/tipsi-stripe/-/tipsi-stripe-7.5.6.tgz#aa11d052be2a07ad83170b3939d56a7b08894b80"
+  integrity sha512-ahDMcbjE1ICJoSRTRKfETU7n6w04EpZ0WPDyPyLJMVsZ3IYp7hjI8zu2/HrhRZIFDdBBgg34KpCQIBkU9nKBaw==
 
 "@expo/react-native-touchable-native-feedback-safe@^1.1.2":
   version "1.1.2"
@@ -1947,9 +1947,9 @@ comma-separated-tokens@^1.0.0:
   dependencies:
     trim "0.0.1"
 
-"comma-x-native@git+ssh://git@github.com/commaai/comma-x-native.git#master":
-  version "0.1.0"
-  resolved "git+ssh://git@github.com/commaai/comma-x-native.git#8f5cf90c60d6a0380a5f7fb290a2cd17d11cf59f"
+"comma-x-native@https://github.com/commaai/comma-x-native.git#master":
+  version "0.2.0"
+  resolved "https://github.com/commaai/comma-x-native.git#1ad501e7a4d48ba33b9241bfb095dcfc219db458"
   dependencies:
     react-native-linear-gradient "^2.3.0"
 

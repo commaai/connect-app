@@ -201,7 +201,6 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				E3571EA012ECF1F3BF17F035 /* [CP] Copy Pods Resources */,
 				1256881D22155693003626BA /* ShellScript */,
-				83B761F71FE42BDD00F21A7A /* Crashlytics */,
 				56FD3D80E3974CBBA842BB07 /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
@@ -305,7 +304,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -315,7 +314,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $PWD/../ios.bundle.map\"\n\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode \\\n../node_modules/react-native/scripts/react-native-xcode.sh < /dev/null\n";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $PWD/../ios.bundle.map\"\n\nif [ \"$DEPLOYMENT_POSTPROCESSING\" -eq \"YES\" ]; then\n    ../node_modules/@sentry/cli/bin/sentry-cli react-native xcode \\\n    ../node_modules/react-native/scripts/react-native-xcode.sh < /dev/null\nelse\n    ../node_modules/react-native/scripts/react-native-xcode.sh\nfi\n";
 		};
 		1256881D22155693003626BA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -336,7 +335,7 @@
 		};
 		56FD3D80E3974CBBA842BB07 /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -344,7 +343,7 @@
 			name = "Upload Debug Symbols to Sentry";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "[ \"$arch\" = \"x86_64\" ] && exit 0\n \nexport SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym < /dev/null\n";
 		};
@@ -365,20 +364,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		83B761F71FE42BDD00F21A7A /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Crashlytics;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		E3571EA012ECF1F3BF17F035 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

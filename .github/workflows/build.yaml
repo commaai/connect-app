@@ -1,0 +1,35 @@
+name: build
+
+on: [push]
+
+jobs:
+  run-test:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache ruby dependencies
+        uses: actions/cache@v1
+        id: bundler-cache
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: node-cache
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Yarn Install
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Install bundler
+        run: gem install bundler:1.17.3
+      - name: Bundle setup
+        run: bundle config path vendor/bundle
+      - name: Bundle install
+        if: steps.bundler-cache.outputs.cache-hit != 'true'
+        run: bundle install --jobs 4 --retry 3
+      - name: Build
+        run: bundle exec fastlane ios build_for_testing

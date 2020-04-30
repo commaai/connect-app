@@ -127,10 +127,10 @@ PODS:
   - Sentry (4.4.3):
     - Sentry/Core (= 4.4.3)
   - Sentry/Core (4.4.3)
-  - Stripe (14.0.0)
-  - tipsi-stripe (7.5.0):
+  - Stripe (14.0.1)
+  - tipsi-stripe (7.5.6):
     - React
-    - Stripe (~> 14.0.0)
+    - Stripe (~> 14.0.1)
   - yoga (0.59.10.React)
 
 DEPENDENCIES:
@@ -168,7 +168,7 @@ DEPENDENCIES:
   - RNGoogleSignin (from `../node_modules/react-native-google-signin/RNGoogleSignin.podspec`)
   - "RNSentry (from `../node_modules/@sentry/react-native/RNSentry.podspec`)"
   - RNSVG (from `../node_modules/react-native-svg`)
-  - tipsi-stripe (from `../node_modules/tipsi-stripe/tipsi-stripe.podspec`)
+  - "tipsi-stripe (from `../node_modules/@commaai/tipsi-stripe/tipsi-stripe.podspec`)"
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -225,7 +225,7 @@ EXTERNAL SOURCES:
   RNSVG:
     :path: "../node_modules/react-native-svg"
   tipsi-stripe:
-    :podspec: "../node_modules/tipsi-stripe/tipsi-stripe.podspec"
+    :podspec: "../node_modules/@commaai/tipsi-stripe/tipsi-stripe.podspec"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -270,10 +270,10 @@ SPEC CHECKSUMS:
   RNSVG: 4834be1d644eb77f0e3f6de851881b83758a3124
   Segment-Mixpanel: edded29dfc288e62f0fae20c9b42a3c50d0639b9
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
-  Stripe: db29ad197c74aca6fb981e4e8355cf7ebd0fca5a
-  tipsi-stripe: 2d0e33b5bb62168cd1f1777a904781725c5baf8a
+  Stripe: 4305b646743612854819fb5d5cf67aaeb93577c0
+  tipsi-stripe: 64a2953ce4c9705465ddc1adb175301f5a897a24
   yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
 
-PODFILE CHECKSUM: d77c929ab25b4a6333839ef10aedbec40f163803
+PODFILE CHECKSUM: d39d10923e950967687070059177ef6b3beae552
 
 COCOAPODS: 1.5.3

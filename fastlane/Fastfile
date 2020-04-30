@@ -36,14 +36,7 @@ platform :android do
 end
 
 platform :ios do
-  TEST_PLATFORM = "platform=iOS Simulator,name=iPhone 7,OS=13.2"
-
-  lane :ci_test do
-    setup_circle_ci
-    sh("xcrun simctl delete 'iPhone 7'") { |e| e }
-    sh("xcrun simctl create 'iPhone 7' com.apple.CoreSimulator.SimDeviceType.iPhone-7 com.apple.CoreSimulator.SimRuntime.iOS-13-2") { |e| e }
-    test
-  end
+  TEST_PLATFORM = "platform=iOS Simulator,name=iPhone 8"
 
   lane :build_for_testing do
     derived_data_path = File.expand_path("..", Dir.pwd) + '/ios/DerivedData'
