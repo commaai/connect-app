@@ -4,13 +4,10 @@ This is a React Native App to connect your phone to your vehicles equipped with 
 
 Pair your `comma two` for:
 
-- Real-time vehicle location on the map
-- Live snapshot from device cameras
-- Drive videos replay with GPS path
+- Real-time vehicle location on the map (for devices connected to Internet, with software version 0.5.10 or newer)
+- Live snapshot from device cameras (for devices connected to Internet, with software version 0.7 or newer)
+- Drive videos replay with GPS path (also available [on the website and offline](https://github.com/commaai/openpilot/tree/master/tools#replay-driving-data))
 - 24/7 device connectivity when subscribed to `comma prime` (free 3-month trial, can be activated without the data plan if you have a third-party SIM)
-
-Live location available for devices connected to internet with software version 0.5.10 or newer.
-Snapshots available for devices with software version 0.7 or newer.
 
 See also: [Frequently Asked Questions](https://comma.ai/faq)
 
