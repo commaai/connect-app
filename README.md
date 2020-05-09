@@ -19,13 +19,13 @@ See also: [Frequently Asked Questions](https://comma.ai/faq)
 
 ### Run
 
+#### Run Android Debug (Device/Simulator)
+- `yarn android`
+
 #### Run iOS Debug (Simulator)
 - `cd ios && bundle install && pod install`
 - `cd ..`
 - `yarn ios`
-
-#### Run Android Debug (Device/Simulator)
-- `yarn android`
 
 ### Release
 
