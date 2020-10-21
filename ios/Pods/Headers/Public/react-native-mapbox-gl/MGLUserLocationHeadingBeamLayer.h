@@ -1,1 +1,1 @@
-../../../react-native-mapbox-gl/ios/RCTMGL/MGLUserLocationHeadingBeamLayer.h
+../../../../../node_modules/@react-native-mapbox-gl/maps/ios/RCTMGL/MGLUserLocationHeadingBeamLayer.h

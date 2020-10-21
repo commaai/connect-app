@@ -1,1 +1,1 @@
-../../../react-native-mapbox-gl/ios/RCTMGL/RCTMGLLightManager.h
+../../../../../node_modules/@react-native-mapbox-gl/maps/ios/RCTMGL/RCTMGLLightManager.h

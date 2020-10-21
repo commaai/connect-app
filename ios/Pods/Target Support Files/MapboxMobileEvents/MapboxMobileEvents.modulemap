@@ -1,0 +1,6 @@
+module MapboxMobileEvents {
+  umbrella header "MapboxMobileEvents-umbrella.h"
+
+  export *
+  module * { export * }
+}

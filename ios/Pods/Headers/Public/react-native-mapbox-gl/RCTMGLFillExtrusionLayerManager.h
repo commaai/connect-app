@@ -1,1 +1,1 @@
-../../../react-native-mapbox-gl/ios/RCTMGL/RCTMGLFillExtrusionLayerManager.h
+../../../../../node_modules/@react-native-mapbox-gl/maps/ios/RCTMGL/RCTMGLFillExtrusionLayerManager.h

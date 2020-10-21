@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import Mapbox from '@mapbox/react-native-mapbox-gl';
+// import MapboxGL from '@MapboxGL/react-native-MapboxGL-gl';
+import MapboxGL from '@react-native-mapbox-gl/maps';
 import moment from 'moment';
 import {lineString as makeLineString} from '@turf/helpers';
 import makeCentroid from '@turf/centroid';
@@ -29,17 +30,17 @@ import X from '../../../theme';
 import Styles from './DriveStyles';
 import { geocodeRoute } from '../../../actions/async/Drives';
 
-Mapbox.setAccessToken(ApiKeys.MAPBOX_TOKEN);
+MapboxGL.setAccessToken(ApiKeys.MAPBOX_TOKEN);
 
 type Props = {};
 
-const layerStyles = Mapbox.StyleSheet.create({
-  route: {
-    lineColor: 'white',
-    lineWidth: 3,
-    lineOpacity: 0.84,
-  },
-});
+// const layerStyles = MapboxGL.StyleSheet.create({
+//   route: {
+//     lineColor: 'white',
+//     lineWidth: 3,
+//     lineOpacity: 0.84,
+//   },
+// });
 
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
 let DEFAULT_MAP_REGION = [[_bbox[0], _bbox[1]], [_bbox[2], _bbox[3]]];
@@ -135,8 +136,8 @@ class Drive extends Component<Props> {
     const pinCoord = this.state.coords && this.state.coords.geometry.coordinates[Math.floor(this.state.currentTime)];
 
     return (
-      <Mapbox.MapView
-        styleURL={ Mapbox.StyleURL.Dark }
+      <MapboxGL.MapView
+        styleURL={ MapboxGL.StyleURL.Dark }
         visibleCoordinateBounds={ this.state.bbox }
         ref={ ref => {
           this.mapRef = ref
@@ -158,13 +159,13 @@ class Drive extends Component<Props> {
         logoEnabled={ false }>
         { this.state.coords &&
           <View>
-            <Mapbox.ShapeSource id='routeCoords' shape={ this.state.coords }>
-              <Mapbox.LineLayer
+            <MapboxGL.ShapeSource id='routeCoords' shape={ this.state.coords }>
+              <MapboxGL.LineLayer
                 id='routeLine'
                 style={ layerStyles.route }
               />
-            </Mapbox.ShapeSource>
-          {pinCoord && <Mapbox.PointAnnotation
+            </MapboxGL.ShapeSource>
+          {pinCoord && <MapboxGL.PointAnnotation
             id='pointAnnotation'
             title=''
             style={ Styles.annotationPin }
@@ -173,10 +174,10 @@ class Drive extends Component<Props> {
             <X.Image
               source={ Assets.iconPinParked }
               style={ Styles.annotationPin } />
-          </Mapbox.PointAnnotation> }
+          </MapboxGL.PointAnnotation> }
         </View>
       }
-      </Mapbox.MapView>
+      </MapboxGL.MapView>
     );
   }
 

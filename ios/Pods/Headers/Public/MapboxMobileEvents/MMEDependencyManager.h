@@ -1,0 +1,1 @@
+../../../MapboxMobileEvents/MapboxMobileEvents/MMEDependencyManager.h

@@ -42,9 +42,9 @@ function createAppStore(shouldAutoRehydrate = true) {
 }
 
 // App Component
-type Props = {};
+// type Props = {};
 
-export default class App extends Component<Props> {
+export default class App extends Component {
 
   constructor(props) {
     super(props);
@@ -64,6 +64,7 @@ export default class App extends Component<Props> {
   }
 
   componentDidMount() {
+    console.log("app mounted");
     AppState.addEventListener('change', this._handleAppStateChange);
     watchPosition(this.store.dispatch);
   }
@@ -73,6 +74,7 @@ export default class App extends Component<Props> {
   }
 
   _handleAppStateChange(appState) {
+    console.log("app state changed");
     if (appState === 'active' && this.state.appState.match(/inactive|background/)) {
       this.setState({ appState });
       setTimeout(() => watchPosition(this.store.dispatch), 500);

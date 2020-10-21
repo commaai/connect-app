@@ -1,0 +1,1 @@
+../../../MapboxMobileEvents/MapboxMobileEvents/Categories/NSUserDefaults+MMEConfiguration_Private.h

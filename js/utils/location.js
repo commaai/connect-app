@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 import { userLocationUpdated }  from '../actions/location';
 let watchId = null;
 
@@ -8,10 +9,10 @@ export function watchPosition(dispatch) {
   }
 
   if (Platform.OS === 'ios') {
-    navigator.geolocation.requestAuthorization();
+    Geolocation.requestAuthorization();
   }
-  watchId = navigator.geolocation.watchPosition(locationUpdated, locationError, { enableHighAccuracy: true });
-  navigator.geolocation.getCurrentPosition(locationUpdated, locationError, { enableHighAccuracy: true });
+  watchId = Geolocation.watchPosition(locationUpdated, locationError, { enableHighAccuracy: true });
+  Geolocation.getCurrentPosition(locationUpdated, locationError, { enableHighAccuracy: true });
 
   function locationUpdated (location) {
     dispatch(userLocationUpdated(location));
@@ -19,14 +20,13 @@ export function watchPosition(dispatch) {
 
   function locationError(error) {
     if (Platform.OS === 'ios') {
-      navigator.geolocation.requestAuthorization();
+      Geolocation.requestAuthorization();
     }
-    console.log('watchPosition error', error);
   }
 }
 
 export function stopWatchingPosition() {
   if (watchId !== null) {
-    navigator.geolocation.clearWatch(watchId);
+    Geolocation.clearWatch(watchId);
   }
 }

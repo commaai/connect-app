@@ -1,0 +1,1 @@
+../../../MapboxMobileEvents/MapboxMobileEvents/MMEEventsManager_Private.h

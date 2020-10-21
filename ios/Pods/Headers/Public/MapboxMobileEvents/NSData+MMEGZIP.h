@@ -1,0 +1,1 @@
+../../../MapboxMobileEvents/MapboxMobileEvents/Categories/NSData+MMEGZIP.h

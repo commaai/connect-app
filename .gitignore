@@ -71,5 +71,8 @@ fastlane/test_output
 api-4947562210441717148-970505-baa086ac3170.json
 connect.app.dSYM.zip
 
+# too large
+ios/Pods/Mapbox-iOS-SDK
+
 ios.bundle.map
 android.bundle.map

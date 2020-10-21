@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import <sys/utsname.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
@@ -14,7 +15,6 @@
 
 @interface RNDeviceInfo : RCTEventEmitter <RCTBridgeModule>
 
-@property (nonatomic) bool isEmulator;
 @property (nonatomic) float lowBatteryThreshold;
 
 @end
