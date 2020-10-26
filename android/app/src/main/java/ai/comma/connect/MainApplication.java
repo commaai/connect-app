@@ -3,8 +3,8 @@ package ai.comma.connect;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
 import io.sentry.RNSentryPackage;
@@ -14,7 +14,6 @@ import com.segment.analytics.reactnative.integration.mixpanel.RNAnalyticsIntegra
 import com.brentvatne.react.ReactVideoPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.mapbox.rctmgl.RCTMGLPackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
