@@ -1,0 +1,1 @@
+../../../RNPermissions/ios/RNPermissions.h

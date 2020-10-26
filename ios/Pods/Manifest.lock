@@ -37,6 +37,8 @@ PODS:
     - MapboxMobileEvents (= 0.10.2)
   - MapboxMobileEvents (0.10.2)
   - Mixpanel (3.4.7)
+  - Permission-Camera (2.2.2):
+    - RNPermissions
   - React (0.60.5):
     - React-Core (= 0.60.5)
     - React-DevSupport (= 0.60.5)
@@ -136,8 +138,6 @@ PODS:
     - React-Core (= 0.60.5)
   - React-RCTWebSocket (0.60.5):
     - React-Core (= 0.60.5)
-  - ReactNativePermissions (1.1.1):
-    - React
   - rn-fetch-blob (0.10.16):
     - React-Core
   - RNAnalytics (0.0.1-beta.5):
@@ -154,6 +154,8 @@ PODS:
   - RNGoogleSignin (1.2.4):
     - GoogleSignIn (~> 4.4.0)
     - React
+  - RNPermissions (2.2.2):
+    - React-Core
   - RNSentry (1.2.1):
     - React
     - Sentry (~> 4.4.0)
@@ -180,6 +182,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - lottie-ios (from `../node_modules/lottie-ios/lottie-ios.podspec`)
   - lottie-react-native (from `../node_modules/lottie-react-native/lottie-react-native.podspec`)
+  - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera.podspec`)
   - React (from `../node_modules/react-native/`)
   - React-Core (from `../node_modules/react-native/React`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
@@ -202,13 +205,13 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
-  - ReactNativePermissions (from `../node_modules/react-native-permissions/ReactNativePermissions.podspec`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - "RNAnalytics (from `../node_modules/@segment/analytics-react-native`)"
   - "RNAnalyticsIntegration-Mixpanel (from `../node_modules/@segment/analytics-react-native-mixpanel`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info/RNDeviceInfo.podspec`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler/RNGestureHandler.podspec`)
   - RNGoogleSignin (from `../node_modules/react-native-google-signin/RNGoogleSignin.podspec`)
+  - RNPermissions (from `../node_modules/react-native-permissions/RNPermissions.podspec`)
   - "RNSentry (from `../node_modules/@sentry/react-native/RNSentry.podspec`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - "tipsi-stripe (from `../node_modules/@commaai/tipsi-stripe/tipsi-stripe.podspec`)"
@@ -243,6 +246,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/lottie-ios/lottie-ios.podspec"
   lottie-react-native:
     :podspec: "../node_modules/lottie-react-native/lottie-react-native.podspec"
+  Permission-Camera:
+    :path: "../node_modules/react-native-permissions/ios/Camera.podspec"
   React:
     :path: "../node_modules/react-native/"
   React-Core:
@@ -287,8 +292,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   React-RCTWebSocket:
     :path: "../node_modules/react-native/Libraries/WebSocket"
-  ReactNativePermissions:
-    :podspec: "../node_modules/react-native-permissions/ReactNativePermissions.podspec"
   rn-fetch-blob:
     :path: "../node_modules/rn-fetch-blob"
   RNAnalytics:
@@ -301,6 +304,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native-gesture-handler/RNGestureHandler.podspec"
   RNGoogleSignin:
     :podspec: "../node_modules/react-native-google-signin/RNGoogleSignin.podspec"
+  RNPermissions:
+    :podspec: "../node_modules/react-native-permissions/RNPermissions.podspec"
   RNSentry:
     :podspec: "../node_modules/@sentry/react-native/RNSentry.podspec"
   RNSVG:
@@ -335,6 +340,7 @@ SPEC CHECKSUMS:
   Mapbox-iOS-SDK: a5915700ec84bc1a7f8b3e746d474789e35b7956
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
   Mixpanel: 696e0a1c7f2685aa06bb23829b7a58ab7203d6c7
+  Permission-Camera: 5d2aaf95592660b6dcb5e8d1d90ed5d0156cad02
   React: 53c53c4d99097af47cf60594b8706b4e3321e722
   React-Core: ba421f6b4f4cbe2fb17c0b6fc675f87622e78a64
   React-cxxreact: 8384287780c4999351ad9b6e7a149d9ed10a2395
@@ -357,13 +363,13 @@ SPEC CHECKSUMS:
   React-RCTText: b074d89033583d4f2eb5faf7ea2db3a13c7553a2
   React-RCTVibration: 2105b2e0e2b66a6408fc69a46c8a7fb5b2fdade0
   React-RCTWebSocket: cd932a16b7214898b6b7f788c8bddb3637246ac4
-  ReactNativePermissions: b64e084dff6a5cad51587d38c306f09246246384
   rn-fetch-blob: 651b8d076b43d0d7aa294a3d9ec16c00aab8bef9
   RNAnalytics: bd4d9abcf63059243aa39383f8d46387a8d9f4ad
   RNAnalyticsIntegration-Mixpanel: adcc0e2f8bf36a2579b8c9d6509732400691f9c8
   RNDeviceInfo: f72e930fbde5077e8366346204ba9ad41c7a598f
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
   RNGoogleSignin: a9084cfe072359166c93b80ead94eda3ad814d1d
+  RNPermissions: 5df468064df661a4c8c017e2791ce90d7695eea5
   RNSentry: 9b1d983b2d5d1c215ba6490348fd2a4cc23a8a9d
   RNSVG: 2cc66383316fa84d4c672ccfa5e3bac271b6a2af
   Segment-Mixpanel: edded29dfc288e62f0fae20c9b42a3c50d0639b9
@@ -372,6 +378,6 @@ SPEC CHECKSUMS:
   tipsi-stripe: 64a2953ce4c9705465ddc1adb175301f5a897a24
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
-PODFILE CHECKSUM: f21d02711fa2d908214a7274395802604cd07628
+PODFILE CHECKSUM: 6e5b2f603734924e12abe7183fe520f0e70b8732
 
 COCOAPODS: 1.9.3
