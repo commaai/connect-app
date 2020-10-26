@@ -24,6 +24,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.facebook.react.PackageList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,22 +40,10 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     @SuppressLint("MissingPermission")
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.asList(
-        new MainReactPackage(),
-            new SvgPackage(),
-        new RNAnalyticsIntegration_MixpanelPackage(),
-        new RNAnalyticsPackage(),
-        new ReactVideoPackage(),
-        new RNFetchBlobPackage(),
-        new RNSentryPackage(),
-        new RCTMGLPackage(),
-        new RNCameraPackage(),
-        new LottiePackage(),
-        new RNDeviceInfo(),
-        new RNGestureHandlerPackage(),
-        new RNGoogleSigninPackage(),
-        new StripeReactPackage()
-      );
+      List<ReactPackage> packages = new PackageList(this).getPackages();
+      // Manually add any missing packages like this
+      // packages.add(new PostsnapPackage());
+      return packages;
     }
 
     @Override
