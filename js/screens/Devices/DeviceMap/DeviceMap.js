@@ -3,12 +3,10 @@
  */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   ActivityIndicator,
   Animated,
   BackHandler,
-  Dimensions,
   FlatList,
   Platform,
   TouchableOpacity,
@@ -17,7 +15,6 @@ import {
 import { connect } from 'react-redux';
 import { withNavigation, DrawerActions } from 'react-navigation';
 import moment from 'moment';
-// import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import {
   multiPoint as makeMultiPoint,
@@ -392,7 +389,6 @@ class DeviceMap extends Component {
       }
     }
 
-    console.log("HI LOGAN " + bbox);
     this.setState({ bbox: {
       ne: [bbox[2], bbox[1]],
       sw: [bbox[0], bbox[3]]
