@@ -352,12 +352,10 @@ class DeviceMap extends Component {
   }
 
   flyToCurrentLocation() {
-    console.log(this.props.location);
     if (!this.props.location.location) {
       return;
     }
 
-    console.log(this.props.location);
     let { longitude, latitude } = this.props.location.location.coords;
     this.camRef.setCamera({ centerCoordinate: [ longitude, latitude ], zoom: 16, duration: 600 })
   }
