@@ -181,7 +181,7 @@ export function fetchDeviceCarHealth(dongleId) {
     try {
       const resp = await AthenaApi.post(dongleId, {
         method: 'getMessage',
-        params: {'service': 'health', 'timeout': 5000},
+        params: {'service': 'pandaState', 'timeout': 5000},
         jsonrpc: '2.0',
         id: 0,
       })
