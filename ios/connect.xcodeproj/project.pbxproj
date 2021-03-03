@@ -63,6 +63,7 @@
 		5112B447225B1BE900C9F3B3 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = ../../fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
 		5112B449225BCE3100C9F3B3 /* XCUIElement+gentleSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+gentleSwipe.swift"; sourceTree = "<group>"; };
 		51152CE4220A539D0088ED40 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		519E3F7A25EFCCB1007BFAE9 /* connectDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = connectDebug.entitlements; path = connect/connectDebug.entitlements; sourceTree = "<group>"; };
 		51C7490C220A615A00221E55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		51C76BB6220D158B00221E55 /* connect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = connect.entitlements; path = connect/connect.entitlements; sourceTree = "<group>"; };
 		51F7B7912238C4870020DD0E /* commaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = commaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +101,7 @@
 		13B07FAE1A68108700A75B9A /* connect */ = {
 			isa = PBXGroup;
 			children = (
+				519E3F7A25EFCCB1007BFAE9 /* connectDebug.entitlements */,
 				51C76BB6220D158B00221E55 /* connect.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -371,7 +373,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-connect/Pods-connect-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-connect/Pods-connect-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png",
 				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png",
@@ -416,7 +418,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-connect/Pods-connect-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-connect/Pods-connect-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -469,12 +471,12 @@
 			baseConfigurationReference = 4031C5D3468A6410BB4016B9 /* Pods-connect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = connect/connectDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 164;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = M598J8XSAV;
+				DEVELOPMENT_TEAM = "";
 				DISPLAY_NAME = comma;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -713,7 +715,7 @@
 				13B07F951A680F5B00A75B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		51F7B7982238C4880020DD0E /* Build configuration list for PBXNativeTarget "commaUITests" */ = {
 			isa = XCConfigurationList;
@@ -722,7 +724,7 @@
 				51F7B79A2238C4880020DD0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "connect" */ = {
 			isa = XCConfigurationList;
@@ -731,7 +733,7 @@
 				83CBBA211A601CBA00E9B192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

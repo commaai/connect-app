@@ -15,6 +15,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator=\"iPhone X\"",
+    "ios-device": "react-native bundle --platform ios --entry-file index.js --bundle-output ios/main.jsbundle --reset-cache && react-native run-ios --device",
     "apk": "cd android && ./gradlew assembleRelease",
     "rename": "node ./bin/rename.js",
     "start": "react-native start",
@@ -69,5 +70,8 @@
     "redux-thunk": "^2.3.0",
     "rn-fetch-blob": "^0.10.15",
     "url-search-params": "^1.1.0"
+  },
+  "resolutions": {
+    "graceful-fs": "4.2.4"
   }
 }

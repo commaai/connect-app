@@ -172,7 +172,7 @@ DEPENDENCIES:
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Analytics
     - boost-for-react-native
     - Crashlytics
@@ -243,9 +243,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Analytics: 77fd5fb102a4a5eedafa2c2b0245ceb7b7c15e45
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
+  Crashlytics: f836e1d564b4492da572b056ce7ea0476c53ec4b
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
-  Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
+  Fabric: e88a14d80173bcf3db4eac866c83619f2894183d
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
@@ -254,26 +254,26 @@ SPEC CHECKSUMS:
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   lottie-react-native: 3d8181d43619b1fe804c828bd5a09d20fe8bdea7
   Mixpanel: 696e0a1c7f2685aa06bb23829b7a58ab7203d6c7
-  React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
+  React: 36d0768f9e93be2473b37e7fa64f92c1d5341eef
   react-native-camera: b322bc25f47536219473c6d00c666d221f7f2695
   react-native-ios-launch-arguments: 78be547d1563de65f488fe049475403ce963b465
   react-native-mapbox-gl: d0477075c417bce09cc87e126cb2b42305c37099
   react-native-video: 8c49eca5a6087de968a05b340933b10e3b58169a
   ReactNativePermissions: b64e084dff6a5cad51587d38c306f09246246384
   rn-fetch-blob: 766f85cabd2992300dfa1be2bc9e4e258abc6f04
-  RNAnalytics: e48fd2e561459802621750097c7ead245ea09b6a
-  RNAnalyticsIntegration-Mixpanel: ceb3c01bf40c53c904ba9bb699fb8626b76d52f6
+  RNAnalytics: bd4d9abcf63059243aa39383f8d46387a8d9f4ad
+  RNAnalyticsIntegration-Mixpanel: adcc0e2f8bf36a2579b8c9d6509732400691f9c8
   RNDeviceInfo: f72e930fbde5077e8366346204ba9ad41c7a598f
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
   RNGoogleSignin: a9084cfe072359166c93b80ead94eda3ad814d1d
   RNSentry: 9b1d983b2d5d1c215ba6490348fd2a4cc23a8a9d
-  RNSVG: 4834be1d644eb77f0e3f6de851881b83758a3124
+  RNSVG: 2cc66383316fa84d4c672ccfa5e3bac271b6a2af
   Segment-Mixpanel: edded29dfc288e62f0fae20c9b42a3c50d0639b9
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
   Stripe: 4305b646743612854819fb5d5cf67aaeb93577c0
   tipsi-stripe: 64a2953ce4c9705465ddc1adb175301f5a897a24
-  yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
+  yoga: 684513b14b03201579ba3cee20218c9d1298b0cc
 
 PODFILE CHECKSUM: d39d10923e950967687070059177ef6b3beae552
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.10.1
