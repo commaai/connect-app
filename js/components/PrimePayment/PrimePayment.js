@@ -3,7 +3,7 @@ import { Keyboard, TouchableWithoutFeedback, View, Platform } from 'react-native
 import { withNavigation } from 'react-navigation';
 import { LiteCreditCardInput } from "react-native-credit-card-input";
 import CardIcons from "react-native-credit-card-input/src/Icons";
-import stripe from 'tipsi-stripe';
+import stripe from '@commaai/tipsi-stripe';
 
 import { Assets } from '../../constants';
 import X from '../../theme';

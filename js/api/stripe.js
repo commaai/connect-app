@@ -1,4 +1,4 @@
-import stripe from 'tipsi-stripe';
+import stripe from '@commaai/tipsi-stripe';
 let STRIPE_PUBLISHABLE_KEY;
 if (__DEV__) {
   STRIPE_PUBLISHABLE_KEY = 'pk_test_jn26O6Fvi063fJIM1z7xuydB';

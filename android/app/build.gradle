@@ -144,9 +144,9 @@ android {
   signingConfigs {
     debug {
       storeFile file("debug.keystore")
-      keyAlias 'androiddebugkey'
-      storePassword 'android'
-      keyPassword 'android'
+      keyAlias "androiddebugkey"
+      storePassword "android"
+      keyPassword "android"
     }
     release {
       storeFile file("release.keystore")
@@ -197,6 +197,7 @@ dependencies {
   implementation project(':react-native-gesture-handler')
   implementation project(':react-native-google-signin')
   implementation project(':tipsi-stripe')
+  implementation "com.android.support:support-core-utils:28.0.0"
   implementation 'com.android.support:multidex:1.0.3'
   implementation 'com.android.support:design:28.0.0'
   compile (project(':react-native-camera')) {

@@ -3,8 +3,8 @@ package ai.comma.connect;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
 import io.sentry.RNSentryPackage;
