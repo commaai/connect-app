@@ -16,10 +16,12 @@ import {
 import { REHYDRATE } from 'redux-persist';
 
 const initialAuthState = {
-  isAuthenticating: false,
+  isGoogleAuthenticating: false,
+  isAppleAuthenticating: false,
   authError: null,
   commaUser: null,
   googleUser: null,
+  appleUser: null,
   user: null,
   acceptedTermsVersion: 0,
   terms: null,
@@ -42,12 +44,14 @@ export default function auth(state = initialAuthState, action) {
       const {
         commaUser,
         googleUser,
+        appleUser,
       } = action.payload;
 
       return {
         ...state,
         commaUser,
         googleUser,
+        appleUser,
         isAuthenticating: false,
         user: {
           username: commaUser.username,

@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import CarouselPager from 'react-native-carousel-pager';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import { attemptGoogleAuth } from '../../../actions/async/Auth';
+import { attemptGoogleAuth, attemptAppleAuth } from '../../../actions/async/Auth';
 import { Assets } from '../../../constants';
 import X from '../../../theme';
 import Styles from '../AuthStyles';
@@ -64,7 +64,12 @@ class AuthIntro extends Component<Props> {
             <X.Button
               textColor='#111'
               onPress={ this.props.attemptGoogleAuth }>
-              { auth.isAuthenticating ? 'Logging in...' : ' Log in with Google' }
+              { auth.isGoogleAuthenticating ? 'Logging in...' : ' Log in with Google' }
+            </X.Button>
+            <X.Button
+              textColor='#111'
+              onPress={ this.props.attemptAppleAuth }>
+              { auth.isAppleAuthenticating ? 'Logging in...' : ' Log in with Apple' }
             </X.Button>
           </View>
         </X.Entrance>

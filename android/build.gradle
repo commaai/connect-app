@@ -33,18 +33,18 @@ subprojects {
 allprojects {
   repositories {
     mavenLocal()
-    google()
-    jcenter()
-    maven { url "https://www.jitpack.io" }
     maven { url "$rootDir/../node_modules/react-native/android" }
+    maven { url "https://www.jitpack.io" }
     maven { url "https://maven.google.com" }
     maven {
       url "$rootDir/../node_modules/@commaai/jsc-android/dist"
     }
+    google()
+    jcenter()
   }
 }
 
-task wrapper(type: Wrapper) {
+wrapper {
   gradleVersion = '4.6'
   distributionUrl = distributionUrl.replace("bin", "all")
 }

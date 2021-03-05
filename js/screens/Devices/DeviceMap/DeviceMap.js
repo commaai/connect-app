@@ -17,7 +17,7 @@ import {
 import { connect } from 'react-redux';
 import { withNavigation, DrawerActions } from 'react-navigation';
 import moment from 'moment';
-import Mapbox from '@mapbox/react-native-mapbox-gl';
+import MapboxGL from '@react-native-mapbox-gl/maps';
 import {
   multiPoint as makeMultiPoint,
 } from '@turf/helpers';
@@ -31,19 +31,19 @@ import X from '../../../theme';
 import Styles from './DeviceMapStyles';
 import { ApiKeys } from '../../../constants';
 
-Mapbox.setAccessToken(ApiKeys.MAPBOX_TOKEN);
+MapboxGL.setAccessToken(ApiKeys.MAPBOX_TOKEN);
 const ONE_WEEK_MILLIS = 7 * 86400 * 1000;
 
-const mapStyles = Mapbox.StyleSheet.create({
+const mapStyles = {
   vehiclePin: {
     // iconAllowOverlap: true,
     // iconIgnorePlacement: true,
-    iconAnchor: Mapbox.IconAnchor.Bottom,
+    iconAnchor: MapboxGL.IconAnchor.Bottom,
     // iconOffset: [0, -5],
     iconImage: Assets.iconPinParked,
     iconSize: __DEV__ ? 0.75 : 0.25,
   },
-})
+};
 
 // tastefully chosen default map region
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
@@ -145,7 +145,7 @@ class DeviceMap extends Component {
           const title = deviceTitle(device);
           const pinStyle = (Platform.OS === 'ios' && selectedPin !== dongleId) ? {display: 'none'} : null;
           return (
-              <Mapbox.PointAnnotation
+              <MapboxGL.PointAnnotation
                 pointerEvents='none'
                 key={ 'pointAnnotation_key_' + location.dongle_id }
                 id={ 'pointAnnotation_' + location.dongle_id }
@@ -155,14 +155,14 @@ class DeviceMap extends Component {
                 selected={ selectedPin===dongleId }
                 coordinate={ [location.lng, location.lat] }>
                   <View style={Styles.annotationPin} />
-                  <Mapbox.Callout
+                  <MapboxGL.Callout
                     title={ title }
                     textStyle={ { color: 'white' } }//, selectedPin!==dongleId ? {display: 'none'} : null] }
                     // containerStyle={ selectedPin!==dongleId ? {display: 'none'} : null }
                     tipStyle={ [Styles.annotationCalloutTip ]} // selectedPin!==dongleId ? {display: 'none'} : null] }
                     contentStyle={ [Styles.annotationCallout ]} //, selectedPin!==dongleId ? {display: 'none'} : null] } />
                   />
-              </Mapbox.PointAnnotation>
+              </MapboxGL.PointAnnotation>
           )
         } else {
           return null;
@@ -210,12 +210,12 @@ class DeviceMap extends Component {
           };
 
           return (
-              <Mapbox.ShapeSource
+              <MapboxGL.ShapeSource
                 id={ 'vehiclePin_' + dongleId }
                 key={ 'vehiclePin_' + dongleId }
                 shape={ shape }>
-                <Mapbox.SymbolLayer id={ 'vehiclePin_' + dongleId } style={ mapStyles.vehiclePin } />
-              </Mapbox.ShapeSource>
+                <MapboxGL.SymbolLayer id={ 'vehiclePin_' + dongleId } style={ mapStyles.vehiclePin } />
+              </MapboxGL.ShapeSource>
           )
         } else {
           return null;
@@ -418,12 +418,12 @@ class DeviceMap extends Component {
 
     return (
       <View style={ Styles.mapContainer }>
-        <Mapbox.MapView
+        <MapboxGL.MapView
           onDidFinishLoadingMap={ () => this.handlePressedAllVehicles() }
           onRegionWillChange={ this.onRegionChange }
           onRegionIsChanging={ this.onRegionChange }
           onRegionDidChange={ this.onRegionChange }
-          styleURL={ Mapbox.StyleURL.Dark }
+          styleURL={ MapboxGL.StyleURL.Dark }
           zoomLevel={ 16 }
           visibleCoordinateBounds={ this.state.bbox }
           showUserLocation={ true }
@@ -433,7 +433,7 @@ class DeviceMap extends Component {
           ref={ ref => this.mapRef = ref }>
           { this.renderVehicleAnnotations() }
           { this.renderVehiclePins() }
-        </Mapbox.MapView>
+        </MapboxGL.MapView>
         <View style={ Styles.mapHeader }>
           <X.Button
             size='full'
