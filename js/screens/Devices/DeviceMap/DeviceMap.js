@@ -108,12 +108,12 @@ class DeviceMap extends Component {
     this.props.navigation.navigate('DeviceInfo', { dongleId: device.dongle_id });
     if (location && location.lng) {
       this.setState({selectedPin: device.dongle_id});
-      this.mapRef.setCamera({ centerCoordinate: [ location.lng, location.lat ], zoom: 16, duration: 600 })
+      this.camRef.setCamera({ centerCoordinate: [ location.lng, location.lat ], zoom: 16, duration: 600 })
     }
   }
 
   resetToNorth() {
-    this.mapRef.setCamera({heading: 0, duration: 250})
+    this.camRef.setCamera({heading: 0, duration: 250})
   }
 
   renderVehicleAnnotations() {
@@ -357,7 +357,7 @@ class DeviceMap extends Component {
       return;
     }
     let { longitude, latitude } = this.props.location.location.coords;
-    this.mapRef.setCamera({ centerCoordinate: [ longitude, latitude ], zoom: 16, duration: 600 })
+    this.camRef.setCamera({ centerCoordinate: [ longitude, latitude ], zoom: 16, duration: 600 })
   }
 
   handlePressedAllVehicles(deviceLocations) {
@@ -387,7 +387,10 @@ class DeviceMap extends Component {
       }
     }
 
-    this.mapRef && this.mapRef.fitBounds([bbox[2], bbox[1]], [bbox[0], bbox[3]], [250, 50], 400);
+    this.setState({ bbox: {
+      ne: [bbox[2], bbox[1]],
+      sw: [bbox[0], bbox[3]]
+    }});
   }
 
   onRegionChange(region) {
@@ -424,15 +427,19 @@ class DeviceMap extends Component {
           onRegionIsChanging={ this.onRegionChange }
           onRegionDidChange={ this.onRegionChange }
           styleURL={ MapboxGL.StyleURL.Dark }
-          zoomLevel={ 16 }
-          visibleCoordinateBounds={ this.state.bbox }
           showUserLocation={ true }
           compassEnabled={ false }
           style={ Styles.mapView }
           onPress={ this.handleMapPress }
-          ref={ ref => this.mapRef = ref }>
+          ref={ ref => this.camRef = ref }>
           { this.renderVehicleAnnotations() }
           { this.renderVehiclePins() }
+          <MapboxGL.Camera
+            bounds={this.state.bbox}
+            animationDuration={this.state.animationDuration}
+            maxZoomLevel={19}
+            ref={ ref => this.camRef = ref }
+          />
         </MapboxGL.MapView>
         <View style={ Styles.mapHeader }>
           <X.Button
@@ -441,7 +448,7 @@ class DeviceMap extends Component {
             style={ Styles.mapHeaderAccount }
             onPress={ () => this.handlePressedAccount() }>
             <X.Avatar
-              image={ { uri: user.photo } }
+              image={ user.photo ? { uri: user.photo } : Assets.iconUser }
               color='transparent'
               shape='circle'
               size='small'
