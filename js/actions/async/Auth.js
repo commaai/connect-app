@@ -70,7 +70,12 @@ export function attemptAppleAuth() {
       await Auth.signOut();
       const appleUser = await Auth.attemptAppleAuth();
       console.log('refreshAccessToken', appleUser);
-      const accessToken = await CommaAuth.refreshAccessToken(appleUser.code, '', 'apple');
+      let accessToken;
+      if (appleUser.authorizationCode) {
+        accessToken = await CommaAuth.refreshAccessToken(appleUser.authorizationCode, 'https://my.comma.ai/auth/a/redirect', 'apple_ios');
+      } else {
+        accessToken = await CommaAuth.refreshAccessToken(appleUser.code, 'https://my.comma.ai/auth/a/redirect', 'apple');
+      }
       console.log('configure', accessToken);
       await configureApis(accessToken, errorHandler(dispatch));
       let commaUser = await Account.getProfile();

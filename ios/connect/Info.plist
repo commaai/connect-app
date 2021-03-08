@@ -54,9 +54,9 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Your message to user when apple music is accessed for the first time</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Your message to user when bluetooth is accessed for the first time</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Your message to user when bluetooth is accessed for the first time</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Your message to user when bluetooth is accessed for the first time</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Your message to user when the calendar is accessed for the first time</string>

@@ -4,36 +4,52 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '9.0'
 
 target 'connect' do
-  use_native_modules!
 
   pod 'Fabric', '~> 1.7.13'
   pod 'Crashlytics', '~> 3.10.9'
   pod 'GoogleSignIn'
 
-  pod 'React', :path => '../node_modules/react-native', :subspecs => [
-    'Core',
-    'CxxBridge',
-    'DevSupport',
-    'RCTActionSheet',
-    'RCTAnimation',
-    'RCTBlob',
-    'RCTGeolocation',
-    'RCTImage',
-    'RCTLinkingIOS',
-    'RCTNetwork',
-    'RCTText',
-    'RCTVibration',
-    'RCTWebSocket'
-  ]
+  pod 'React', :path => '../node_modules/react-native/'
+  pod 'React-Core', :path => '../node_modules/react-native/React'
+  pod 'React-DevSupport', :path => '../node_modules/react-native/React'
+  pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
+  pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
+  pod 'React-RCTBlob', :path => '../node_modules/react-native/Libraries/Blob'
+  pod 'React-RCTImage', :path => '../node_modules/react-native/Libraries/Image'
+  pod 'React-RCTLinking', :path => '../node_modules/react-native/Libraries/LinkingIOS'
+  pod 'React-RCTNetwork', :path => '../node_modules/react-native/Libraries/Network'
+  pod 'React-RCTSettings', :path => '../node_modules/react-native/Libraries/Settings'
+  pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
+  pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
+  pod 'React-RCTWebSocket', :path => '../node_modules/react-native/Libraries/WebSocket'
+  pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
+  pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
+  pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
+  pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
   pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-
+  pod 'lottie-react-native', :podspec => '../node_modules/lottie-react-native/lottie-react-native.podspec'
   pod 'lottie-ios', :podspec => '../node_modules/lottie-ios/lottie-ios.podspec'
-  pod 'react-native-mapbox-gl', :podspec => '../node_modules/@mapbox/react-native-mapbox-gl/react-native-mapbox-gl.podspec'
-  pod 'ReactNativePermissions', :podspec => '../node_modules/react-native-permissions/ReactNativePermissions.podspec'
+
+  pod 'react-native-camera', :podspec => '../node_modules/react-native-camera/react-native-camera.podspec'
+  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+  pod 'react-native-video', :podspec => '../node_modules/react-native-video/react-native-video.podspec'
+  pod 'RNPermissions', :podspec => '../node_modules/react-native-permissions/RNPermissions.podspec'
+  pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
+  pod 'RNAnalytics', :path => '../node_modules/@segment/analytics-react-native'
+  pod 'RNAnalyticsIntegration-Mixpanel', :path => '../node_modules/@segment/analytics-react-native-mixpanel'
+  pod 'RNDeviceInfo', :podspec => '../node_modules/react-native-device-info/RNDeviceInfo.podspec'
+  pod 'RNGestureHandler', :podspec => '../node_modules/react-native-gesture-handler/RNGestureHandler.podspec'
+  pod 'RNGoogleSignin', :podspec => '../node_modules/react-native-google-signin/RNGoogleSignin.podspec'
+  pod 'RNSentry', :podspec => '../node_modules/@sentry/react-native/RNSentry.podspec'
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
   pod 'react-native-ios-launch-arguments', :podspec => '../node_modules/react-native-ios-launch-arguments/react-native-ios-launch-arguments.podspec'
   pod 'tipsi-stripe', :podspec => '../node_modules/@commaai/tipsi-stripe/tipsi-stripe.podspec'
 
- end
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+
+  use_native_modules!
+end

@@ -3,7 +3,7 @@
 
 import { Platform } from 'react-native'
 import { GoogleSignin } from 'react-native-google-signin';
-import { appleAuthAndroid } from '@invertase/react-native-apple-authentication';
+import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { ApiKeys } from '../constants';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
@@ -35,17 +35,33 @@ export async function attemptAppleAuth() {
   const state = uuid();
 
   // Configure the request
-  appleAuthAndroid.configure({
-    clientId: 'ai.comma.login',
-    redirectUri: 'https://my.comma.ai/auth/a/redirect',
-    responseType: appleAuthAndroid.ResponseType.ALL,
-    scope: appleAuthAndroid.Scope.ALL,
-    nonce: rawNonce,
-    state,
-  });
+  if (appleAuth) {
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+    });
 
-  const response = await appleAuthAndroid.signIn();
-  return response;
+    // get current authentication state for user
+    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+
+    // use credentialState response to ensure the user is authenticated
+    if (credentialState === appleAuth.State.AUTHORIZED) {
+      return appleAuthRequestResponse;
+    }
+  }
+  else if (appleAuthAndroid) {
+    appleAuthAndroid.configure({
+      clientId: 'ai.comma.login',
+      redirectUri: 'https://my.comma.ai/auth/a/redirect',
+      responseType: appleAuthAndroid.ResponseType.ALL,
+      scope: appleAuthAndroid.Scope.ALL,
+      nonce: rawNonce,
+      state,
+    });
+
+    const response = await appleAuthAndroid.signIn();
+    return response;
+  }
 }
 
 // Terminate Google Auth

@@ -1,1 +1,0 @@
-../../../react-native-camera/ios/RCT/CameraFocusSquare.h

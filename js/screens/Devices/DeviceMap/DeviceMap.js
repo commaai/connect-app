@@ -47,7 +47,10 @@ const mapStyles = {
 
 // tastefully chosen default map region
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
-let DEFAULT_MAP_REGION = [[_bbox[0], _bbox[1]], [_bbox[2], _bbox[3]]];
+let DEFAULT_MAP_REGION = {
+  ne: [_bbox[0], _bbox[1]],
+  sw: [_bbox[2], _bbox[3]]
+};
 
 class DeviceMap extends Component {
 

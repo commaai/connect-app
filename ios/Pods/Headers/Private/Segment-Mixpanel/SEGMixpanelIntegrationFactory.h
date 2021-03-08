@@ -1,1 +1,0 @@
-../../../Segment-Mixpanel/Pod/Classes/SEGMixpanelIntegrationFactory.h

@@ -1,1 +1,0 @@
-../../../RNDeviceInfo/ios/RNDeviceInfo/RNDeviceInfo.h
