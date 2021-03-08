@@ -40,7 +40,7 @@ export function attemptGoogleAuth() {
       await Auth.signOut();
       const googleUser = await Auth.attemptGoogleAuth();
       console.log('refreshAccessToken', googleUser);
-      const accessToken = await CommaAuth.refreshAccessToken(googleUser.serverAuthCode);
+      const accessToken = await CommaAuth.refreshAccessToken(googleUser.serverAuthCode, '', 'google');
       console.log('configure', accessToken);
       await configureApis(accessToken, errorHandler(dispatch));
       let commaUser = await Account.getProfile();
@@ -49,6 +49,36 @@ export function attemptGoogleAuth() {
 
       if (googleUser != null && commaUser != null) {
         dispatch(authSucceeded({ commaUser, googleUser }));
+      } else {
+        console.error('wtf')
+      }
+    } catch(error) {
+      console.log(error);
+      Sentry.captureException(error);
+      dispatch(authFailed(error));
+    }
+  }
+}
+
+export function attemptAppleAuth() {
+  return async (dispatch) => {
+    try {
+      dispatch(authAttempted());
+      await dispatch(refreshTerms());
+
+      console.log('attemptAppleAuth');
+      await Auth.signOut();
+      const appleUser = await Auth.attemptAppleAuth();
+      console.log('refreshAccessToken', appleUser);
+      const accessToken = await CommaAuth.refreshAccessToken(appleUser.code, '', 'apple');
+      console.log('configure', accessToken);
+      await configureApis(accessToken, errorHandler(dispatch));
+      let commaUser = await Account.getProfile();
+      commaUser.accessToken = accessToken;
+      console.log({appleUser, commaUser});
+
+      if (appleUser != null && commaUser != null) {
+        dispatch(authSucceeded({ commaUser, appleUser }));
       } else {
         console.error('wtf')
       }

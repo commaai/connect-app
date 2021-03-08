@@ -3,7 +3,10 @@
 
 import { Platform } from 'react-native'
 import { GoogleSignin } from 'react-native-google-signin';
+import { appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { ApiKeys } from '../constants';
+import 'react-native-get-random-values';
+import { v4 as uuid } from 'uuid';
 
 // Configure Google Auth
 let configured = false;
@@ -24,6 +27,25 @@ export async function attemptGoogleAuth() {
 
   const googleUser = await GoogleSignin.signIn();
   return googleUser;
+}
+
+// apple Login
+export async function attemptAppleAuth() {
+  const rawNonce = uuid();
+  const state = uuid();
+
+  // Configure the request
+  appleAuthAndroid.configure({
+    clientId: 'ai.comma.login',
+    redirectUri: 'https://my.comma.ai/auth/a/redirect',
+    responseType: appleAuthAndroid.ResponseType.ALL,
+    scope: appleAuthAndroid.Scope.ALL,
+    nonce: rawNonce,
+    state,
+  });
+
+  const response = await appleAuthAndroid.signIn();
+  return response;
 }
 
 // Terminate Google Auth

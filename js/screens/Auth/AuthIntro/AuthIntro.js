@@ -12,9 +12,7 @@ import { Assets } from '../../../constants';
 import X from '../../../theme';
 import Styles from '../AuthStyles';
 
-type Props = {};
-
-class AuthIntro extends Component<Props> {
+class AuthIntro extends Component {
 
   constructor(props) {
     super(props);
@@ -26,10 +24,6 @@ class AuthIntro extends Component<Props> {
 
   handleSlideChanged(activeSlide) {
     return this.setState({ activeSlide });
-  }
-
-  handlePressedGoogleSignin() {
-    this.props.attemptGoogleAuth();
   }
 
   componentWillReceiveProps(newProps) {
@@ -92,6 +86,9 @@ function mapDispatchToProps(dispatch) {
   return ({
     attemptGoogleAuth: () => {
       dispatch(attemptGoogleAuth());
+    },
+    attemptAppleAuth: () => {
+      dispatch(attemptAppleAuth());
     },
   });
 }
