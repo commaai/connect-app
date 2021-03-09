@@ -60,6 +60,8 @@ class AuthIntro extends Component {
               onPress={ this.props.attemptGoogleAuth }>
               { auth.isGoogleAuthenticating ? 'Logging in...' : ' Log in with Google' }
             </X.Button>
+          </View>
+          <View style={ Styles.authIntroAction }>
             <X.Button
               textColor='#111'
               onPress={ this.props.attemptAppleAuth }>

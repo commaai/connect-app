@@ -64,6 +64,8 @@
 	<string>comma Connect needs access to your camera to scan a QR code</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>comma Connect shows your location relative to paired devices while using the app</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>comma Connect shows your location relative to paired devices while using the app</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>comma Connect shows your location relative to paired devices while using the app</string>
 	<key>NSMicrophoneUsageDescription</key>
