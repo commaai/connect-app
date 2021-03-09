@@ -19,7 +19,8 @@ import * as NavigationService from '../../navigators/service';
 
 import {
   authReset,
-  authAttempted,
+  authGoogleAttempted,
+  authAppleAttempted,
   authSucceeded,
   authFailed,
   authTerminated,
@@ -33,7 +34,7 @@ import { resetDrives } from '../Drives';
 export function attemptGoogleAuth() {
   return async (dispatch) => {
     try {
-      dispatch(authAttempted());
+      dispatch(authGoogleAttempted());
       await dispatch(refreshTerms());
 
       console.log('attemptGoogleAuth');
@@ -63,7 +64,7 @@ export function attemptGoogleAuth() {
 export function attemptAppleAuth() {
   return async (dispatch) => {
     try {
-      dispatch(authAttempted());
+      dispatch(authAppleAttempted());
       await dispatch(refreshTerms());
 
       console.log('attemptAppleAuth');

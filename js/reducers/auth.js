@@ -4,7 +4,8 @@
 import {
   ACTION_PRIME_ACTIVATED,
   ACTION_AUTH_RESET,
-  ACTION_AUTH_ATTEMPTED,
+  ACTION_AUTH_GOOGLE_ATTEMPTED,
+  ACTION_AUTH_APPLE_ATTEMPTED,
   ACTION_AUTH_SUCCEEDED,
   ACTION_AUTH_FAILED,
   ACTION_AUTH_TERMINATED,
@@ -34,10 +35,16 @@ export default function auth(state = initialAuthState, action) {
         ...initialAuthState,
       };
       break;
-    case ACTION_AUTH_ATTEMPTED:
+    case ACTION_AUTH_APPLE_ATTEMPTED:
       return {
         ...state,
-        isAuthenticating: true
+        isAppleAuthenticating: true
+      };
+      break;
+    case ACTION_AUTH_GOOGLE_ATTEMPTED:
+      return {
+        ...state,
+        isGoogleAuthenticating: true
       };
       break;
     case ACTION_AUTH_SUCCEEDED:
@@ -52,7 +59,8 @@ export default function auth(state = initialAuthState, action) {
         commaUser,
         googleUser,
         appleUser,
-        isAuthenticating: false,
+        isGoogleAuthenticating: false,
+        isAppleAuthenticating: false,
         user: {
           username: commaUser.username,
           email: commaUser.email,
@@ -76,7 +84,8 @@ export default function auth(state = initialAuthState, action) {
       };
       return {
         ...state,
-        isAuthenticating: false,
+        isGoogleAuthenticating: false,
+        isAppleAuthenticating: false,
         authError
       };
       break;
@@ -117,7 +126,8 @@ export default function auth(state = initialAuthState, action) {
         return {
           ...state,
           ...((action.payload && action.payload.auth) || {}),
-          isAuthenticating: false
+          isGoogleAuthenticating: false,
+          isAppleAuthenticating: false,
         }
       } else {
         return state;
