@@ -35,7 +35,7 @@ export async function attemptAppleAuth() {
   const state = uuid();
 
   // Configure the request
-  if (appleAuth) {
+  if (appleAuth.isSupported) {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
     });
@@ -49,7 +49,7 @@ export async function attemptAppleAuth() {
       return appleAuthRequestResponse;
     }
   }
-  else if (appleAuthAndroid) {
+  else if (appleAuthAndroid.isSupported) {
     appleAuthAndroid.configure({
       clientId: 'ai.comma.login',
       redirectUri: 'https://my.comma.ai/auth/a/redirect',

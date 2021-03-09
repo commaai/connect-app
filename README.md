@@ -6,6 +6,9 @@
 - `bundle install`
 - `yarn`
 
+#### Run local bundler
+- `yarn start`
+
 #### Run iOS Debug (Device/Simulator)
 - `cd ios && bundle install && pod install`
 - `cd ..`

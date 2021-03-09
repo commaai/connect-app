@@ -19,9 +19,7 @@ import Styles from './SetupStyles';
 import { Page, Alert, Spinner } from '../../components';
 import { pilotPair, fetchDevices, fetchDevice, fetchDeviceSubscription } from '../../actions/async/Devices';
 
-type Props = {};
-
-class SetupEonPairing extends Component<Props> {
+class SetupEonPairing extends Component {
 
   constructor(props) {
     super(props);

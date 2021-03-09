@@ -430,11 +430,11 @@ class DeviceMap extends Component {
           onRegionIsChanging={ this.onRegionChange }
           onRegionDidChange={ this.onRegionChange }
           styleURL={ MapboxGL.StyleURL.Dark }
+          visibleCoordinateBounds={ this.state.bbox }
           showUserLocation={ true }
           compassEnabled={ false }
           style={ Styles.mapView }
-          onPress={ this.handleMapPress }
-          ref={ ref => this.camRef = ref }>
+          onPress={ this.handleMapPress }>
           { this.renderVehicleAnnotations() }
           { this.renderVehiclePins() }
           <MapboxGL.Camera
