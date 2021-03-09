@@ -14,6 +14,6 @@ export function deviceTypePretty(device) {
   if (device.device_type == 'neo') {
     return 'EON';
   } else {
-    return 'comma two';
+    return 'comma ' + device.device_type;
   }
 }
