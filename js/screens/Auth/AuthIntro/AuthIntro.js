@@ -54,20 +54,34 @@ class AuthIntro extends Component {
           </View>
         </View>
         <X.Entrance style={ Styles.authIntroActions }>
-          <View style={ Styles.authIntroAction }>
-            <X.Button
-              textColor='#111'
-              onPress={ this.props.attemptGoogleAuth }>
-              { auth.isGoogleAuthenticating ? 'Logging in...' : ' Log in with Google' }
-            </X.Button>
-          </View>
-          <View style={ Styles.authIntroAction }>
-            <X.Button
-              textColor='#111'
-              onPress={ this.props.attemptAppleAuth }>
-              { auth.isAppleAuthenticating ? 'Logging in...' : ' Log in with Apple' }
-            </X.Button>
-          </View>
+          <X.Button
+            style={ Styles.authIntroAction }
+            textColor='#111'
+            onPress={ this.props.attemptGoogleAuth }>
+            <X.Image
+              style={ Styles.authIntroButtonImg }
+              source={ Assets.authGoogle } />
+            <X.Text
+              style={ Styles.authIntroButtonText }
+              color='black'
+              weight='semibold'>
+              { auth.isGoogleAuthenticating ? 'Logging in...' : 'Sign in with Google' }
+            </X.Text>
+          </X.Button>
+          <X.Button
+            style={ Styles.authIntroAction }
+            textColor='#111'
+            onPress={ this.props.attemptAppleAuth }>
+            <X.Image
+              style={ Styles.authIntroButtonImg }
+              source={ Assets.authApple } />
+            <X.Text
+              style={ Styles.authIntroButtonText }
+              color='black'
+              weight='semibold'>
+              { auth.isAppleAuthenticating ? 'Logging in...' : ' Sign in with Apple' }
+            </X.Text>
+          </X.Button>
         </X.Entrance>
         <View style={ Styles.authIntroSlidesCrumbs }>
         </View>

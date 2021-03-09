@@ -68,7 +68,17 @@ export default StyleSheet.create({
     width: '100%',
   },
   authIntroAction: {
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+  },
+  authIntroButtonImg: {
+    width: 50,
     height: 50,
+  },
+  authIntroButtonText: {
+    flexGrow: 1,
   },
   authIntroSlidesCrumbs: {
     alignSelf: 'flex-end',
