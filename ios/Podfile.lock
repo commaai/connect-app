@@ -1,6 +1,11 @@
 PODS:
   - "@react-native-mapbox-gl-mapbox-static (5.9.0)"
   - Analytics (4.0.5)
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
   - boost-for-react-native (1.63.0)
   - Crashlytics (3.10.9):
     - Fabric (~> 1.7.13)
@@ -84,6 +89,9 @@ PODS:
     - React-cxxreact (= 0.60.5)
     - React-jsi (= 0.60.5)
   - React-jsinspector (0.60.5)
+  - react-native-app-auth (6.1.0):
+    - AppAuth (= 1.4.0)
+    - React-Core
   - react-native-camera (3.40.0):
     - React-Core
     - react-native-camera/RCT (= 3.40.0)
@@ -194,6 +202,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-app-auth (from `../node_modules/react-native-app-auth`)
   - react-native-camera (from `../node_modules/react-native-camera/react-native-camera.podspec`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
@@ -239,6 +248,8 @@ SPEC REPOS:
     - Segment-Mixpanel
     - Sentry
     - Stripe
+  trunk:
+    - AppAuth
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -267,6 +278,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-app-auth:
+    :path: "../node_modules/react-native-app-auth"
   react-native-camera:
     :podspec: "../node_modules/react-native-camera/react-native-camera.podspec"
   react-native-geolocation:
@@ -335,6 +348,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   "@react-native-mapbox-gl-mapbox-static": 83c0e0ba33597bb694735ffb136d3d96780af37d
   Analytics: 4bcf052c91e1f3339219e83d6a036fb2bd7c218d
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   Crashlytics: f836e1d564b4492da572b056ce7ea0476c53ec4b
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
@@ -357,6 +371,7 @@ SPEC CHECKSUMS:
   React-jsi: 4d8c9efb6312a9725b18d6fc818ffc103f60fec2
   React-jsiexecutor: 90ad2f9db09513fc763bc757fdc3c4ff8bde2a30
   React-jsinspector: e08662d1bf5b129a3d556eb9ea343a3f40353ae4
+  react-native-app-auth: 35682974e299697129d46f798b978787d1fa8d00
   react-native-camera: 35854c4f764a4a6cf61c1c3525888b92f0fe4b31
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-get-random-values: f0fc24a5887a3341589515a86282a574407b59e4
@@ -389,6 +404,6 @@ SPEC CHECKSUMS:
   tipsi-stripe: 64a2953ce4c9705465ddc1adb175301f5a897a24
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
-PODFILE CHECKSUM: 9a76c5eff69252a234b8cf53b1e2b8b76f25ae7f
+PODFILE CHECKSUM: 7d2b550075e5fed32be36c804735a2625ca4d3a0
 
 COCOAPODS: 1.10.1
