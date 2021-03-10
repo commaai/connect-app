@@ -1,14 +1,13 @@
 // Auth API
 // ~~~~~~~~
 
-import { Platform } from 'react-native'
+import { Platform, Linking } from 'react-native'
 import { GoogleSignin } from 'react-native-google-signin';
 import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { ApiKeys } from '../constants';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 
-// Configure Google Auth
 let configured = false;
 export function configureGoogleAuth() {
   if (configured) return;
@@ -21,7 +20,6 @@ export function configureGoogleAuth() {
   configured =  true;
 }
 
-// Attempt Google Auth
 export async function attemptGoogleAuth() {
   await ensureGoogleAuthReady();
 
@@ -29,27 +27,20 @@ export async function attemptGoogleAuth() {
   return googleUser;
 }
 
-// apple Login
 export async function attemptAppleAuth() {
-  const rawNonce = uuid();
-  const state = uuid();
-
-  // Configure the request
   if (appleAuth.isSupported) {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
     });
-
-    // get current authentication state for user
-    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    
     const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
-
-    // use credentialState response to ensure the user is authenticated
-    if (credentialState === appleAuth.State.AUTHORIZED) {
+    if (credentialState === appleAuth.State.AUTHORIZED) {  // user is authenticated
       return appleAuthRequestResponse;
     }
   }
   else if (appleAuthAndroid.isSupported) {
+    const rawNonce = uuid();
+    const state = uuid();
     appleAuthAndroid.configure({
       clientId: 'ai.comma.login',
       redirectUri: 'https://my.comma.ai/auth/a/redirect',
@@ -62,6 +53,45 @@ export async function attemptAppleAuth() {
     const response = await appleAuthAndroid.signIn();
     return response;
   }
+}
+
+export async function attemptGithubAuth() {
+  return new Promise((resolve, reject) => {
+    const handleUrl = event => {
+      const authCode = event.url.substring(
+        event.url.indexOf('=') + 1,
+        event.url.length
+      )
+      const tokenRequest = {
+        code: authCode,
+        client_id: this.clientId,
+        redirect_uri: this.callback,
+        grant_type: 'authorization_code'
+      }
+      let s = []
+      for (let key in tokenRequest) {
+        if (tokenRequest.hasOwnProperty(key)) {
+          s.push(`${encodeURIComponent(key)}=${encodeURIComponent(tokenRequest[key])}`)
+        }
+      }
+      fetch(this.tokenUrl, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: s.join('&')
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+      Linking.removeEventListener('url', handleUrl)
+    }
+    Linking.addEventListener('url', handleUrl);
+
+    const client_id = '2ca8e276e644c46c00fa';
+    const redirect_uri = encodeURIComponent('ai.comma.connect://localhost/auth/h/redirect');
+    Linking.openURL(`https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`);
+  });
 }
 
 // Terminate Google Auth

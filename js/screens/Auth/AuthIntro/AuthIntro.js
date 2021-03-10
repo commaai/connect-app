@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import CarouselPager from 'react-native-carousel-pager';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import { attemptGoogleAuth, attemptAppleAuth } from '../../../actions/async/Auth';
+import { attemptGoogleAuth, attemptAppleAuth, attemptGithubAuth } from '../../../actions/async/Auth';
 import { Assets } from '../../../constants';
 import X from '../../../theme';
 import Styles from '../AuthStyles';
@@ -82,6 +82,20 @@ class AuthIntro extends Component {
               { auth.isAppleAuthenticating ? 'Logging in...' : ' Sign in with Apple' }
             </X.Text>
           </X.Button>
+          <X.Button
+            style={ Styles.authIntroAction }
+            textColor='#111'
+            onPress={ this.props.attemptGithubAuth }>
+            <X.Image
+              style={ Styles.authIntroButtonImg }
+              source={ Assets.authGithub } />
+            <X.Text
+              style={ Styles.authIntroButtonText }
+              color='black'
+              weight='semibold'>
+              { auth.isGithubAuthenticating ? 'Logging in...' : ' Sign in with GitHub' }
+            </X.Text>
+          </X.Button>
         </X.Entrance>
         <View style={ Styles.authIntroSlidesCrumbs }>
         </View>
@@ -105,6 +119,9 @@ function mapDispatchToProps(dispatch) {
     },
     attemptAppleAuth: () => {
       dispatch(attemptAppleAuth());
+    },
+    attemptGithubAuth: () => {
+      dispatch(attemptGithubAuth());
     },
   });
 }

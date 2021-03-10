@@ -6,6 +6,7 @@ import {
   ACTION_AUTH_RESET,
   ACTION_AUTH_GOOGLE_ATTEMPTED,
   ACTION_AUTH_APPLE_ATTEMPTED,
+  ACTION_AUTH_GITHUB_ATTEMPTED,
   ACTION_AUTH_SUCCEEDED,
   ACTION_AUTH_FAILED,
   ACTION_AUTH_TERMINATED,
@@ -19,10 +20,12 @@ import { REHYDRATE } from 'redux-persist';
 const initialAuthState = {
   isGoogleAuthenticating: false,
   isAppleAuthenticating: false,
+  isGithubAuthenticating: false,
   authError: null,
   commaUser: null,
   googleUser: null,
   appleUser: null,
+  githubUser: null,
   user: null,
   acceptedTermsVersion: 0,
   terms: null,
@@ -35,16 +38,22 @@ export default function auth(state = initialAuthState, action) {
         ...initialAuthState,
       };
       break;
+    case ACTION_AUTH_GOOGLE_ATTEMPTED:
+      return {
+        ...state,
+        isGoogleAuthenticating: true
+      };
+      break;
     case ACTION_AUTH_APPLE_ATTEMPTED:
       return {
         ...state,
         isAppleAuthenticating: true
       };
       break;
-    case ACTION_AUTH_GOOGLE_ATTEMPTED:
+    case ACTION_AUTH_GITHUB_ATTEMPTED:
       return {
         ...state,
-        isGoogleAuthenticating: true
+        isGithubAuthenticating: true
       };
       break;
     case ACTION_AUTH_SUCCEEDED:
@@ -52,6 +61,7 @@ export default function auth(state = initialAuthState, action) {
         commaUser,
         googleUser,
         appleUser,
+        githubUser,
       } = action.payload;
 
       return {
@@ -59,8 +69,10 @@ export default function auth(state = initialAuthState, action) {
         commaUser,
         googleUser,
         appleUser,
+        githubUser,
         isGoogleAuthenticating: false,
         isAppleAuthenticating: false,
+        isGithubAuthenticating: false,
         user: {
           username: commaUser.username,
           email: commaUser.email,
@@ -86,6 +98,7 @@ export default function auth(state = initialAuthState, action) {
         ...state,
         isGoogleAuthenticating: false,
         isAppleAuthenticating: false,
+        isGithubAuthenticating: false,
         authError
       };
       break;
@@ -128,6 +141,7 @@ export default function auth(state = initialAuthState, action) {
           ...((action.payload && action.payload.auth) || {}),
           isGoogleAuthenticating: false,
           isAppleAuthenticating: false,
+          isGithubAuthenticating: false,
         }
       } else {
         return state;

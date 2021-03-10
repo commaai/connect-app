@@ -4,6 +4,7 @@
 export const ACTION_AUTH_RESET = 'ACTION_AUTH_RESET';
 export const ACTION_AUTH_GOOGLE_ATTEMPTED = 'ACTION_AUTH_GOOGLE_ATTEMPTED';
 export const ACTION_AUTH_APPLE_ATTEMPTED = 'ACTION_AUTH_APPLE_ATTEMPTED';
+export const ACTION_AUTH_GITHUB_ATTEMPTED = 'ACTION_AUTH_GITHUB_ATTEMPTED';
 export const ACTION_AUTH_SUCCEEDED = 'ACTION_AUTH_SUCCEEDED';
 export const ACTION_AUTH_FAILED = 'ACTION_AUTH_FAILED';
 export const ACTION_COMMA_USER_REFRESHED = 'ACTION_COMMA_USER_REFRESHED';
@@ -31,6 +32,14 @@ export function authAppleAttempted() {
   return dispatch => {
     dispatch({
       type: ACTION_AUTH_APPLE_ATTEMPTED,
+    });
+  }
+}
+
+export function authGithubAttempted() {
+  return dispatch => {
+    dispatch({
+      type: ACTION_AUTH_GITHUB_ATTEMPTED,
     });
   }
 }

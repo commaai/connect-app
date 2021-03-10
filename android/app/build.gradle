@@ -133,6 +133,9 @@ android {
     // because of firestore:
     multiDexEnabled true
     missingDimensionStrategy 'react-native-camera', 'general'
+    manifestPlaceholders = [
+      appAuthRedirectScheme: 'ai.comma.connect'
+    ]
   }
   splits {
     abi {

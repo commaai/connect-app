@@ -21,6 +21,7 @@ import {
   authReset,
   authGoogleAttempted,
   authAppleAttempted,
+  authGithubAttempted,
   authSucceeded,
   authFailed,
   authTerminated,
@@ -85,6 +86,36 @@ export function attemptAppleAuth() {
 
       if (appleUser != null && commaUser != null) {
         dispatch(authSucceeded({ commaUser, appleUser }));
+      } else {
+        console.error('wtf')
+      }
+    } catch(error) {
+      console.log(error);
+      Sentry.captureException(error);
+      dispatch(authFailed(error));
+    }
+  }
+}
+
+export function attemptGithubAuth() {
+  return async (dispatch) => {
+    try {
+      dispatch(authGithubAttempted());
+      await dispatch(refreshTerms());
+
+      console.log('attemptGithubAuth');
+      await Auth.signOut();
+      const githubUser = await Auth.attemptGithubAuth();
+      console.log('refreshAccessToken', githubUser);
+      const accessToken = await CommaAuth.refreshAccessToken(githubUser.code, '', 'github');
+      console.log('configure', accessToken);
+      await configureApis(accessToken, errorHandler(dispatch));
+      let commaUser = await Account.getProfile();
+      commaUser.accessToken = accessToken;
+      console.log({githubUser, commaUser});
+
+      if (githubUser != null && commaUser != null) {
+        dispatch(authSucceeded({ commaUser, githubUser }));
       } else {
         console.error('wtf')
       }

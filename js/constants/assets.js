@@ -42,6 +42,7 @@ export default {
   cardMastercard: require('../assets/stp_card_mastercard.png'),
   cardVisa: require('../assets/stp_card_visa.png'),
   cardUnknown: require('../assets/stp_card_unknown.png'),
-  authApple: require('../assets/auth_apple.png'),
   authGoogle: require('../assets/auth_google.png'),
+  authApple: require('../assets/auth_apple.png'),
+  authGithub: require('../assets/auth_google.png'),
 }
