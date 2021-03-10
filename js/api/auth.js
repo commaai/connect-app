@@ -7,6 +7,7 @@ import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authe
 import { ApiKeys } from '../constants';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
+import { authorize } from 'react-native-app-auth';
 
 let configured = false;
 export function configureGoogleAuth() {
@@ -49,49 +50,24 @@ export async function attemptAppleAuth() {
       nonce: rawNonce,
       state,
     });
-
+    
     const response = await appleAuthAndroid.signIn();
     return response;
   }
 }
 
 export async function attemptGithubAuth() {
-  return new Promise((resolve, reject) => {
-    const handleUrl = event => {
-      const authCode = event.url.substring(
-        event.url.indexOf('=') + 1,
-        event.url.length
-      )
-      const tokenRequest = {
-        code: authCode,
-        client_id: this.clientId,
-        redirect_uri: this.callback,
-        grant_type: 'authorization_code'
-      }
-      let s = []
-      for (let key in tokenRequest) {
-        if (tokenRequest.hasOwnProperty(key)) {
-          s.push(`${encodeURIComponent(key)}=${encodeURIComponent(tokenRequest[key])}`)
-        }
-      }
-      fetch(this.tokenUrl, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: s.join('&')
-      })
-        .then(response => resolve(response))
-        .catch(error => reject(error))
-      Linking.removeEventListener('url', handleUrl)
+  const config = {
+    redirectUrl: 'ai.comma.connect://oauthredirect',
+    clientId: '7d827388a27280a03327',
+    skipCodeExchange: true,
+    serviceConfiguration: {
+      authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+      tokenEndpoint: 'https://github.com/login/oauth/access_token',
     }
-    Linking.addEventListener('url', handleUrl);
-
-    const client_id = '2ca8e276e644c46c00fa';
-    const redirect_uri = encodeURIComponent('ai.comma.connect://localhost/auth/h/redirect');
-    Linking.openURL(`https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`);
-  });
+  };
+  
+  return await authorize(config);
 }
 
 // Terminate Google Auth

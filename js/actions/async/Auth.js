@@ -107,7 +107,7 @@ export function attemptGithubAuth() {
       await Auth.signOut();
       const githubUser = await Auth.attemptGithubAuth();
       console.log('refreshAccessToken', githubUser);
-      const accessToken = await CommaAuth.refreshAccessToken(githubUser.code, '', 'github');
+      const accessToken = await CommaAuth.refreshAccessToken(githubUser.authorizationCode, '', 'github_mobile');
       console.log('configure', accessToken);
       await configureApis(accessToken, errorHandler(dispatch));
       let commaUser = await Account.getProfile();
