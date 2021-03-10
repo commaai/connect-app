@@ -44,5 +44,5 @@ export default {
   cardUnknown: require('../assets/stp_card_unknown.png'),
   authGoogle: require('../assets/auth_google.png'),
   authApple: require('../assets/auth_apple.png'),
-  authGithub: require('../assets/auth_google.png'),
+  authGithub: require('../assets/auth_github.png'),
 }
