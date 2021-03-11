@@ -2,7 +2,7 @@
 // ~~~~~~~~
 
 import { Platform, Linking } from 'react-native'
-import { GoogleSignin } from 'react-native-google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { ApiKeys } from '../constants';
 import 'react-native-get-random-values';
@@ -33,7 +33,7 @@ export async function attemptAppleAuth() {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
     });
-    
+
     const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
     if (credentialState === appleAuth.State.AUTHORIZED) {  // user is authenticated
       return appleAuthRequestResponse;
@@ -50,7 +50,7 @@ export async function attemptAppleAuth() {
       nonce: rawNonce,
       state,
     });
-    
+
     const response = await appleAuthAndroid.signIn();
     return response;
   }
@@ -66,7 +66,7 @@ export async function attemptGithubAuth() {
       tokenEndpoint: 'https://github.com/login/oauth/access_token',
     }
   };
-  
+
   return await authorize(config);
 }
 

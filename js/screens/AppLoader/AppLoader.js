@@ -6,9 +6,7 @@ import { rehydrateAuth } from '../../actions/async/Auth';
 import X from '../../theme';
 import { Spinner } from '../../components';
 
-type Props = {};
-
-class AppLoader extends Component<Props> {
+class AppLoader extends Component {
 
   constructor(props) {
     super(props);

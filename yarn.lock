@@ -893,6 +893,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/geolocation/-/geolocation-2.0.2.tgz#ba8b40f560ead8d014740d1cdea970b33f19312e"
   integrity sha512-tTNXRCgnhJBu79mulQwzabXRpDqfh/uaDqfHVpvF0nX4NTpolpy6mvTRiFg7eWFPGRArsnZz1EYp6rHfJWGgEA==
 
+"@react-native-google-signin/google-signin@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-6.0.0.tgz#115b666221169cbd6aabd6d9a622a7f48205ea2e"
+  integrity sha512-xmrrG2muhwmoPy9AdfP+ceLBZtnrXkZwgN/jR5u3xOHadyerJfvD76w2BSmm7zeoiMB1wwSkZkzFSa9+i1BdKA==
+
 "@react-native-mapbox-gl/maps@^8.1.0-rc.4":
   version "8.1.0-rc.4"
   resolved "https://registry.yarnpkg.com/@react-native-mapbox-gl/maps/-/maps-8.1.0-rc.4.tgz#7a9415f1a076ed1a514a7107d74b7d8ea96ad560"
@@ -6935,13 +6940,10 @@ react-native-get-random-values@^1.6.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-"react-native-google-signin@https://github.com/andyh2/react-native-google-signin.git#v1.2.4":
-  version "1.2.4"
-  resolved "https://github.com/andyh2/react-native-google-signin.git#76df4ed2bd0542e234683a2a89e8930fcd396d21"
-
-"react-native-ios-launch-arguments@https://github.com/andyh2/react-native-ios-launch-arguments.git#master":
-  version "1.1.1"
-  resolved "https://github.com/andyh2/react-native-ios-launch-arguments.git#c3fd008ae682216b7ebd68c2c88a3a20daa01768"
+react-native-launch-arguments@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-launch-arguments/-/react-native-launch-arguments-2.0.0.tgz#780a71d5e1dbf38d56bce8e3c0b7d7817038597d"
+  integrity sha512-NkOXdMBapsqpYvWLhB3AMaidk1hPib64xvvFU4q5ZQnQz2gY7qvvzyVbnov+WtlhMV6V8bC3I9GHOEc7yBMT/Q==
 
 react-native-linear-gradient@^2.3.0:
   version "2.5.4"

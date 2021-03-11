@@ -439,7 +439,6 @@ class DeviceMap extends Component {
           { this.renderVehiclePins() }
           <MapboxGL.Camera
             bounds={this.state.bbox}
-            animationDuration={this.state.animationDuration}
             maxZoomLevel={19}
             ref={ ref => this.camRef = ref }
           />
