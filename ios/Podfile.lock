@@ -21,19 +21,18 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - GoogleSignIn (4.4.0):
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
-    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.3.1):
-    - GoogleToolboxForMac/Defines (= 2.3.1)
-  - GoogleToolboxForMac/Defines (2.3.1)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.3.1)":
-    - GoogleToolboxForMac/DebugUtils (= 2.3.1)
-    - GoogleToolboxForMac/Defines (= 2.3.1)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.3.1)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.3.1)"
+  - GTMAppAuth (1.1.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher (~> 1.4)
+  - GTMSessionFetcher (1.5.0):
+    - GTMSessionFetcher/Full (= 1.5.0)
   - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Full (1.5.0):
+    - GTMSessionFetcher/Core (= 1.5.0)
   - lottie-ios (3.1.8)
   - lottie-react-native (3.5.0):
     - lottie-ios (~> 3.1.8)
@@ -104,7 +103,7 @@ PODS:
     - React
   - react-native-get-random-values (1.6.0):
     - React-Core
-  - react-native-ios-launch-arguments (1.1.1):
+  - react-native-launch-arguments (2.0.0):
     - React
   - react-native-mapbox-gl (8.1.0-rc.4):
     - "@react-native-mapbox-gl-mapbox-static (~> 5.8)"
@@ -163,9 +162,9 @@ PODS:
     - React
   - RNGestureHandler (1.1.0):
     - React
-  - RNGoogleSignin (1.2.4):
-    - GoogleSignIn (~> 4.4.0)
-    - React
+  - RNGoogleSignin (6.0.0):
+    - GoogleSignIn (~> 5.0.0)
+    - React-Core
   - RNPermissions (2.2.2):
     - React-Core
   - RNSentry (1.8.2):
@@ -206,7 +205,7 @@ DEPENDENCIES:
   - react-native-camera (from `../node_modules/react-native-camera/react-native-camera.podspec`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
-  - react-native-ios-launch-arguments (from `../node_modules/react-native-ios-launch-arguments/react-native-ios-launch-arguments.podspec`)
+  - react-native-launch-arguments (from `../node_modules/react-native-launch-arguments`)
   - "react-native-mapbox-gl (from `../node_modules/@react-native-mapbox-gl/maps`)"
   - react-native-video (from `../node_modules/react-native-video/react-native-video.podspec`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -223,9 +222,9 @@ DEPENDENCIES:
   - "RNAnalytics (from `../node_modules/@segment/analytics-react-native`)"
   - "RNAnalyticsIntegration-Mixpanel (from `../node_modules/@segment/analytics-react-native-mixpanel`)"
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
-  - RNDeviceInfo (from `../node_modules/react-native-device-info/RNDeviceInfo.podspec`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler/RNGestureHandler.podspec`)
-  - RNGoogleSignin (from `../node_modules/react-native-google-signin/RNGoogleSignin.podspec`)
+  - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNPermissions (from `../node_modules/react-native-permissions/RNPermissions.podspec`)
   - "RNSentry (from `../node_modules/@sentry/react-native/RNSentry.podspec`)"
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -239,9 +238,6 @@ SPEC REPOS:
     - boost-for-react-native
     - Crashlytics
     - Fabric
-    - GoogleSignIn
-    - GoogleToolboxForMac
-    - GTMSessionFetcher
     - Mapbox-iOS-SDK
     - MapboxMobileEvents
     - Mixpanel
@@ -250,6 +246,9 @@ SPEC REPOS:
     - Stripe
   trunk:
     - AppAuth
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -286,8 +285,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
-  react-native-ios-launch-arguments:
-    :podspec: "../node_modules/react-native-ios-launch-arguments/react-native-ios-launch-arguments.podspec"
+  react-native-launch-arguments:
+    :path: "../node_modules/react-native-launch-arguments"
   react-native-mapbox-gl:
     :path: "../node_modules/@react-native-mapbox-gl/maps"
   react-native-video:
@@ -321,11 +320,11 @@ EXTERNAL SOURCES:
   RNAppleAuthentication:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
   RNDeviceInfo:
-    :podspec: "../node_modules/react-native-device-info/RNDeviceInfo.podspec"
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :podspec: "../node_modules/react-native-gesture-handler/RNGestureHandler.podspec"
   RNGoogleSignin:
-    :podspec: "../node_modules/react-native-google-signin/RNGoogleSignin.podspec"
+    :path: "../node_modules/@react-native-google-signin/google-signin"
   RNPermissions:
     :podspec: "../node_modules/react-native-permissions/RNPermissions.podspec"
   RNSentry:
@@ -337,14 +336,6 @@ EXTERNAL SOURCES:
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
-CHECKOUT OPTIONS:
-  react-native-ios-launch-arguments:
-    :commit: dec69d8a6405e745e2474d08c6bf4034e2df8821
-    :git: https://github.com/andyh2/react-native-ios-launch-arguments.git
-  RNDeviceInfo:
-    :commit: 4c1dfd15c03a77f54a69e2f52392e150c5b8eed4
-    :git: https://github.com/react-native-community/react-native-device-info.git
-
 SPEC CHECKSUMS:
   "@react-native-mapbox-gl-mapbox-static": 83c0e0ba33597bb694735ffb136d3d96780af37d
   Analytics: 4bcf052c91e1f3339219e83d6a036fb2bd7c218d
@@ -355,8 +346,8 @@ SPEC CHECKSUMS:
   Fabric: e88a14d80173bcf3db4eac866c83619f2894183d
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
-  GoogleToolboxForMac: 471e0c05d39506e50e6398f46fa9a12ae0efeff9
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
+  GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
@@ -375,7 +366,7 @@ SPEC CHECKSUMS:
   react-native-camera: 35854c4f764a4a6cf61c1c3525888b92f0fe4b31
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-get-random-values: f0fc24a5887a3341589515a86282a574407b59e4
-  react-native-ios-launch-arguments: 78be547d1563de65f488fe049475403ce963b465
+  react-native-launch-arguments: f218fbbf86570d5828668bd7365d015061de42b8
   react-native-mapbox-gl: b2e4cee6a40cb713cd72846c9573cd5bc468c3d5
   react-native-video: 8c49eca5a6087de968a05b340933b10e3b58169a
   React-RCTActionSheet: b0f1ea83f4bf75fb966eae9bfc47b78c8d3efd90
@@ -394,7 +385,7 @@ SPEC CHECKSUMS:
   RNAppleAuthentication: 46cbc67739bae83ca229497f9b0038f3f5431443
   RNDeviceInfo: f72e930fbde5077e8366346204ba9ad41c7a598f
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
-  RNGoogleSignin: a9084cfe072359166c93b80ead94eda3ad814d1d
+  RNGoogleSignin: 111fd4792913208f338fe3178005f7a22e490ff9
   RNPermissions: 5df468064df661a4c8c017e2791ce90d7695eea5
   RNSentry: cff88174a0b2e0289b2efe5be1abba1f6c54269d
   RNSVG: 2cc66383316fa84d4c672ccfa5e3bac271b6a2af
@@ -404,6 +395,6 @@ SPEC CHECKSUMS:
   tipsi-stripe: 64a2953ce4c9705465ddc1adb175301f5a897a24
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
-PODFILE CHECKSUM: 7d2b550075e5fed32be36c804735a2625ca4d3a0
+PODFILE CHECKSUM: 97429ab727410f71f328f727bb43f4b275e5117a
 
 COCOAPODS: 1.10.1
