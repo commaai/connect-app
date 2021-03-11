@@ -64,8 +64,6 @@
             ReferencedContainer = "container:connect.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <CommandLineArguments>
-      </CommandLineArguments>
       <Testables>
          <TestableReference
             skipped = "NO">

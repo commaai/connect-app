@@ -342,7 +342,7 @@ CHECKOUT OPTIONS:
     :commit: dec69d8a6405e745e2474d08c6bf4034e2df8821
     :git: https://github.com/andyh2/react-native-ios-launch-arguments.git
   RNDeviceInfo:
-    :commit: d6d2a32e2ac009ef7d393ae252a6f6ae0aef77b7
+    :commit: 4c1dfd15c03a77f54a69e2f52392e150c5b8eed4
     :git: https://github.com/react-native-community/react-native-device-info.git
 
 SPEC CHECKSUMS:
