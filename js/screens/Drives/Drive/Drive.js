@@ -40,7 +40,11 @@ const layerStyles = {
 };
 
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
-let DEFAULT_MAP_REGION = [[_bbox[0], _bbox[1]], [_bbox[2], _bbox[3]]];
+let DEFAULT_MAP_REGION = {
+  ne: [_bbox[0], _bbox[1]],
+  sw: [_bbox[2], _bbox[3]]
+};
+
 class Drive extends Component {
 
   constructor(props) {
@@ -116,8 +120,8 @@ class Drive extends Component {
     var centroid = makeCentroid(lineString).geometry.coordinates;
     var bbox = makeBbox(lineString);
 
-    this.mapRef && this.mapRef.fitBounds([bbox[2], bbox[1]], [bbox[0], bbox[3]], [200,200], 400);
-    this.setState({ coords: lineString, bbox: [[bbox[0], bbox[1]], [bbox[2], bbox[3]]], isLoading: false, coordsFetchFailed: false });
+    this.camRef && this.camRef.fitBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]], [200,200], 400);
+    this.setState({ coords: lineString, bbox: { ne: [bbox[0], bbox[1]], sw: [bbox[2], bbox[3]] }, isLoading: false, coordsFetchFailed: false });
   }
 
   swapMapVideoPip() {
@@ -136,9 +140,6 @@ class Drive extends Component {
       <MapboxGL.MapView
         styleURL={ MapboxGL.StyleURL.Dark }
         visibleCoordinateBounds={ this.state.bbox }
-        ref={ ref => {
-          this.mapRef = ref
-        } }
         onDidFinishLoadingMap={() => {
           if(!this.state.coords) {
             this.fetchCoords();
@@ -162,7 +163,7 @@ class Drive extends Component {
                 style={ layerStyles.route }
               />
             </MapboxGL.ShapeSource>
-          {pinCoord && <MapboxGL.PointAnnotation
+          { pinCoord && <MapboxGL.PointAnnotation
             id='pointAnnotation'
             title=''
             style={ Styles.annotationPin }
@@ -171,9 +172,15 @@ class Drive extends Component {
             <X.Image
               source={ Assets.iconPinParked }
               style={ Styles.annotationPin } />
-          </MapboxGL.PointAnnotation> }
-        </View>
-      }
+            </MapboxGL.PointAnnotation> }
+          </View>
+        }
+        <MapboxGL.Camera
+          bounds={this.state.bbox}
+          animationDuration={this.state.animationDuration}
+          maxZoomLevel={19}
+          ref={ ref => this.camRef = ref }
+        />
       </MapboxGL.MapView>
     );
   }
