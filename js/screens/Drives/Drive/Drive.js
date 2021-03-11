@@ -120,12 +120,11 @@ class Drive extends Component {
     var centroid = makeCentroid(lineString).geometry.coordinates;
     var bbox = makeBbox(lineString);
 
-    this.camRef && this.camRef.fitBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]], 50, 400);
+    this.camRef && this.camRef.fitBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]]);
     this.setState({ coords: lineString, bbox: { ne: [bbox[0], bbox[1]], sw: [bbox[2], bbox[3]] }, isLoading: false, coordsFetchFailed: false });
   }
 
   swapMapVideoPip() {
-    this.setState({ isLoading: true });
     if(this.state.pipPrimary === 'video') {
       this.setState({pipPrimary: 'map'});
     } else {

@@ -131,7 +131,7 @@ export function rehydrateAuth() {
   return async (dispatch, getState) => {
     let { commaUser, googleUser, appleUser, githubUser } = getState().auth;
     const launchArgs = LaunchArguments.value();
-    const hasJwtArg = launchArgs.hasOwnProperty('-jwt');
+    const hasJwtArg = launchArgs.hasOwnProperty('jwt');
 
     await dispatch(refreshTerms());
 
@@ -145,7 +145,7 @@ export function rehydrateAuth() {
       jwt = commaUser.accessToken;
     } else if (hasJwtArg) {
       dispatch(termsAccepted(getState().auth.terms.version));
-      jwt = launchArgs['-jwt'];
+      jwt = launchArgs['jwt'];
     }
 
     if (jwt) {
