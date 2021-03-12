@@ -30,6 +30,14 @@
 				<string>com.googleusercontent.apps.45471411055-mrs8e6dh0ualv24caqs6jh932v766hlk</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>ai.comma.connect</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ai.comma.connect</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>164</string>
@@ -54,15 +62,17 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Your message to user when apple music is accessed for the first time</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Your message to user when bluetooth is accessed for the first time</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Your message to user when bluetooth is accessed for the first time</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Your message to user when bluetooth is accessed for the first time</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Your message to user when the calendar is accessed for the first time</string>
 	<key>NSCameraUsageDescription</key>
 	<string>comma Connect needs access to your camera to scan a QR code</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>comma Connect shows your location relative to paired devices while using the app</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>comma Connect shows your location relative to paired devices while using the app</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>comma Connect shows your location relative to paired devices while using the app</string>

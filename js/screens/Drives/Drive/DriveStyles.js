@@ -36,9 +36,6 @@ export default StyleSheet.create({
     flex: 1,
     position: 'relative',
   },
-  driveCoverMap: {
-    flex: 1,
-  },
   annotationPin: {
     height: 40,
     width: 260/6.0,

@@ -1,7 +1,7 @@
 // Auth Async Actions
 // ~~~~~~~~~~~~~~~~~~
 
-import getLaunchArguments from 'react-native-ios-launch-arguments';
+import { LaunchArguments } from "react-native-launch-arguments";
 import Segment from '@segment/analytics-react-native';
 import * as Sentry from '@sentry/react-native';
 
@@ -19,7 +19,9 @@ import * as NavigationService from '../../navigators/service';
 
 import {
   authReset,
-  authAttempted,
+  authGoogleAttempted,
+  authAppleAttempted,
+  authGithubAttempted,
   authSucceeded,
   authFailed,
   authTerminated,
@@ -33,14 +35,14 @@ import { resetDrives } from '../Drives';
 export function attemptGoogleAuth() {
   return async (dispatch) => {
     try {
-      dispatch(authAttempted());
+      dispatch(authGoogleAttempted());
       await dispatch(refreshTerms());
 
       console.log('attemptGoogleAuth');
       await Auth.signOut();
       const googleUser = await Auth.attemptGoogleAuth();
       console.log('refreshAccessToken', googleUser);
-      const accessToken = await CommaAuth.refreshAccessToken(googleUser.serverAuthCode);
+      const accessToken = await CommaAuth.refreshAccessToken(googleUser.serverAuthCode, '', 'google');
       console.log('configure', accessToken);
       await configureApis(accessToken, errorHandler(dispatch));
       let commaUser = await Account.getProfile();
@@ -60,11 +62,76 @@ export function attemptGoogleAuth() {
   }
 }
 
+export function attemptAppleAuth() {
+  return async (dispatch) => {
+    try {
+      dispatch(authAppleAttempted());
+      await dispatch(refreshTerms());
+
+      console.log('attemptAppleAuth');
+      await Auth.signOut();
+      const appleUser = await Auth.attemptAppleAuth();
+      console.log('refreshAccessToken', appleUser);
+      let accessToken;
+      if (appleUser.authorizationCode) {
+        accessToken = await CommaAuth.refreshAccessToken(appleUser.authorizationCode, 'https://my.comma.ai/auth/a/redirect', 'apple_ios');
+      } else {
+        accessToken = await CommaAuth.refreshAccessToken(appleUser.code, 'https://my.comma.ai/auth/a/redirect', 'apple');
+      }
+      console.log('configure', accessToken);
+      await configureApis(accessToken, errorHandler(dispatch));
+      let commaUser = await Account.getProfile();
+      commaUser.accessToken = accessToken;
+      console.log({appleUser, commaUser});
+
+      if (appleUser != null && commaUser != null) {
+        dispatch(authSucceeded({ commaUser, appleUser }));
+      } else {
+        console.error('wtf')
+      }
+    } catch(error) {
+      console.log(error);
+      Sentry.captureException(error);
+      dispatch(authFailed(error));
+    }
+  }
+}
+
+export function attemptGithubAuth() {
+  return async (dispatch) => {
+    try {
+      dispatch(authGithubAttempted());
+      await dispatch(refreshTerms());
+
+      console.log('attemptGithubAuth');
+      await Auth.signOut();
+      const githubUser = await Auth.attemptGithubAuth();
+      console.log('refreshAccessToken', githubUser);
+      const accessToken = await CommaAuth.refreshAccessToken(githubUser.authorizationCode, '', 'github_mobile');
+      console.log('configure', accessToken);
+      await configureApis(accessToken, errorHandler(dispatch));
+      let commaUser = await Account.getProfile();
+      commaUser.accessToken = accessToken;
+      console.log({githubUser, commaUser});
+
+      if (githubUser != null && commaUser != null) {
+        dispatch(authSucceeded({ commaUser, githubUser }));
+      } else {
+        console.error('wtf')
+      }
+    } catch(error) {
+      console.log(error);
+      Sentry.captureException(error);
+      dispatch(authFailed(error));
+    }
+  }
+}
+
 export function rehydrateAuth() {
   return async (dispatch, getState) => {
-    let { commaUser, googleUser } = getState().auth;
-    const launchArgs = getLaunchArguments();
-    const jwtArgIdx = launchArgs.findIndex(arg => arg === '-jwt');
+    let { commaUser, googleUser, appleUser, githubUser } = getState().auth;
+    const launchArgs = LaunchArguments.value();
+    const hasJwtArg = launchArgs.hasOwnProperty('jwt');
 
     await dispatch(refreshTerms());
 
@@ -76,9 +143,9 @@ export function rehydrateAuth() {
       });
       Segment.identify(commaUser.id, { username: commaUser.username });
       jwt = commaUser.accessToken;
-    } else if (jwtArgIdx !== -1) {
+    } else if (hasJwtArg) {
       dispatch(termsAccepted(getState().auth.terms.version));
-      jwt = launchArgs[jwtArgIdx + 1];
+      jwt = launchArgs['jwt'];
     }
 
     if (jwt) {
@@ -91,7 +158,7 @@ export function rehydrateAuth() {
       }
 
       commaUser.accessToken = jwt;
-      dispatch(authSucceeded({commaUser, googleUser}));
+      dispatch(authSucceeded({ commaUser, googleUser, appleUser, githubUser }));
     }
   }
 }

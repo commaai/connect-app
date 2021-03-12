@@ -1,1 +1,0 @@
-../../../ReactNativePermissions/ios/ReactNativePermissions.h

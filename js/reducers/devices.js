@@ -143,7 +143,7 @@ export default function devices(state = initialDevicesState, action) {
           ...state.devices,
           [action.payload.dongleId]: {
             ...state.devices[action.payload.dongleId],
-            car_health: action.payload.carHealth.health,
+            carHealth: action.payload.carHealth.pandaState,
           },
         },
       }

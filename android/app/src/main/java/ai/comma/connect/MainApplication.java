@@ -3,8 +3,8 @@ package ai.comma.connect;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
 import io.sentry.RNSentryPackage;
@@ -14,7 +14,6 @@ import com.segment.analytics.reactnative.integration.mixpanel.RNAnalyticsIntegra
 import com.brentvatne.react.ReactVideoPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.mapbox.rctmgl.RCTMGLPackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -24,6 +23,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.facebook.react.PackageList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,22 +39,10 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     @SuppressLint("MissingPermission")
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.asList(
-        new MainReactPackage(),
-            new SvgPackage(),
-        new RNAnalyticsIntegration_MixpanelPackage(),
-        new RNAnalyticsPackage(),
-        new ReactVideoPackage(),
-        new RNFetchBlobPackage(),
-        new RNSentryPackage(),
-        new RCTMGLPackage(),
-        new RNCameraPackage(),
-        new LottiePackage(),
-        new RNDeviceInfo(),
-        new RNGestureHandlerPackage(),
-        new RNGoogleSigninPackage(),
-        new StripeReactPackage()
-      );
+      List<ReactPackage> packages = new PackageList(this).getPackages();
+      // Manually add any missing packages like this
+      // packages.add(new PostsnapPackage());
+      return packages;
     }
 
     @Override

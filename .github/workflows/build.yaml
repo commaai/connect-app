@@ -21,6 +21,14 @@ jobs:
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Cache pods
+        uses: actions/cache@v1
+        id: pod-cache
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
       - name: Yarn Install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
@@ -31,5 +39,9 @@ jobs:
       - name: Bundle install
         if: steps.bundler-cache.outputs.cache-hit != 'true'
         run: bundle install --jobs 4 --retry 3
+      - name: Pods install
+        if: steps.pods-cache.outputs.cache-hit != 'true'
+        working-directory: ios
+        run: pod install
       - name: Build
         run: bundle exec fastlane ios build_for_testing

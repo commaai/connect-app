@@ -1,1 +1,0 @@
-../../../react-native-mapbox-gl/ios/RCTMGL/RCTMGLFillLayerManager.h

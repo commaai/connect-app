@@ -289,7 +289,7 @@ class DeviceInfo extends Component {
 
   renderDeviceCarBattery = () => {
     const device = this.device();
-    const voltage = device.car_health ? (device.car_health.voltage/1000).toFixed(1) : null;
+    const voltage = device.carHealth ? (device.carHealth.voltage/1000).toFixed(1) : null;
     return (
       <View style={ [
         Styles.deviceInfoCarBattery,

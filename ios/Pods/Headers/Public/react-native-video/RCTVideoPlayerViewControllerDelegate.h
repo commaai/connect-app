@@ -1,1 +1,0 @@
-../../../react-native-video/ios/Video/RCTVideoPlayerViewControllerDelegate.h

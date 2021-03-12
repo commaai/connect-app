@@ -1,1 +1,0 @@
-../../../RNSentry/ios/RNSentry.h

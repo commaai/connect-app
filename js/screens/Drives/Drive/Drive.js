@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import Mapbox from '@mapbox/react-native-mapbox-gl';
+import MapboxGL from '@react-native-mapbox-gl/maps';
 import moment from 'moment';
 import {lineString as makeLineString} from '@turf/helpers';
 import makeCentroid from '@turf/centroid';
@@ -29,21 +29,34 @@ import X from '../../../theme';
 import Styles from './DriveStyles';
 import { geocodeRoute } from '../../../actions/async/Drives';
 
-Mapbox.setAccessToken(ApiKeys.MAPBOX_TOKEN);
+MapboxGL.setAccessToken(ApiKeys.MAPBOX_TOKEN);
 
-type Props = {};
-
-const layerStyles = Mapbox.StyleSheet.create({
+const layerStyles = {
   route: {
     lineColor: 'white',
     lineWidth: 3,
     lineOpacity: 0.84,
   },
-});
+  vehiclePin: {
+    iconAnchor: MapboxGL.IconAnchor.Bottom,
+    iconImage: Assets.iconPinParked,
+    iconSize: 0.25,
+    iconOffset: [0, 35],
+    iconColor: 'white',
+  },
+};
 
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
-let DEFAULT_MAP_REGION = [[_bbox[0], _bbox[1]], [_bbox[2], _bbox[3]]];
-class Drive extends Component<Props> {
+let DEFAULT_MAP_REGION = {
+  ne: [_bbox[0], _bbox[1]],
+  sw: [_bbox[2], _bbox[3]],
+  paddingLeft: 20,
+  paddingRight: 20,
+  paddingBottom: 20,
+  paddingTop: 20,
+};
+
+class Drive extends Component {
 
   constructor(props) {
     super(props);
@@ -118,8 +131,20 @@ class Drive extends Component<Props> {
     var centroid = makeCentroid(lineString).geometry.coordinates;
     var bbox = makeBbox(lineString);
 
-    this.mapRef && this.mapRef.fitBounds([bbox[2], bbox[1]], [bbox[0], bbox[3]], [200,200], 400);
-    this.setState({ coords: lineString, bbox: [[bbox[0], bbox[1]], [bbox[2], bbox[3]]], isLoading: false, coordsFetchFailed: false });
+    this.setState({
+      coords: lineString,
+      bbox: {
+        ne: [bbox[0], bbox[1]],
+        sw: [bbox[2], bbox[3]],
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 20,
+        paddingTop: 20, },
+      isLoading: false,
+      coordsFetchFailed: false
+    });
+    this.camRef.props.animationMode = 'moveTo';
+    //this.camRef.fitBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]], 20, 2000);
   }
 
   swapMapVideoPip() {
@@ -130,17 +155,32 @@ class Drive extends Component<Props> {
     }
   }
 
-  renderMap() {
+  renderMap(noDestroy) {
     const { route } = this.props.navigation.state.params;
     const pinCoord = this.state.coords && this.state.coords.geometry.coordinates[Math.floor(this.state.currentTime)];
+    let style = { flex: 1 };
+    if (noDestroy) {
+      style['display'] = this.state.pipPrimary === 'video'? 'flex' : 'none';
+    }
+
+    let shape;
+    if (pinCoord) {
+      shape = {
+        type: 'Feature',
+        properties: {
+          isVehiclePin: true,
+        },
+        geometry: {
+          type: 'Point',
+          coordinates: pinCoord,
+        },
+      };
+    }
 
     return (
-      <Mapbox.MapView
-        styleURL={ Mapbox.StyleURL.Dark }
+      <MapboxGL.MapView
+        styleURL={ MapboxGL.StyleURL.Dark }
         visibleCoordinateBounds={ this.state.bbox }
-        ref={ ref => {
-          this.mapRef = ref
-        } }
         onDidFinishLoadingMap={() => {
           if(!this.state.coords) {
             this.fetchCoords();
@@ -152,31 +192,32 @@ class Drive extends Component<Props> {
         zoomEnabled={ this.state.pipPrimary === 'map' }
         onPress={ this.state.pipPrimary !== 'map' ? this.swapMapVideoPip : null }
         showUserLocation={ false }
-        style={ Styles.driveCoverMap }
+        style={ style }
         attributionEnabled={ false }
         compassEnabled={ false }
-        logoEnabled={ false }>
+        logoEnabled={ false }
+        surfaceView={ true }>
         { this.state.coords &&
           <View>
-            <Mapbox.ShapeSource id='routeCoords' shape={ this.state.coords }>
-              <Mapbox.LineLayer
+            <MapboxGL.ShapeSource id='routeCoords' shape={ this.state.coords }>
+              <MapboxGL.LineLayer
                 id='routeLine'
                 style={ layerStyles.route }
               />
-            </Mapbox.ShapeSource>
-          {pinCoord && <Mapbox.PointAnnotation
-            id='pointAnnotation'
-            title=''
-            style={ Styles.annotationPin }
-            anchor={{ x: 0.5, y: 1 }}
-            coordinate={ pinCoord }>
-            <X.Image
-              source={ Assets.iconPinParked }
-              style={ Styles.annotationPin } />
-          </Mapbox.PointAnnotation> }
-        </View>
-      }
-      </Mapbox.MapView>
+            </MapboxGL.ShapeSource>
+            { shape && <MapboxGL.ShapeSource
+                id='vehiclePin'
+                shape={ shape }>
+                <MapboxGL.SymbolLayer id='vehiclePin' style={ layerStyles.vehiclePin } />
+              </MapboxGL.ShapeSource> }
+          </View>
+        }
+        <MapboxGL.Camera
+          bounds={this.state.bbox}
+          maxZoomLevel={19}
+          ref={ ref => this.camRef = ref }
+        />
+      </MapboxGL.MapView>
     );
   }
 
@@ -277,10 +318,11 @@ class Drive extends Component<Props> {
                 isFlex={ true }
                 onPress={ this.swapMapVideoPip }
                 style={ { zIndex: 3, elevation: 3 } }>
-                { this.state.pipPrimary === 'video' ? this.renderMap() : this.renderVideo() }
+                { this.state.pipPrimary === 'video' ? null : this.renderVideo() }
+                { this.renderMap(true) }
               </X.Button>
             </View>
-            { this.state.pipPrimary === 'video' ? this.renderVideo() : this.renderMap() }
+            { this.state.pipPrimary === 'video' ? this.renderVideo() : this.renderMap(false) }
           </View>
           <View style={ Styles.driveJourney }>
             <View style={ Styles.driveJourneyHeader }>

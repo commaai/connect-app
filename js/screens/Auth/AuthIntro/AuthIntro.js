@@ -7,14 +7,12 @@ import { View } from 'react-native';
 import CarouselPager from 'react-native-carousel-pager';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import { attemptGoogleAuth } from '../../../actions/async/Auth';
+import { attemptGoogleAuth, attemptAppleAuth, attemptGithubAuth } from '../../../actions/async/Auth';
 import { Assets } from '../../../constants';
 import X from '../../../theme';
 import Styles from '../AuthStyles';
 
-type Props = {};
-
-class AuthIntro extends Component<Props> {
+class AuthIntro extends Component {
 
   constructor(props) {
     super(props);
@@ -26,10 +24,6 @@ class AuthIntro extends Component<Props> {
 
   handleSlideChanged(activeSlide) {
     return this.setState({ activeSlide });
-  }
-
-  handlePressedGoogleSignin() {
-    this.props.attemptGoogleAuth();
   }
 
   componentWillReceiveProps(newProps) {
@@ -60,13 +54,48 @@ class AuthIntro extends Component<Props> {
           </View>
         </View>
         <X.Entrance style={ Styles.authIntroActions }>
-          <View style={ Styles.authIntroAction }>
-            <X.Button
-              textColor='#111'
-              onPress={ this.props.attemptGoogleAuth }>
-              { auth.isAuthenticating ? 'Logging in...' : ' Log in with Google' }
-            </X.Button>
-          </View>
+          <X.Button
+            style={ Styles.authIntroAction }
+            textColor='#111'
+            onPress={ this.props.attemptGoogleAuth }>
+            <X.Image
+              style={ Styles.authIntroButtonImg }
+              source={ Assets.authGoogle } />
+            <X.Text
+              style={ Styles.authIntroButtonText }
+              color='black'
+              weight='semibold'>
+              { auth.isGoogleAuthenticating ? 'Logging in...' : 'Sign in with Google' }
+            </X.Text>
+          </X.Button>
+          <X.Button
+            style={ Styles.authIntroAction }
+            textColor='#111'
+            onPress={ this.props.attemptAppleAuth }>
+            <X.Image
+              style={ Styles.authIntroButtonImg }
+              source={ Assets.authApple } />
+            <X.Text
+              style={ Styles.authIntroButtonText }
+              color='black'
+              weight='semibold'>
+              { auth.isAppleAuthenticating ? 'Logging in...' : ' Sign in with Apple' }
+            </X.Text>
+          </X.Button>
+          <X.Button
+            style={ Styles.authIntroAction }
+            textColor='#111'
+            onPress={ this.props.attemptGithubAuth }>
+            <X.Image
+              style={ Styles.authIntroButtonImg }
+              source={ Assets.authGithub } />
+            <X.Text
+              style={ Styles.authIntroButtonText }
+              color='black'
+              weight='semibold'>
+              { auth.isGithubAuthenticating ? 'Logging in...' : ' Sign in with GitHub' }
+            </X.Text>
+          </X.Button>
         </X.Entrance>
         <View style={ Styles.authIntroSlidesCrumbs }>
         </View>
@@ -87,6 +116,12 @@ function mapDispatchToProps(dispatch) {
   return ({
     attemptGoogleAuth: () => {
       dispatch(attemptGoogleAuth());
+    },
+    attemptAppleAuth: () => {
+      dispatch(attemptAppleAuth());
+    },
+    attemptGithubAuth: () => {
+      dispatch(attemptGithubAuth());
     },
   });
 }

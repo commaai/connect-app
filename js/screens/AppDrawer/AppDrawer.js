@@ -36,15 +36,14 @@ class AppDrawer extends Component {
           { auth.user ? (
             <View>
               <View style={ Styles.appDrawerHeaderPhoto }>
-                <X.Image
-                  source={ { uri: auth.user.photo } } />
+                <X.Image source={ auth.user.photo ? { uri: auth.user.photo } : Assets.iconUser } />
               </View>
               <X.Text
                 color='white'
                 size='medium'
                 weight='semibold'
                 style={ Styles.appDrawerHeaderName }>
-                { auth.user.full_name }
+                { auth.user.full_name ? auth.user.full_name : (!auth.user.email.includes('privaterelay.appleid.com') ? auth.user.email : '') }
               </X.Text>
               { auth.user.username &&
                 <X.Text

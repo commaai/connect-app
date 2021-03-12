@@ -1,1 +1,0 @@
-../../../ReactNativePermissions/ios/Permissions/RNPBackgroundRefresh.h

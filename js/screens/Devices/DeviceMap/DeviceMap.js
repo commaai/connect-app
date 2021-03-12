@@ -17,7 +17,7 @@ import {
 import { connect } from 'react-redux';
 import { withNavigation, DrawerActions } from 'react-navigation';
 import moment from 'moment';
-import Mapbox from '@mapbox/react-native-mapbox-gl';
+import MapboxGL from '@react-native-mapbox-gl/maps';
 import {
   multiPoint as makeMultiPoint,
 } from '@turf/helpers';
@@ -31,23 +31,26 @@ import X from '../../../theme';
 import Styles from './DeviceMapStyles';
 import { ApiKeys } from '../../../constants';
 
-Mapbox.setAccessToken(ApiKeys.MAPBOX_TOKEN);
+MapboxGL.setAccessToken(ApiKeys.MAPBOX_TOKEN);
 const ONE_WEEK_MILLIS = 7 * 86400 * 1000;
 
-const mapStyles = Mapbox.StyleSheet.create({
+const mapStyles = {
   vehiclePin: {
     // iconAllowOverlap: true,
     // iconIgnorePlacement: true,
-    iconAnchor: Mapbox.IconAnchor.Bottom,
+    iconAnchor: MapboxGL.IconAnchor.Bottom,
     // iconOffset: [0, -5],
     iconImage: Assets.iconPinParked,
     iconSize: __DEV__ ? 0.75 : 0.25,
   },
-})
+};
 
 // tastefully chosen default map region
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
-let DEFAULT_MAP_REGION = [[_bbox[0], _bbox[1]], [_bbox[2], _bbox[3]]];
+let DEFAULT_MAP_REGION = {
+  ne: [_bbox[0], _bbox[1]],
+  sw: [_bbox[2], _bbox[3]]
+};
 
 class DeviceMap extends Component {
 
@@ -108,12 +111,12 @@ class DeviceMap extends Component {
     this.props.navigation.navigate('DeviceInfo', { dongleId: device.dongle_id });
     if (location && location.lng) {
       this.setState({selectedPin: device.dongle_id});
-      this.mapRef.setCamera({ centerCoordinate: [ location.lng, location.lat ], zoom: 16, duration: 600 })
+      this.camRef.setCamera({ centerCoordinate: [ location.lng, location.lat ], zoom: 16, duration: 600 })
     }
   }
 
   resetToNorth() {
-    this.mapRef.setCamera({heading: 0, duration: 250})
+    this.camRef.setCamera({heading: 0, duration: 250})
   }
 
   renderVehicleAnnotations() {
@@ -145,7 +148,7 @@ class DeviceMap extends Component {
           const title = deviceTitle(device);
           const pinStyle = (Platform.OS === 'ios' && selectedPin !== dongleId) ? {display: 'none'} : null;
           return (
-              <Mapbox.PointAnnotation
+              <MapboxGL.PointAnnotation
                 pointerEvents='none'
                 key={ 'pointAnnotation_key_' + location.dongle_id }
                 id={ 'pointAnnotation_' + location.dongle_id }
@@ -155,14 +158,14 @@ class DeviceMap extends Component {
                 selected={ selectedPin===dongleId }
                 coordinate={ [location.lng, location.lat] }>
                   <View style={Styles.annotationPin} />
-                  <Mapbox.Callout
+                  <MapboxGL.Callout
                     title={ title }
                     textStyle={ { color: 'white' } }//, selectedPin!==dongleId ? {display: 'none'} : null] }
                     // containerStyle={ selectedPin!==dongleId ? {display: 'none'} : null }
                     tipStyle={ [Styles.annotationCalloutTip ]} // selectedPin!==dongleId ? {display: 'none'} : null] }
                     contentStyle={ [Styles.annotationCallout ]} //, selectedPin!==dongleId ? {display: 'none'} : null] } />
                   />
-              </Mapbox.PointAnnotation>
+              </MapboxGL.PointAnnotation>
           )
         } else {
           return null;
@@ -210,12 +213,12 @@ class DeviceMap extends Component {
           };
 
           return (
-              <Mapbox.ShapeSource
+              <MapboxGL.ShapeSource
                 id={ 'vehiclePin_' + dongleId }
                 key={ 'vehiclePin_' + dongleId }
                 shape={ shape }>
-                <Mapbox.SymbolLayer id={ 'vehiclePin_' + dongleId } style={ mapStyles.vehiclePin } />
-              </Mapbox.ShapeSource>
+                <MapboxGL.SymbolLayer id={ 'vehiclePin_' + dongleId } style={ mapStyles.vehiclePin } />
+              </MapboxGL.ShapeSource>
           )
         } else {
           return null;
@@ -357,7 +360,7 @@ class DeviceMap extends Component {
       return;
     }
     let { longitude, latitude } = this.props.location.location.coords;
-    this.mapRef.setCamera({ centerCoordinate: [ longitude, latitude ], zoom: 16, duration: 600 })
+    this.camRef.setCamera({ centerCoordinate: [ longitude, latitude ], zoom: 16, duration: 600 })
   }
 
   handlePressedAllVehicles(deviceLocations) {
@@ -387,7 +390,10 @@ class DeviceMap extends Component {
       }
     }
 
-    this.mapRef && this.mapRef.fitBounds([bbox[2], bbox[1]], [bbox[0], bbox[3]], [250, 50], 400);
+    this.setState({ bbox: {
+      ne: [bbox[2], bbox[1]],
+      sw: [bbox[0], bbox[3]]
+    }});
   }
 
   onRegionChange(region) {
@@ -418,22 +424,26 @@ class DeviceMap extends Component {
 
     return (
       <View style={ Styles.mapContainer }>
-        <Mapbox.MapView
+        <MapboxGL.MapView
           onDidFinishLoadingMap={ () => this.handlePressedAllVehicles() }
           onRegionWillChange={ this.onRegionChange }
           onRegionIsChanging={ this.onRegionChange }
           onRegionDidChange={ this.onRegionChange }
-          styleURL={ Mapbox.StyleURL.Dark }
-          zoomLevel={ 16 }
+          styleURL={ MapboxGL.StyleURL.Dark }
           visibleCoordinateBounds={ this.state.bbox }
           showUserLocation={ true }
           compassEnabled={ false }
           style={ Styles.mapView }
           onPress={ this.handleMapPress }
-          ref={ ref => this.mapRef = ref }>
+          surfaceView={ true }>
           { this.renderVehicleAnnotations() }
           { this.renderVehiclePins() }
-        </Mapbox.MapView>
+          <MapboxGL.Camera
+            bounds={this.state.bbox}
+            maxZoomLevel={19}
+            ref={ ref => this.camRef = ref }
+          />
+        </MapboxGL.MapView>
         <View style={ Styles.mapHeader }>
           <X.Button
             size='full'
@@ -441,7 +451,7 @@ class DeviceMap extends Component {
             style={ Styles.mapHeaderAccount }
             onPress={ () => this.handlePressedAccount() }>
             <X.Avatar
-              image={ { uri: user.photo } }
+              image={ user.photo ? { uri: user.photo } : Assets.iconUser }
               color='transparent'
               shape='circle'
               size='small'

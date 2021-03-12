@@ -179,7 +179,7 @@ export function takeDeviceSnapshot(dongleId) {
 export function fetchDeviceCarHealth(dongleId) {
   return async dispatch => {
     try {
-      const resp = await AthenaApi.post(dongleId, {
+      const resp = await AthenaApi.postJsonRpcPayload(dongleId, {
         method: 'getMessage',
         params: {'service': 'pandaState', 'timeout': 5000},
         jsonrpc: '2.0',
