@@ -42,7 +42,11 @@ const layerStyles = {
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
 let DEFAULT_MAP_REGION = {
   ne: [_bbox[0], _bbox[1]],
-  sw: [_bbox[2], _bbox[3]]
+  sw: [_bbox[2], _bbox[3]],
+  paddingLeft: 20,
+  paddingRight: 20,
+  paddingBottom: 20,
+  paddingTop: 20,
 };
 
 class Drive extends Component {
@@ -120,8 +124,20 @@ class Drive extends Component {
     var centroid = makeCentroid(lineString).geometry.coordinates;
     var bbox = makeBbox(lineString);
 
-    this.camRef && this.camRef.fitBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]]);
-    this.setState({ coords: lineString, bbox: { ne: [bbox[0], bbox[1]], sw: [bbox[2], bbox[3]] }, isLoading: false, coordsFetchFailed: false });
+    this.setState({
+      coords: lineString,
+      bbox: {
+        ne: [bbox[0], bbox[1]],
+        sw: [bbox[2], bbox[3]],
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 20,
+        paddingTop: 20, },
+      isLoading: false,
+      coordsFetchFailed: false
+    });
+    this.camRef.props.animationMode = 'moveTo';
+    //this.camRef.fitBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]], 20, 2000);
   }
 
   swapMapVideoPip() {
