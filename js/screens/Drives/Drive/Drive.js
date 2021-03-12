@@ -37,6 +37,13 @@ const layerStyles = {
     lineWidth: 3,
     lineOpacity: 0.84,
   },
+  vehiclePin: {
+    iconAnchor: MapboxGL.IconAnchor.Bottom,
+    iconImage: Assets.iconPinParked,
+    iconSize: 0.25,
+    iconOffset: [0, 35],
+    iconColor: 'white',
+  },
 };
 
 let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
@@ -148,9 +155,27 @@ class Drive extends Component {
     }
   }
 
-  renderMap() {
+  renderMap(noDestroy) {
     const { route } = this.props.navigation.state.params;
     const pinCoord = this.state.coords && this.state.coords.geometry.coordinates[Math.floor(this.state.currentTime)];
+    let style = { flex: 1 };
+    if (noDestroy) {
+      style['display'] = this.state.pipPrimary === 'video'? 'flex' : 'none';
+    }
+
+    let shape;
+    if (pinCoord) {
+      shape = {
+        type: 'Feature',
+        properties: {
+          isVehiclePin: true,
+        },
+        geometry: {
+          type: 'Point',
+          coordinates: pinCoord,
+        },
+      };
+    }
 
     return (
       <MapboxGL.MapView
@@ -167,7 +192,7 @@ class Drive extends Component {
         zoomEnabled={ this.state.pipPrimary === 'map' }
         onPress={ this.state.pipPrimary !== 'map' ? this.swapMapVideoPip : null }
         showUserLocation={ false }
-        style={ Styles.driveCoverMap }
+        style={ style }
         attributionEnabled={ false }
         compassEnabled={ false }
         logoEnabled={ false }
@@ -180,16 +205,11 @@ class Drive extends Component {
                 style={ layerStyles.route }
               />
             </MapboxGL.ShapeSource>
-          { pinCoord && <MapboxGL.PointAnnotation
-            id='pointAnnotation'
-            title=''
-            style={ Styles.annotationPin }
-            anchor={{ x: 0.5, y: 1 }}
-            coordinate={ pinCoord }>
-            <X.Image
-              source={ Assets.iconPinParked }
-              style={ Styles.annotationPin } />
-            </MapboxGL.PointAnnotation> }
+            { shape && <MapboxGL.ShapeSource
+                id='vehiclePin'
+                shape={ shape }>
+                <MapboxGL.SymbolLayer id='vehiclePin' style={ layerStyles.vehiclePin } />
+              </MapboxGL.ShapeSource> }
           </View>
         }
         <MapboxGL.Camera
@@ -298,10 +318,11 @@ class Drive extends Component {
                 isFlex={ true }
                 onPress={ this.swapMapVideoPip }
                 style={ { zIndex: 3, elevation: 3 } }>
-                { this.state.pipPrimary === 'video' ? this.renderMap() : this.renderVideo() }
+                { this.state.pipPrimary === 'video' ? null : this.renderVideo() }
+                { this.renderMap(true) }
               </X.Button>
             </View>
-            { this.state.pipPrimary === 'video' ? this.renderVideo() : this.renderMap() }
+            { this.state.pipPrimary === 'video' ? this.renderVideo() : this.renderMap(false) }
           </View>
           <View style={ Styles.driveJourney }>
             <View style={ Styles.driveJourneyHeader }>
