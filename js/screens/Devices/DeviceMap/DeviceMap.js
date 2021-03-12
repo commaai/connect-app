@@ -434,7 +434,8 @@ class DeviceMap extends Component {
           showUserLocation={ true }
           compassEnabled={ false }
           style={ Styles.mapView }
-          onPress={ this.handleMapPress }>
+          onPress={ this.handleMapPress }
+          surfaceView={ true }>
           { this.renderVehicleAnnotations() }
           { this.renderVehiclePins() }
           <MapboxGL.Camera

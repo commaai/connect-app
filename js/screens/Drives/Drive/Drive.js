@@ -154,7 +154,8 @@ class Drive extends Component {
         style={ Styles.driveCoverMap }
         attributionEnabled={ false }
         compassEnabled={ false }
-        logoEnabled={ false }>
+        logoEnabled={ false }
+        surfaceView={ true }>
         { this.state.coords &&
           <View>
             <MapboxGL.ShapeSource id='routeCoords' shape={ this.state.coords }>
