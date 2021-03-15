@@ -43,14 +43,14 @@ class AppDrawer extends Component {
                 size='medium'
                 weight='semibold'
                 style={ Styles.appDrawerHeaderName }>
-                { auth.user.full_name ? auth.user.full_name : (!auth.user.email.includes('privaterelay.appleid.com') ? auth.user.email : '') }
+                { !auth.user.email.includes('privaterelay.appleid.com') ? auth.user.email : '' }
               </X.Text>
-              { auth.user.username &&
+              { auth.user.full_name &&
                 <X.Text
                   color='lightGrey'
                   size='medium'
                   style={ Styles.appDrawerHeaderAlias }>
-                  @{ auth.user.username }
+                  { auth.user.full_name }
                 </X.Text>
               }
             </View>
