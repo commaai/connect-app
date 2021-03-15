@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.1</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -40,7 +40,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>164</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -70,9 +70,9 @@
 	<string>Your message to user when the calendar is accessed for the first time</string>
 	<key>NSCameraUsageDescription</key>
 	<string>comma Connect needs access to your camera to scan a QR code</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>comma Connect shows your location relative to paired devices while using the app</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>comma Connect shows your location relative to paired devices while using the app</string>
+	<key>NSLocationAlwaysUsageDescription</key>
 	<string>comma Connect shows your location relative to paired devices while using the app</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>comma Connect shows your location relative to paired devices while using the app</string>

@@ -1,5 +1,5 @@
 app_identifier("ai.comma.connect") # The bundle identifier of your app
-apple_id("andy@comma.ai") # Your Apple email address
+apple_id("joost@comma.ai") # Your Apple email address
 
 itc_team_id("118156365") # App Store Connect Team ID
 team_id("M598J8XSAV") # Developer Portal Team ID
