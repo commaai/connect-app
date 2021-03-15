@@ -235,23 +235,22 @@ DEPENDENCIES:
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - "@react-native-mapbox-gl-mapbox-static"
     - Analytics
+    - AppAuth
     - boost-for-react-native
     - Crashlytics
     - Fabric
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
     - Mapbox-iOS-SDK
     - MapboxMobileEvents
     - Mixpanel
     - Segment-Mixpanel
     - Sentry
     - Stripe
-  trunk:
-    - AppAuth
-    - GoogleSignIn
-    - GTMAppAuth
-    - GTMSessionFetcher
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -400,4 +399,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 97429ab727410f71f328f727bb43f4b275e5117a
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.3
