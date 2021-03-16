@@ -36,12 +36,12 @@ const ONE_WEEK_MILLIS = 7 * 86400 * 1000;
 
 const mapStyles = {
   vehiclePin: {
-    // iconAllowOverlap: true,
-    // iconIgnorePlacement: true,
     iconAnchor: MapboxGL.IconAnchor.Bottom,
-    // iconOffset: [0, -5],
     iconImage: Assets.iconPinParked,
-    iconSize: __DEV__ ? 0.75 : 0.25,
+    iconSize: 0.25,
+    iconOffset: [0, 35],
+    iconColor: 'white',
+    iconOpacity: 1.0,
   },
 };
 
@@ -88,8 +88,7 @@ class DeviceMap extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.mapZoomed
-      && Object.values(nextProps.devices.deviceLocations).some((location) =>
+    if (!this.state.mapZoomed && Object.values(nextProps.devices.deviceLocations).some((location) =>
         Date.now() - location.time < ONE_WEEK_MILLIS && location.lng != null)) {
         this.setState({ mapZoomed: true });
       this.handlePressedAllVehicles(nextProps.devices.deviceLocations);
@@ -154,16 +153,15 @@ class DeviceMap extends Component {
                 id={ 'pointAnnotation_' + location.dongle_id }
                 title=''
                 onDeselected={ () => this.setState({ selectedPin: null }) }
-                style={ [Styles.annotationPin, pinStyle ]} // Platform.OS === 'ios' && selectedPin!==dongleId ? {display: 'none'} : null] }
+                style={ [Styles.annotationPin, pinStyle ]}
                 selected={ selectedPin===dongleId }
                 coordinate={ [location.lng, location.lat] }>
                   <View style={Styles.annotationPin} />
                   <MapboxGL.Callout
                     title={ title }
-                    textStyle={ { color: 'white' } }//, selectedPin!==dongleId ? {display: 'none'} : null] }
-                    // containerStyle={ selectedPin!==dongleId ? {display: 'none'} : null }
-                    tipStyle={ [Styles.annotationCalloutTip ]} // selectedPin!==dongleId ? {display: 'none'} : null] }
-                    contentStyle={ [Styles.annotationCallout ]} //, selectedPin!==dongleId ? {display: 'none'} : null] } />
+                    textStyle={ { color: 'white' } }
+                    tipStyle={ Styles.annotationCalloutTip }
+                    contentStyle={ Styles.annotationCallout }
                   />
               </MapboxGL.PointAnnotation>
           )
@@ -213,12 +211,15 @@ class DeviceMap extends Component {
           };
 
           return (
-              <MapboxGL.ShapeSource
+            <MapboxGL.ShapeSource
+              id={ 'vehiclePin_' + dongleId }
+              key={ 'vehiclePin_' + dongleId }
+              shape={ shape }>
+              <MapboxGL.SymbolLayer
                 id={ 'vehiclePin_' + dongleId }
-                key={ 'vehiclePin_' + dongleId }
-                shape={ shape }>
-                <MapboxGL.SymbolLayer id={ 'vehiclePin_' + dongleId } style={ mapStyles.vehiclePin } />
-              </MapboxGL.ShapeSource>
+                style={ mapStyles.vehiclePin }
+              />
+            </MapboxGL.ShapeSource>
           )
         } else {
           return null;

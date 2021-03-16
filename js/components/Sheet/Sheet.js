@@ -21,7 +21,7 @@ const MARGIN_TOP = Platform.OS === 'ios' ? 130 : -StatusBar.currentHeight;
 const DEVICE_HEIGHT = Dimensions.get('window').height - MARGIN_TOP;
 const COLLAPSED_HEIGHT = Platform.OS === 'android' ? 248 : 200;
 
-export default class Sheet extends Component<Props> {
+export default class Sheet extends Component {
   static propTypes = {
     touchEnabled: PropTypes.bool,
     onCollapse: PropTypes.func,
@@ -37,8 +37,6 @@ export default class Sheet extends Component<Props> {
 
   constructor(props) {
     super(props);
-
-    this._panResponder = null;
 
     this.collapsed = true;
     this.state = {
@@ -56,9 +54,7 @@ export default class Sheet extends Component<Props> {
 
     this.collapse = this.collapse.bind(this);
     this.expand = this.expand.bind(this);
-  }
 
-  componentWillMount() {
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: (e, gesture) => this.props.touchEnabled && ((this.collapsed && gesture.dy < 0) || (!this.collapsed && gesture.dy > 0)) && (Math.abs(gesture.dy) > 2),
       onPanResponderMove: this._onPanResponderMove.bind(this),

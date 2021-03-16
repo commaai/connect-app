@@ -1,7 +1,7 @@
 // Prime Signup Stack Navigator
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import { PrimeSignup, PrimeActivationIntro, PrimeActivationSpinner, PrimeActivationPayment, PrimeActivationDone } from '../screens/PrimeSignup';
 

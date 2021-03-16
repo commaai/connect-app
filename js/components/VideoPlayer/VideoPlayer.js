@@ -151,6 +151,9 @@ export default class VideoPlayer extends Component {
             videoStyle: this.props.videoStyle || {},
             containerStyle: this.props.style || {}
         };
+
+        this.initSeekPanResponder();
+        this.initVolumePanResponder();
     }
 
 
@@ -688,8 +691,6 @@ export default class VideoPlayer extends Component {
         return this.player.volumeWidth / this.state.volume;
     }
 
-
-
     /**
     | -------------------------------------------------------
     | React Component functions
@@ -702,22 +703,13 @@ export default class VideoPlayer extends Component {
     */
 
     /**
-     * Before mounting, init our seekbar and volume bar
-     * pan responders.
-     */
-    componentWillMount() {
-        this.initSeekPanResponder();
-        this.initVolumePanResponder();
-    }
-
-    /**
      * To allow basic playback management from the outside
      * we have to handle possible props changes to state changes
      */
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.paused !== undefined && this.state.paused !== nextProps.paused ) {
+     componentDidUpdate(prevProps, prevState) {
+        if (this.props.paused !== undefined && this.props.paused !== prevProps.paused ) {
             this.setState({
-                paused: nextProps.paused
+                paused: this.props.paused
             })
         }
     }

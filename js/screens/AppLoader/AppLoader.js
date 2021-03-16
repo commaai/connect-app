@@ -13,7 +13,7 @@ class AppLoader extends Component {
     YellowBox.ignoreWarnings(['Require cycle:']);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { commaUser, terms, acceptedTermsVersion } = this.props.auth;
     console.log({terms, acceptedTermsVersion})
     if(commaUser) {
@@ -36,7 +36,6 @@ class AppLoader extends Component {
       </View>
     )
   }
-
 }
 
 function mapStateToProps(state) {
