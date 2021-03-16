@@ -55,7 +55,7 @@
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-app-auth": "^6.1.0",
-    "react-native-camera": "^3.40.0",
+    "react-native-camera": "^3.40.5",
     "react-native-carousel-pager": "^1.5.0",
     "react-native-credit-card-input": "0.4.1",
     "react-native-device-info": "1.4.1",
