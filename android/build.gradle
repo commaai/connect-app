@@ -44,6 +44,6 @@ allprojects {
 }
 
 wrapper {
-  gradleVersion = '4.6'
+  gradleVersion = '6.2'
   distributionUrl = distributionUrl.replace("bin", "all")
 }

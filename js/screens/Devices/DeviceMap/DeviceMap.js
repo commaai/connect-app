@@ -15,7 +15,8 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { withNavigation, DrawerActions } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
+import { DrawerActions } from 'react-navigation-drawer';
 import moment from 'moment';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import {
@@ -45,22 +46,14 @@ const mapStyles = {
   },
 };
 
-// tastefully chosen default map region
-let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
-let DEFAULT_MAP_REGION = {
-  ne: [_bbox[0], _bbox[1]],
-  sw: [_bbox[2], _bbox[3]]
-};
-
 class DeviceMap extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       mapZoomed: false,
       deviceListIsAtTop: true,
       collapsed: true,
-      bbox: DEFAULT_MAP_REGION,
+      bbox: null,
       selectedPin: null,
     };
     this.handlePressedAllVehicles = this.handlePressedAllVehicles.bind(this);
@@ -87,11 +80,12 @@ class DeviceMap extends Component {
     this.backHandler && this.backHandler.remove();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.mapZoomed && Object.values(nextProps.devices.deviceLocations).some((location) =>
-        Date.now() - location.time < ONE_WEEK_MILLIS && location.lng != null)) {
-        this.setState({ mapZoomed: true });
-      this.handlePressedAllVehicles(nextProps.devices.deviceLocations);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!this.state.mapZoomed && Object.values(this.props.devices.deviceLocations).some((location) =>
+        Date.now() - location.time < ONE_WEEK_MILLIS && location.lng != null))
+    {
+      this.setState({ mapZoomed: true });
+      this.handlePressedAllVehicles(this.props.devices.deviceLocations);
     }
   }
 

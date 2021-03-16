@@ -37,6 +37,9 @@ import X from '../../../theme';
 import Styles from './DeviceInfoStyles';
 import { ApiKeys } from '../../../constants';
 import DriveListByDate from '../../Drives/DriveListByDate';
+import { LogBox } from 'react-native';
+import { usesMetricSystem } from 'react-native-localize';
+import { MILES_PER_METER, KM_PER_MI } from '../../../utils/conversions'
 
 class DeviceInfo extends Component {
 
@@ -76,6 +79,7 @@ class DeviceInfo extends Component {
   }
 
   async componentDidMount() {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     this._handleKeyboardDidHide = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide);
     const device = this.device();
     if (device) {
@@ -414,13 +418,13 @@ class DeviceInfo extends Component {
             color='white'
             size='small'
             weight='semibold'>
-            { Math.floor(stats.all.distance)  }
+            { Math.floor((usesMetricSystem() ? 1 : KM_PER_MI) * stats.all.distance)  }
           </X.Text>
           <X.Text
             size='tiny'
             color='lightGrey'
             style={ Styles.deviceInfoMetricLabel }>
-            Miles Uploaded
+            { usesMetricSystem() ? 'Miles' : 'Kilometers' } Uploaded
           </X.Text>
         </View>
         <View style={ Styles.deviceInfoMetric }>

@@ -65,7 +65,8 @@ class Terms extends Component {
                 footerSecondaryButtonLabel={ hasScrolled ? 'I agree to the terms' : 'Read to Continue' }
                 footerSecondaryButtonAction={ hasScrolled ? this.onAccept : () => {} }
                 footerSecondaryButtonStyle={ Styles.secondaryButtonStyle }
-                footerSecondaryButtonColor={ hasScrolled ? 'default' : 'borderless' }>
+                footerSecondaryButtonColor={ hasScrolled ? 'default' : 'borderless' }
+                footerSecondaryButtonTextColor={ hasScrolled ? 'black' : 'white' }>
                 <ScrollView
                     onScroll={ this.onScroll }
                     onLayout={ this.onScrollViewLayout }>

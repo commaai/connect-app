@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, YellowBox } from 'react-native';
+import { View, LogBox } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { rehydrateAuth } from '../../actions/async/Auth';
@@ -10,7 +10,8 @@ class AppLoader extends Component {
 
   constructor(props) {
     super(props);
-    YellowBox.ignoreWarnings(['Require cycle:']);
+    LogBox.ignoreLogs(['Require cycle:']);
+    LogBox.ignoreLogs(['Mapbox [info] Request failed due to a permanent error: Canceled']);
   }
 
   componentDidMount() {

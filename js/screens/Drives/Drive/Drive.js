@@ -28,6 +28,7 @@ import { Page } from '../../../components';
 import X from '../../../theme';
 import Styles from './DriveStyles';
 import { geocodeRoute } from '../../../actions/async/Drives';
+import { usesMetricSystem } from 'react-native-localize';
 
 MapboxGL.setAccessToken(ApiKeys.MAPBOX_TOKEN);
 
@@ -46,16 +47,6 @@ const layerStyles = {
   },
 };
 
-let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
-let DEFAULT_MAP_REGION = {
-  ne: [_bbox[0], _bbox[1]],
-  sw: [_bbox[2], _bbox[3]],
-  paddingLeft: 20,
-  paddingRight: 20,
-  paddingBottom: 20,
-  paddingTop: 20,
-};
-
 class Drive extends Component {
 
   constructor(props) {
@@ -63,7 +54,7 @@ class Drive extends Component {
     this.state = {
       coords: null,
       centroid: [-122.474717, 37.689861],
-      bbox: DEFAULT_MAP_REGION,
+      bbox: null,
       pipPrimary: 'video',
       currentTime: 0,
       videoBuffering: true,
@@ -270,7 +261,12 @@ class Drive extends Component {
     const { coords, region } = this.state;
     const { routeGeocodes } = this.props.drives;
     const { route } = this.props.navigation.state.params;
-    const driveLength = route.distanceMiles.toFixed(1);
+    let driveLengthText = '';
+    if (usesMetricSystem()) {
+      driveLengthText = route.distanceMiles.toFixed(1) + ' miles';
+    } else {
+      driveLengthText = (KM_PER_MI * route.distanceMiles).toFixed(1) + ' km';
+    }
     const driveHours = (route.duration / 1000) / 3600;
     const driveMinutes = ((route.duration / 1000) % 3600) / 60;
     const driveTime = driveHours >= 1
@@ -401,7 +397,7 @@ class Drive extends Component {
               <X.Text
                 color='white'
                 style={ Styles.driveMetricValue }>
-                { driveLength } miles
+                { driveLengthText }
               </X.Text>
             </View>
             <View style={ Styles.driveMetric }>

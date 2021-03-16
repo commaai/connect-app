@@ -81,6 +81,7 @@ export default StyleSheet.create({
     flex: 0,
   },
   authIntroButtonText: {
+    color: 'black',
     textAlign: 'center',
     flex: 1,
   },

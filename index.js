@@ -1,6 +1,4 @@
 /** @format */
-console.disableYellowBox = true;
-
 import * as Sentry from '@sentry/react-native';
 
 global.XMLHttpRequest = global.originalXMLHttpRequest ?

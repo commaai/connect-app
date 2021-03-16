@@ -8,9 +8,7 @@ import { Assets } from '../../constants';
 import X from '../../theme';
 import Styles from './SpinnerStyles';
 
-type Props = {};
-
-class Spinner extends Component<Props> {
+class Spinner extends Component {
 
   constructor(props) {
     super(props);
@@ -23,7 +21,7 @@ class Spinner extends Component<Props> {
       toValue: 1,
       duration: 900,
       easing: Easing.linear,
-      useNativeDriver: true,
+      useNativeDriver: false,
     })).start();
   }
 

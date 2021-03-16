@@ -32,6 +32,7 @@ export async function attemptAppleAuth() {
   if (appleAuth.isSupported) {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL],
     });
 
     const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);

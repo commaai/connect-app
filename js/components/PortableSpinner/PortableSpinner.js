@@ -8,9 +8,7 @@ import { Assets } from '../../constants';
 import X from '../../theme';
 import Styles from './SpinnerStyles';
 
-type Props = {};
-
-class PortableSpinner extends Component<Props> {
+class PortableSpinner extends Component {
 
   constructor(props) {
     super(props);
@@ -31,7 +29,7 @@ class PortableSpinner extends Component<Props> {
       toValue: 1,
       duration: 900,
       easing: Easing.linear,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }));
     this.animation.start();
   }
