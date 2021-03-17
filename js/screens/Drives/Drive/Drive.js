@@ -263,9 +263,9 @@ class Drive extends Component {
     const { route } = this.props.navigation.state.params;
     let driveLengthText = '';
     if (usesMetricSystem()) {
-      driveLengthText = route.distanceMiles.toFixed(1) + ' miles';
-    } else {
       driveLengthText = (KM_PER_MI * route.distanceMiles).toFixed(1) + ' km';
+    } else {
+      driveLengthText = route.distanceMiles.toFixed(1) + ' miles';
     }
     const driveHours = (route.duration / 1000) / 3600;
     const driveMinutes = ((route.duration / 1000) % 3600) / 60;

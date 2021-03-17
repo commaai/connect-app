@@ -318,13 +318,17 @@ class DeviceInfo extends Component {
     const deviceLocation = deviceLocations[this.dongleId()];
     const distanceToDevice = location.location && deviceLocation && MapUtils.calculateDistance(
           location.location.coords.latitude, location.location.coords.longitude,
-          deviceLocation.lat, deviceLocation.lng, "N").toFixed(1);
+          deviceLocation.lat, deviceLocation.lng, "N");
     let locationStatus = 'Location unavailable';
     if (isUpdatingLocation) {
       locationStatus = 'Updating device location...';
     } else if (deviceLocation) {
       if (distanceToDevice != null) {
-        locationStatus = `Located ${ distanceToDevice } mi away`;
+        if (usesMetricSystem()) {
+          locationStatus = `Located ${ (distanceToDevice * KM_PER_MI).toFixed(1) } km away`;
+        } else {
+          locationStatus = `Located ${ distanceToDevice.toFixed(1) } mi away`;
+        }
       } else {
         // TODO athena health state should be reflected here: parked, driving, 'located ... ago' if health state unavailable
         locationStatus = 'Parked';
@@ -418,13 +422,13 @@ class DeviceInfo extends Component {
             color='white'
             size='small'
             weight='semibold'>
-            { Math.floor((usesMetricSystem() ? 1 : KM_PER_MI) * stats.all.distance)  }
+            { Math.floor((usesMetricSystem() ? KM_PER_MI : 1) * stats.all.distance)  }
           </X.Text>
           <X.Text
             size='tiny'
             color='lightGrey'
             style={ Styles.deviceInfoMetricLabel }>
-            { usesMetricSystem() ? 'Miles' : 'Kilometers' } Uploaded
+            { usesMetricSystem() ? 'Kilometers' : 'Miles' } Uploaded
           </X.Text>
         </View>
         <View style={ Styles.deviceInfoMetric }>
