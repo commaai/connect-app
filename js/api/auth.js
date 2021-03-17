@@ -32,7 +32,7 @@ export async function attemptAppleAuth() {
   if (appleAuth.isSupported) {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
-      requestedScopes: [appleAuth.Scope.EMAIL],
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
 
     const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
@@ -62,6 +62,7 @@ export async function attemptGithubAuth() {
     redirectUrl: 'ai.comma.connect://oauthredirect',
     clientId: '7d827388a27280a03327',
     skipCodeExchange: true,
+    scopes: ['read:user'],
     serviceConfiguration: {
       authorizationEndpoint: 'https://github.com/login/oauth/authorize',
       tokenEndpoint: 'https://github.com/login/oauth/access_token',
