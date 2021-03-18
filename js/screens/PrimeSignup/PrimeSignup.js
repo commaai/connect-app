@@ -82,9 +82,9 @@ class PrimeSignup extends Component {
                   }
                 </X.Text>
                 <View style={ Styles.primeSignupFeatures }>
-                  { features.map((feature) => {
+                  { features.map((feature, i) => {
                     return (
-                      <View style={ Styles.primeSignupFeature }>
+                      <View style={ Styles.primeSignupFeature } key={ i }>
                         <X.Image
                             isFlex={ false }
                             source={ Assets.iconCheckmark }

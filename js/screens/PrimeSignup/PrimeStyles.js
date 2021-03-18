@@ -1,9 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+var {height, width} = Dimensions.get('window');
 
 export default StyleSheet.create({
   primeSignup: {
     width: '100%',
-    height: '100%',
+    height: height - 220,
   },
   primeSignupTitle: {
     textAlign: 'center',

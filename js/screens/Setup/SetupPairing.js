@@ -3,21 +3,22 @@
  */
 
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Linking,
-} from 'react-native';
+import { View, ScrollView, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
-import Permissions from 'react-native-permissions';
+import Permissions, { PERMISSIONS, RESULTS } from 'react-native-permissions';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { Assets } from '../../constants';
 import X from '../../theme';
 import Styles from './SetupStyles';
 import { Page, Alert, Spinner } from '../../components';
 import { pilotPair, fetchDevices, fetchDevice, fetchDeviceSubscription } from '../../actions/async/Devices';
+
+const PERMISSION_CAMERA = Platform.select({
+  android: PERMISSIONS.ANDROID.CAMERA,
+  ios: PERMISSIONS.IOS.CAMERA,
+});
 
 class SetupEonPairing extends Component {
 
@@ -26,6 +27,7 @@ class SetupEonPairing extends Component {
     this.state = {
       wantsCameraPermissions: false,
       hasCameraPermissions: false,
+      deniedCameraPermission: false,
       attemptingPair: false,
     };
     this.handleConfirmPressed = this.handleConfirmPressed.bind(this);
@@ -34,9 +36,18 @@ class SetupEonPairing extends Component {
   }
 
   componentDidMount() {
-    Permissions.check('camera').then(response => {
-      if (response == 'authorized') {
-        this.setState({ hasCameraPermissions: true })
+    Permissions.check(PERMISSION_CAMERA).then(response => {
+      switch (response) {
+        case RESULTS.DENIED:
+          break;
+        case RESULTS.UNAVAILABLE:
+        case RESULTS.BLOCKED:
+          this.setState({ deniedCameraPermission: true })
+          break;
+        case RESULTS.LIMITED:
+        case RESULTS.GRANTED:
+          this.setState({ hasCameraPermissions: true })
+          break;
       }
     })
   }
@@ -79,6 +90,7 @@ class SetupEonPairing extends Component {
     const {
       wantsCameraPermissions,
       hasCameraPermissions,
+      deniedCameraPermission,
       attemptingPair,
     } = this.state;
 
@@ -88,6 +100,22 @@ class SetupEonPairing extends Component {
           <Spinner spinnerMessage='Pairing Device...' />
         </View>
       )
+    } else if (deniedCameraPermission) {
+      return (
+        <Page
+          headerIconLeftAsset={ Assets.iconChevronLeft }
+          headerIconLeftAction={ () => navigate('AppDrawer') }>
+          <View style={ Styles.setupEonPairingContainer }>
+            <X.Entrance style={ { height: '100%' } }>
+              <Alert
+                title='Camera Access'
+                message='Camera access is denied, go to settings to give access'
+                confirmButtonAction={ this.handleDismissPressed }
+                confirmButtonTitle='Ok' />
+            </X.Entrance>
+          </View>
+        </Page>
+      );
     } else if (wantsCameraPermissions || hasCameraPermissions) {
       return (
         <Page

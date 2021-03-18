@@ -82,24 +82,22 @@ class PrimeActivationIntro extends Component {
 
     return (<Page
         headerIconLeftAsset={ Assets.iconChevronLeft }
-        headerIconLeftAction={ () => goBack(null) }>
-        <View style={{width: '100%', height: '100%'}}>
+        headerIconLeftAction={ () => goBack(null) }
+        footerPrimaryButtonDisabled={ selectedDeviceDongleId === null }
+        footerPrimaryButtonLabel='Continue'
+        footerPrimaryButtonAction={ () => navigate('PrimeActivationSpinner', {
+          message: 'Reading SIM Info from device...',
+          nextScreen: 'PrimeActivationPayment',
+          dongleId: selectedDeviceDongleId,
+          subscription: subscriptions[selectedDeviceDongleId],
+          loadFn: () => fetchSimInfo(selectedDeviceDongleId) }) }>
+        <View style={{ width: '100%', height: '100%' }}>
           <X.Text color='white' style={ Styles.insertPromptText }>
             Select your device
           </X.Text>
-          <ScrollView style={{height: '70%', width: '100%'}}>
+          <ScrollView style={{ width: '100%' }}>
             { devicesDriveTimeSorted.map(this.renderDeviceRow) }
           </ScrollView>
-          <X.Button
-            isDisabled={ selectedDeviceDongleId === null }
-            onPress={ () => navigate('PrimeActivationSpinner', {
-              message: 'Reading SIM Info from device...',
-              nextScreen: 'PrimeActivationPayment',
-              dongleId: selectedDeviceDongleId,
-              subscription: subscriptions[selectedDeviceDongleId],
-              loadFn: () => fetchSimInfo(selectedDeviceDongleId) }) }>
-              Continue
-          </X.Button>
         </View>
     </Page>);
   }

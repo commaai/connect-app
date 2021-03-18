@@ -47,7 +47,6 @@ class DeviceInfo extends Component {
     super(props);
     this.state = {
       deviceSettingsIsOpen: false,
-      deviceSettingsModalIsOpen: false,
       isUpdatingSnapshot: false,
       isEditingTitle: false,
       editedDeviceTitle: '',
@@ -116,15 +115,11 @@ class DeviceInfo extends Component {
   }
 
   handleSettingsPressed = () => {
-    this.setState({ deviceSettingsIsOpen: true, deviceSettingsModalIsOpen: true });
+    this.setState({ deviceSettingsIsOpen: true });
   }
 
   handleSettingsClosed = () => {
-    this.setState({ deviceSettingsIsOpen: false, deviceSettingsModalIsOpen: true });
-  }
-
-  handleSettingsModalClosed = () => {
-    this.setState({ deviceSettingsModalIsOpen: false });
+    this.setState({ deviceSettingsIsOpen: false });
   }
 
   handleSettingsSetAliasPressed = () => {
@@ -134,15 +129,9 @@ class DeviceInfo extends Component {
       before focusing our TextInput. Otherwise, a .blur() is called
       immediately after the TextInput is focused and the keyboard is dismissed
       */
-      let start = Date.now();
-      let interval = setInterval(() => {
-        if (!this.state.deviceSettingsModalIsOpen) {
-          this._deviceTitleInputRef.current.focus()
-          clearInterval(interval);
-        } else if (Date.now() - start > 1000) {
-          clearInterval(interval);
-        }
-      }, 50);
+      setTimeout(() => {
+        this._deviceTitleInputRef.current.focus();
+      }, 500);
     });
   }
 
@@ -570,8 +559,7 @@ class DeviceInfo extends Component {
               fromView={ this.deviceSettingsButton }
               isVisible={ deviceSettingsIsOpen }
               placement='bottom'
-              onRequestClose={ this.handleSettingsClosed }
-              onCloseStart={ this.handleSettingsModalClosed }>
+              onRequestClose={ this.handleSettingsClosed }>
                 <X.Button
                   size='small'
                   style={ Styles.deviceSettingsPopoverItem }

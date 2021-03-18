@@ -25,6 +25,7 @@ class Page extends Component {
       headerStyle,
       headerTitle,
       footerStyle,
+      footerPrimaryButtonDisabled,
       footerPrimaryButtonAction,
       footerPrimaryButtonLabel,
       footerPrimaryButtonSize,
@@ -78,6 +79,7 @@ class Page extends Component {
             { footerPrimaryButtonAction ? (
               <X.Entrance style={ [Styles.pageFooterAction, footerPrimaryButtonStyle] }>
                 <X.Button
+                  isDisabled={ footerPrimaryButtonDisabled }
                   color={ footerPrimaryButtonColor }
                   textColor={ footerPrimaryButtonTextColor }
                   onPress={ footerPrimaryButtonAction }>
