@@ -10,7 +10,7 @@
 - `yarn start`
 
 #### Run iOS Debug (Device/Simulator)
-- `cd ios && bundle install && bundle exec pod install`
+- `cd ios && bundle exec pod install`
 - `cd ..`
 - `yarn ios` or `yarn ios-device`
 
