@@ -43,8 +43,10 @@ jobs:
         if: steps.bundler-cache.outputs.cache-hit != 'true'
         working-directory: ios
         run: bundle install --jobs 4 --retry 3
+      - name: Pods cache clear
+        working-directory: ios
+        run: bundle exec pod cache clean --all
       - name: Pods install
-        if: steps.pods-cache.outputs.cache-hit != 'true'
         working-directory: ios
         run: bundle exec pod install
       - name: Build
