@@ -21,14 +21,6 @@ jobs:
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Cache pods
-        uses: actions/cache@v1
-        id: pod-cache
-        with:
-          path: ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
       - name: Yarn Install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
