@@ -154,7 +154,6 @@ class DeviceInfo extends Component {
   }
 
   handleKeyboardDidHide = () => {
-    console.log('handleKeyboardDidHide');
     this.setState({ isEditingTitle: false });
   }
 
@@ -572,7 +571,7 @@ class DeviceInfo extends Component {
               isVisible={ deviceSettingsIsOpen }
               placement='bottom'
               onRequestClose={ this.handleSettingsClosed }
-              onCloseComplete={ this.handleSettingsModalClosed }>
+              onCloseStart={ this.handleSettingsModalClosed }>
                 <X.Button
                   size='small'
                   style={ Styles.deviceSettingsPopoverItem }
