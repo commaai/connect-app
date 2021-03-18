@@ -6804,12 +6804,12 @@ react-native-permissions@^2.0.2, react-native-permissions@^2.2.2:
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.2.2.tgz#3d2a63f6b7d6be52fc86e30f77412a9566283028"
   integrity sha512-ihf4shQDSX5Oo9ChQXb9kr13mmyyNem5MaEvOpr3dCjhBOBWyEMztXm9/uPK1Qg5PsNpaYLa1KpcPZDCw87LXg==
 
-react-native-popover-view@^1.0.17:
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-1.0.19.tgz#7b3f430c4c24a96d58e08dcdf90be30e2f92836c"
-  integrity sha512-vyh96EcffKEl6S+NCG30TjMkFRohrOPdvA3tZg2/NdKb4AO6pmjCAlsq1Gntw7fUqhEDlKHAdpQmR216kDpC7Q==
+react-native-popover-view@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-3.1.1.tgz#d55e6856ec81b2823342fda57e28974947bc8d39"
+  integrity sha512-SfI9sh8t1UpzpUq0BT8WEVXvcPbww/yLh6hKGwp/5U3LEEQtP21nFjqFYGAdM/SBtuyQR6EPQE2RYnwubVcuaQ==
   dependencies:
-    react-native-safe-area-view "^0.10.0"
+    react-native-safe-area-view "0.14.9"
 
 react-native-qrcode-scanner@^1.5.3:
   version "1.5.3"
@@ -6832,14 +6832,7 @@ react-native-safe-area-context@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.2.0.tgz#06113c6b208f982d68ab5c3cebd199ca93db6941"
   integrity sha512-k2Nty4PwSnrg9HwrYeeE+EYqViYJoOFwEy9LxL5RIRfoqxAq/uQXNGwpUg2/u4gnKpBbEPa9eRh15KKMe/VHkA==
 
-react-native-safe-area-view@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.10.0.tgz#e8e9228d22698c0f82ad1202d24a4e4977260489"
-  integrity sha512-Y70uGBxfB5E+ipf4QInBynSQbuWdCtC1roJqrW9HGwYCTMLy6+ZxyOxMTe07N9jXlPX+FKzxeoEK9k8U2Zi4Sw==
-  dependencies:
-    hoist-non-react-statics "^2.3.1"
-
-react-native-safe-area-view@^0.14.9:
+react-native-safe-area-view@0.14.9, react-native-safe-area-view@^0.14.9:
   version "0.14.9"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.9.tgz#90ee8383037010d9a5055a97cf97e4c1da1f0c3d"
   integrity sha512-WII/ulhpVyL/qbYb7vydq7dJAfZRBcEhg4/UWt6F6nAKpLa3gAceMOxBxI914ppwSP/TdUsandFy6lkJQE0z4A==

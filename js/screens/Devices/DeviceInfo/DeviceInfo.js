@@ -571,8 +571,8 @@ class DeviceInfo extends Component {
               fromView={ this.deviceSettingsButton }
               isVisible={ deviceSettingsIsOpen }
               placement='bottom'
-              onClose={ this.handleSettingsClosed }
-              doneClosingCallback={ this.handleSettingsModalClosed }>
+              onRequestClose={ this.handleSettingsClosed }
+              onCloseComplete={ this.handleSettingsModalClosed }>
                 <X.Button
                   size='small'
                   style={ Styles.deviceSettingsPopoverItem }
