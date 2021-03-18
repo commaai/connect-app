@@ -7,13 +7,11 @@ import { View } from 'react-native';
 import X from '../../theme';
 import Styles from './PageStyles';
 
-type Props = {};
-
-class Page extends Component<Props> {
+class Page extends Component {
 
   static defaultProps = {
-      footerPrimaryButtonTextColor: '#080808',
-      footerSecondaryButtonTextColor: '#080808',
+      footerPrimaryButtonTextColor: 'black',
+      footerSecondaryButtonTextColor: 'black',
   };
 
   render() {
@@ -92,7 +90,7 @@ class Page extends Component<Props> {
                 <X.Button
                   color={ footerSecondaryButtonColor }
                   size={ footerSecondaryButtonSize }
-                  textColor={ footerSecondaryButtonTextColor }
+                  style={ { color: footerSecondaryButtonTextColor } }
                   onPress={ footerSecondaryButtonAction }>
                   { footerSecondaryButtonLabel }
                 </X.Button>

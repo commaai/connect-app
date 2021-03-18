@@ -41,10 +41,7 @@ function createAppStore(shouldAutoRehydrate = true) {
   return store;
 }
 
-// App Component
-type Props = {};
-
-export default class App extends Component<Props> {
+export default class App extends Component {
 
   constructor(props) {
     super(props);

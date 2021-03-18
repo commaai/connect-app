@@ -1,7 +1,7 @@
 // Auth Stack Navigator
 // ~~~~~~~~~~~~~~~~~~~~
 
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import AuthIntro from '../screens/Auth/AuthIntro'
 import AuthCreate from '../screens/Auth/AuthCreate';

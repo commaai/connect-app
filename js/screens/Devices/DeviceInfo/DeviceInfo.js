@@ -37,6 +37,9 @@ import X from '../../../theme';
 import Styles from './DeviceInfoStyles';
 import { ApiKeys } from '../../../constants';
 import DriveListByDate from '../../Drives/DriveListByDate';
+import { LogBox } from 'react-native';
+import { usesMetricSystem } from 'react-native-localize';
+import { MILES_PER_METER, KM_PER_MI } from '../../../utils/conversions'
 
 class DeviceInfo extends Component {
 
@@ -76,6 +79,7 @@ class DeviceInfo extends Component {
   }
 
   async componentDidMount() {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     this._handleKeyboardDidHide = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide);
     const device = this.device();
     if (device) {
@@ -150,7 +154,6 @@ class DeviceInfo extends Component {
   }
 
   handleKeyboardDidHide = () => {
-    console.log('handleKeyboardDidHide');
     this.setState({ isEditingTitle: false });
   }
 
@@ -314,13 +317,17 @@ class DeviceInfo extends Component {
     const deviceLocation = deviceLocations[this.dongleId()];
     const distanceToDevice = location.location && deviceLocation && MapUtils.calculateDistance(
           location.location.coords.latitude, location.location.coords.longitude,
-          deviceLocation.lat, deviceLocation.lng, "N").toFixed(1);
+          deviceLocation.lat, deviceLocation.lng, "N");
     let locationStatus = 'Location unavailable';
     if (isUpdatingLocation) {
       locationStatus = 'Updating device location...';
     } else if (deviceLocation) {
       if (distanceToDevice != null) {
-        locationStatus = `Located ${ distanceToDevice } mi away`;
+        if (usesMetricSystem()) {
+          locationStatus = `Located ${ (distanceToDevice * KM_PER_MI).toFixed(1) } km away`;
+        } else {
+          locationStatus = `Located ${ distanceToDevice.toFixed(1) } mi away`;
+        }
       } else {
         // TODO athena health state should be reflected here: parked, driving, 'located ... ago' if health state unavailable
         locationStatus = 'Parked';
@@ -414,13 +421,13 @@ class DeviceInfo extends Component {
             color='white'
             size='small'
             weight='semibold'>
-            { Math.floor(stats.all.distance)  }
+            { Math.floor((usesMetricSystem() ? KM_PER_MI : 1) * stats.all.distance)  }
           </X.Text>
           <X.Text
             size='tiny'
             color='lightGrey'
             style={ Styles.deviceInfoMetricLabel }>
-            Miles Uploaded
+            { usesMetricSystem() ? 'Kilometers' : 'Miles' } Uploaded
           </X.Text>
         </View>
         <View style={ Styles.deviceInfoMetric }>
@@ -563,8 +570,8 @@ class DeviceInfo extends Component {
               fromView={ this.deviceSettingsButton }
               isVisible={ deviceSettingsIsOpen }
               placement='bottom'
-              onClose={ this.handleSettingsClosed }
-              doneClosingCallback={ this.handleSettingsModalClosed }>
+              onRequestClose={ this.handleSettingsClosed }
+              onCloseStart={ this.handleSettingsModalClosed }>
                 <X.Button
                   size='small'
                   style={ Styles.deviceSettingsPopoverItem }

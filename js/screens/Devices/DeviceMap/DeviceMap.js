@@ -15,7 +15,8 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { withNavigation, DrawerActions } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
+import { DrawerActions } from 'react-navigation-drawer';
 import moment from 'moment';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import {
@@ -36,31 +37,23 @@ const ONE_WEEK_MILLIS = 7 * 86400 * 1000;
 
 const mapStyles = {
   vehiclePin: {
-    // iconAllowOverlap: true,
-    // iconIgnorePlacement: true,
     iconAnchor: MapboxGL.IconAnchor.Bottom,
-    // iconOffset: [0, -5],
     iconImage: Assets.iconPinParked,
-    iconSize: __DEV__ ? 0.75 : 0.25,
+    iconSize: 0.25,
+    iconOffset: [0, 35],
+    iconColor: 'white',
+    iconOpacity: 1.0,
   },
 };
 
-// tastefully chosen default map region
-let _bbox = makeBbox(makeMultiPoint([[-122.474717, 37.689861], [-122.468134, 37.681371]]));
-let DEFAULT_MAP_REGION = {
-  ne: [_bbox[0], _bbox[1]],
-  sw: [_bbox[2], _bbox[3]]
-};
-
 class DeviceMap extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       mapZoomed: false,
       deviceListIsAtTop: true,
       collapsed: true,
-      bbox: DEFAULT_MAP_REGION,
+      bbox: null,
       selectedPin: null,
     };
     this.handlePressedAllVehicles = this.handlePressedAllVehicles.bind(this);
@@ -87,12 +80,12 @@ class DeviceMap extends Component {
     this.backHandler && this.backHandler.remove();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.mapZoomed
-      && Object.values(nextProps.devices.deviceLocations).some((location) =>
-        Date.now() - location.time < ONE_WEEK_MILLIS && location.lng != null)) {
-        this.setState({ mapZoomed: true });
-      this.handlePressedAllVehicles(nextProps.devices.deviceLocations);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!this.state.mapZoomed && Object.values(this.props.devices.deviceLocations).some((location) =>
+        Date.now() - location.time < ONE_WEEK_MILLIS && location.lng != null))
+    {
+      this.setState({ mapZoomed: true });
+      this.handlePressedAllVehicles(this.props.devices.deviceLocations);
     }
   }
 
@@ -154,16 +147,15 @@ class DeviceMap extends Component {
                 id={ 'pointAnnotation_' + location.dongle_id }
                 title=''
                 onDeselected={ () => this.setState({ selectedPin: null }) }
-                style={ [Styles.annotationPin, pinStyle ]} // Platform.OS === 'ios' && selectedPin!==dongleId ? {display: 'none'} : null] }
+                style={ [Styles.annotationPin, pinStyle ]}
                 selected={ selectedPin===dongleId }
                 coordinate={ [location.lng, location.lat] }>
                   <View style={Styles.annotationPin} />
                   <MapboxGL.Callout
                     title={ title }
-                    textStyle={ { color: 'white' } }//, selectedPin!==dongleId ? {display: 'none'} : null] }
-                    // containerStyle={ selectedPin!==dongleId ? {display: 'none'} : null }
-                    tipStyle={ [Styles.annotationCalloutTip ]} // selectedPin!==dongleId ? {display: 'none'} : null] }
-                    contentStyle={ [Styles.annotationCallout ]} //, selectedPin!==dongleId ? {display: 'none'} : null] } />
+                    textStyle={ { color: 'white' } }
+                    tipStyle={ Styles.annotationCalloutTip }
+                    contentStyle={ Styles.annotationCallout }
                   />
               </MapboxGL.PointAnnotation>
           )
@@ -213,12 +205,15 @@ class DeviceMap extends Component {
           };
 
           return (
-              <MapboxGL.ShapeSource
+            <MapboxGL.ShapeSource
+              id={ 'vehiclePin_' + dongleId }
+              key={ 'vehiclePin_' + dongleId }
+              shape={ shape }>
+              <MapboxGL.SymbolLayer
                 id={ 'vehiclePin_' + dongleId }
-                key={ 'vehiclePin_' + dongleId }
-                shape={ shape }>
-                <MapboxGL.SymbolLayer id={ 'vehiclePin_' + dongleId } style={ mapStyles.vehiclePin } />
-              </MapboxGL.ShapeSource>
+                style={ mapStyles.vehiclePin }
+              />
+            </MapboxGL.ShapeSource>
           )
         } else {
           return null;

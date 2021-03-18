@@ -26,9 +26,9 @@ class AuthIntro extends Component {
     return this.setState({ activeSlide });
   }
 
-  componentWillReceiveProps(newProps) {
+  componentDidUpdate() {
     const { navigate } = this.props.navigation;
-    if (newProps.auth.commaUser) {
+    if (this.props.auth.commaUser) {
       navigate('AppLoader');
     }
   }

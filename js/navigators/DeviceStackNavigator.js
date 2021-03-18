@@ -1,7 +1,7 @@
 // Device Stack Navigator
 // ~~~~~~~~~~~~~~~~~~~~~~~
 
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import DeviceMap from '../screens/Devices/DeviceMap';
 import DeviceInfo from '../screens/Devices/DeviceInfo';

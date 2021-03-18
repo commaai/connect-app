@@ -6,7 +6,7 @@ import DeviceInfo from 'react-native-device-info';
 import { NavigationActions } from 'react-navigation';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { DrawerActions } from 'react-navigation';
+import { DrawerActions } from 'react-navigation-drawer';
 import { signOut } from '../../actions/async/Auth';
 import { Assets } from '../../constants';
 import X from '../../theme';
@@ -40,17 +40,17 @@ class AppDrawer extends Component {
               </View>
               <X.Text
                 color='white'
-                size='medium'
+                size='small'
                 weight='semibold'
                 style={ Styles.appDrawerHeaderName }>
-                { auth.user.full_name ? auth.user.full_name : (!auth.user.email.includes('privaterelay.appleid.com') ? auth.user.email : '') }
+                { !auth.user.email.includes('privaterelay.appleid.com') ? auth.user.email : '' }
               </X.Text>
-              { auth.user.username &&
+              { auth.user.full_name &&
                 <X.Text
                   color='lightGrey'
-                  size='medium'
+                  size='small'
                   style={ Styles.appDrawerHeaderAlias }>
-                  @{ auth.user.username }
+                  { auth.user.full_name }
                 </X.Text>
               }
             </View>

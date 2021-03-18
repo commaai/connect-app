@@ -102,7 +102,7 @@ export default StyleSheet.create({
   },
   annotationCalloutTip: {
     marginTop: -30,
-    opacity: 0.0,
+//    opacity: 0.0,
     zIndex: -2,
     elevation: -2,
   },

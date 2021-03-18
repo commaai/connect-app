@@ -1,7 +1,7 @@
 // App Drawer Navigator
 // ~~~~~~~~~~~~~~~~~~~~
 
-import { createDrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { DeviceStackNavigator } from './DeviceStackNavigator';
 import AppDrawer from '../screens/AppDrawer';
