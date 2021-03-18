@@ -33,11 +33,15 @@ jobs:
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
       - name: Install bundler
-        run: gem install bundler:2.2.11
+        run: gem install bundler:2.2.14
       - name: Bundle setup
         run: bundle config path vendor/bundle
       - name: Bundle install
         if: steps.bundler-cache.outputs.cache-hit != 'true'
+        run: bundle install --jobs 4 --retry 3
+      - name: Bundle install ios
+        if: steps.bundler-cache.outputs.cache-hit != 'true'
+        working-directory: ios
         run: bundle install --jobs 4 --retry 3
       - name: Pods install
         if: steps.pods-cache.outputs.cache-hit != 'true'
