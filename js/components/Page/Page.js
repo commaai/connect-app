@@ -20,8 +20,6 @@ class Page extends Component {
       children,
       headerIconLeftAsset,
       headerIconLeftAction,
-      headerIconRightAsset,
-      headerIconRightAction,
       headerStyle,
       headerTitle,
       footerStyle,
@@ -60,14 +58,6 @@ class Page extends Component {
                   { headerTitle }
                 </X.Text>
               </View>
-            ) : null }
-            { headerIconRightAction ? (
-              <X.Button
-                color='borderless'
-                style={ Styles.pageHeaderIconRight }
-                onPress={ headerIconRightAction }>
-                <X.Image source={ headerIconRightAsset } />
-              </X.Button>
             ) : null }
           </View>
         }

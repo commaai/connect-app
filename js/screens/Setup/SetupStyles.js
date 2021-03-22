@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+var {height, width} = Dimensions.get('window');
 
 export default StyleSheet.create({
   setupDevicesContainer: {
@@ -78,11 +80,11 @@ export default StyleSheet.create({
   },
   setupEonPairingCamera: {
     backgroundColor: 'rgba(255,255,255,.02)',
-    height: '60%',
+    height: '60%'
   },
   setupEonPairingInstruction: {
     alignItems: 'center',
-    height: '45%',
+    height: '40%',
     justifyContent: 'center',
     padding: '15%',
     paddingBottom: '5%',

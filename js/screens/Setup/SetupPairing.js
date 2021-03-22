@@ -3,12 +3,11 @@
  */
 
 import React, { Component } from 'react';
-import { View, ScrollView, Linking, Platform } from 'react-native';
+import { View, Vibration, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
 import Permissions, { PERMISSIONS, RESULTS } from 'react-native-permissions';
-import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
 import { Assets } from '../../constants';
 import X from '../../theme';
 import Styles from './SetupStyles';
@@ -65,6 +64,8 @@ class SetupEonPairing extends Component {
   }
 
   handleScannedQRCode(e) {
+    Vibration.vibrate();
+
     this.setState({
       attemptingPair: true,
     });
@@ -124,33 +125,32 @@ class SetupEonPairing extends Component {
           headerIconLeftAsset={ Assets.iconChevronLeft }
           headerIconLeftAction={ () => navigate('AppDrawer') }>
           <View style={ Styles.setupEonPairingContainer }>
-            <View style={ Styles.setupEonPairingContainer }>
-              <X.Entrance style={ Styles.setupEonPairingCamera }>
-                <QRCodeScanner
-                  onRead={ this.handleScannedQRCode }
-                  topContent={ null }
-                  bottomContent={ null }
-                  cameraProps={ { captureAudio: false } } />
-              </X.Entrance>
-              <View style={ Styles.setupEonPairingInstruction }>
-                <X.Text
-                  color='white'
-                  size='big'
-                  weight='semibold'>
-                  Pair Your Device
-                </X.Text>
-                <X.Text
-                  color='lightGrey'
-                  style={ Styles.setupEonPairingInstructionText }>
-                  Place the QR code from your device during setup within the frame.
-                </X.Text>
-                <X.Button
-                  size='tiny'
-                  color='borderless'
-                  onPress={ this.handleViewSetupGuidePressed }>
-                  View Setup Guide
-                </X.Button>
-              </View>
+            <X.Entrance style={ Styles.setupEonPairingCamera }>
+              <RNCamera
+                ref={ ref => this.cameraRef = ref }
+                style={ { flex: 1, width: '100%' } }
+                onBarCodeRead={ !attemptingPair ? this.handleScannedQRCode : null }
+                barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+                captureAudio={ false } />
+            </X.Entrance>
+            <View style={ Styles.setupEonPairingInstruction }>
+              <X.Text
+                color='white'
+                size='big'
+                weight='semibold'>
+                Pair Your Device
+              </X.Text>
+              <X.Text
+                color='lightGrey'
+                style={ Styles.setupEonPairingInstructionText }>
+                Place the QR code from your device during setup within the frame.
+              </X.Text>
+              <X.Button
+                size='tiny'
+                color='borderless'
+                onPress={ this.handleViewSetupGuidePressed }>
+                View Setup Guide
+              </X.Button>
             </View>
           </View>
         </Page>

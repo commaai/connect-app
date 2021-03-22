@@ -7,26 +7,20 @@ export default StyleSheet.create({
     backgroundColor: '#080808',
     flex: 1,
     padding: '8%',
-    paddingTop: '13%',
+    paddingTop: '8%',
   },
   pageNoHeader: {
     paddingTop: '8%',
   },
   pageHeader: {
     alignSelf: 'flex-start',
-    height: 50,
+    height: Platform.OS === 'android' ? 65 : 110,
     flexDirection: 'row',
+    marginBottom: 20,
   },
   pageHeaderIconLeft: {
     height: 28,
-    padding: 3,
-    width: 28,
-  },
-  pageHeaderIconRight: {
-    height: 28,
-    padding: 3,
-    marginLeft: 'auto',
-    width: 28,
+    width: 20,
   },
   pageHeaderTitle: {
     alignItems: 'center',
