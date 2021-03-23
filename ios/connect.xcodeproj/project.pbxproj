@@ -472,7 +472,7 @@
 				CODE_SIGN_ENTITLEMENTS = connect/connectDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 173;
+				CURRENT_PROJECT_VERSION = 175;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M598J8XSAV;
 				DISPLAY_NAME = comma;
@@ -518,7 +518,7 @@
 				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 173;
+				CURRENT_PROJECT_VERSION = 175;
 				DEVELOPMENT_TEAM = M598J8XSAV;
 				DISPLAY_NAME = comma;
 				FRAMEWORK_SEARCH_PATHS = (

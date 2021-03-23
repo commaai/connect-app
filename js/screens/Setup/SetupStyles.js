@@ -86,7 +86,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     height: '40%',
     justifyContent: 'center',
-    padding: '15%',
+    padding: '8%',
     paddingBottom: '5%',
     paddingTop: 0,
   },

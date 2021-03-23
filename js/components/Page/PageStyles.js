@@ -7,16 +7,15 @@ export default StyleSheet.create({
     backgroundColor: '#080808',
     flex: 1,
     padding: '8%',
-    paddingTop: '8%',
+    paddingTop: Platform.OS === 'ios' ? '13%' : '8%',
   },
   pageNoHeader: {
     paddingTop: '8%',
   },
   pageHeader: {
     alignSelf: 'flex-start',
-    height: Platform.OS === 'android' ? 65 : 110,
+    height: Platform.OS === 'ios' ? 65 : 95,
     flexDirection: 'row',
-    marginBottom: 20,
   },
   pageHeaderIconLeft: {
     height: 28,

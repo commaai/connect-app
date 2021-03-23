@@ -120,15 +120,13 @@ class SetupEonPairing extends Component {
     } else if (wantsCameraPermissions || hasCameraPermissions) {
       return (
         <Page
-          style={ { padding: 0 } }
-          headerStyle={ { paddingLeft: '10%' } }
           headerIconLeftAsset={ Assets.iconChevronLeft }
           headerIconLeftAction={ () => navigate('AppDrawer') }>
           <View style={ Styles.setupEonPairingContainer }>
             <X.Entrance style={ Styles.setupEonPairingCamera }>
               <RNCamera
                 ref={ ref => this.cameraRef = ref }
-                style={ { flex: 1, width: '100%' } }
+                style={ { flex: 1, width: '119%', marginLeft: '-9.5%' } }
                 onBarCodeRead={ !attemptingPair ? this.handleScannedQRCode : null }
                 barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
                 captureAudio={ false } />
