@@ -155,6 +155,8 @@ android {
     release {
       storeFile file("release.keystore")
       keyAlias 'release'
+      storePassword System.getenv('KEYSTORE_PASSWORD')
+      keyPassword System.getenv('KEY_PASSWORD')
     }
   }
   buildTypes {

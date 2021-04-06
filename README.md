@@ -18,17 +18,12 @@
 - `yarn android`
 
 #### Release Android beta
-- `KEYSTORE_PASSWORD=*** bundle exec fastlane android internal_beta`
+- place `release.keystore` file in `android/app/`
+- `KEYSTORE_PASSWORD=*** KEY_PASSWORD=*** bundle exec fastlane android internal_beta`
 - visit play store releases dashboard to finalize release (only if gradle versionName changes)
 
 #### Release iOS beta
 - `bundle exec fastlane ios beta`
 
-#### Android production release
-- `KEYSTORE_PASSWORD=*** bundle exec fastlane android production`
-- visit play store releases dashboard to finalize release
-
-#### iOS production release
-- `bundle exec fastlane ios production`
-- visit https://appstoreconnect.apple.com/ to finalize release
-
+#### Relase to production
+- beta builds can be released to production in the store dashboards
