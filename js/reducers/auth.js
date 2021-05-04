@@ -2,7 +2,6 @@
 // ~~~~~~~~~~~~~
 
 import {
-  ACTION_PRIME_ACTIVATED,
   ACTION_AUTH_RESET,
   ACTION_AUTH_GOOGLE_ATTEMPTED,
   ACTION_AUTH_APPLE_ATTEMPTED,
@@ -112,18 +111,6 @@ export default function auth(state = initialAuthState, action) {
         },
       }
       break;
-    case ACTION_PRIME_ACTIVATED:
-      return {
-        ...state,
-        commaUser: {
-          ...state.commaUser,
-          prime: true,
-        },
-        user: {
-          ...state.user,
-          prime: true,
-        }
-      }
     case ACTION_TERMS_ACCEPTED:
       return {
         ...state,

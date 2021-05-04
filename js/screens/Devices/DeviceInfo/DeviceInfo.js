@@ -567,16 +567,9 @@ class DeviceInfo extends Component {
                   Set device nickname
                 </X.Button>
                 { this.isSubscriptionActive() &&
-                  <X.Button
-                    size='small'
-                    style={ Styles.deviceSettingsPopoverItem }
-                    onPress={ () => {
-                      this.handleSettingsClosed();
-                      this.props.navigation.navigate('PrimeManage', { dongleId: device.dongle_id })
-                    } }
-                    >
-                    Manage comma prime
-                  </X.Button>
+                  <X.Text size='small' style={ Styles.deviceSettingsPopoverItem }>
+                    Go to my.comma.ai to manage your prime subscription
+                  </X.Text>
                 }
                 <X.Button
                   size='small'

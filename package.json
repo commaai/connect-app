@@ -27,9 +27,8 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "@commaai/comma-api": "^1.4.0",
+    "@commaai/comma-api": "^1.5.0",
     "@commaai/jsc-android": "^250230.0.0",
-    "@commaai/tipsi-stripe": "^7.5.6",
     "@expo/react-native-touchable-native-feedback-safe": "^1.1.2",
     "@invertase/react-native-apple-authentication": "^2.1.0",
     "@mapbox/mapbox-sdk": "^0.11.0",

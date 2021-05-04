@@ -8,7 +8,6 @@ export const ACTION_AUTH_GITHUB_ATTEMPTED = 'ACTION_AUTH_GITHUB_ATTEMPTED';
 export const ACTION_AUTH_SUCCEEDED = 'ACTION_AUTH_SUCCEEDED';
 export const ACTION_AUTH_FAILED = 'ACTION_AUTH_FAILED';
 export const ACTION_COMMA_USER_REFRESHED = 'ACTION_COMMA_USER_REFRESHED';
-export const ACTION_PRIME_ACTIVATED = 'ACTION_PRIME_ACTIVATED';
 export const ACTION_TERMS_REFRESHED = 'ACTION_TERMS_REFRESHED';
 export const ACTION_TERMS_ACCEPTED = 'ACTION_TERMS_ACCEPTED';
 
@@ -66,14 +65,6 @@ export function commaUserRefreshed() {
   return dispatch => {
     dispatch({
       type: ACTION_COMMA_USER_REFRESHED,
-    });
-  }
-}
-
-export function primeActivated() {
-  return dispatch => {
-    dispatch({
-      type: ACTION_PRIME_ACTIVATED,
     });
   }
 }
