@@ -571,7 +571,7 @@ class DeviceInfo extends Component {
                   <X.Button size='small' style={ Styles.deviceSettingsPopoverItem }
                     onPress={ () => Linking.openURL('https://my.comma.ai/') }
                   >
-                    Manage prime subscription in my.comma.ai
+                    Manage comma prime in explorer
                   </X.Button>
                 }
                 <X.Button
