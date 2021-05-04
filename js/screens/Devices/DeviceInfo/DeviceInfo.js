@@ -11,7 +11,8 @@ import {
   Keyboard,
   ActivityIndicator,
   TextInput,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Linking
 } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
@@ -567,9 +568,11 @@ class DeviceInfo extends Component {
                   Set device nickname
                 </X.Button>
                 { this.isSubscriptionActive() &&
-                  <X.Text size='small' style={ Styles.deviceSettingsPopoverItem }>
-                    Go to my.comma.ai to manage your prime subscription
-                  </X.Text>
+                  <X.Button size='small' style={ Styles.deviceSettingsPopoverItem }
+                    onPress={ () => Linking.openURL('https://my.comma.ai/') }
+                  >
+                    Manage prime subscription in my.comma.ai
+                  </X.Button>
                 }
                 <X.Button
                   size='small'
