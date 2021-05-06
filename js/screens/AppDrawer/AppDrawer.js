@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import DeviceInfo from 'react-native-device-info';
 import { NavigationActions } from 'react-navigation';
-import { ScrollView, View } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
 import { signOut } from '../../actions/async/Auth';
@@ -75,7 +75,7 @@ class AppDrawer extends Component {
             color='borderless'
             size='full'
             style={ Styles.appDrawerButton }
-            onPress={ this.navigateToScreen('PrimeSignup') }>
+            onPress={ () => Linking.openURL('https://my.comma.ai/') }>
             <X.Image
               source={ Assets.iconComma }
               style={ Styles.appDrawerButtonImage } />
@@ -83,7 +83,7 @@ class AppDrawer extends Component {
               color='white'
               size='small'
               weight='semibold'>
-              Activate comma prime
+              Open explorer
             </X.Text>
           </X.Button>
 

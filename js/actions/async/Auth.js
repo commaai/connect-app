@@ -10,9 +10,9 @@ import {
   athena as Athena,
   auth as CommaAuth,
   request as Request,
+  billing as Billing,
 } from '@commaai/comma-api';
 import * as Auth from '../../api/auth';
-import * as Billing from '../../api/billing';
 import errorHandler from '../../api/errorHandler';
 
 import * as NavigationService from '../../navigators/service';

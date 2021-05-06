@@ -6,7 +6,6 @@ import Obstruction from 'obstruction';
 
 import X from '../../theme';
 
-import * as BillingApi from '../../api/billing';
 import { fetchDeviceSubscription } from '../../actions/async/Devices';
 import { Assets } from '../../constants';
 import Page from '../../components/Page';

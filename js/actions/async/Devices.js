@@ -5,8 +5,8 @@ import * as Sentry from '@sentry/react-native';
 import {
   devices as DevicesApi,
   athena as AthenaApi,
+  billing as BillingApi,
 } from '@commaai/comma-api';
-import * as BillingApi from '../../api/billing';
 import * as Geocoding from '../../api/geocoding';
 
 import {

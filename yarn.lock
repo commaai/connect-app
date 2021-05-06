@@ -648,10 +648,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@commaai/comma-api@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@commaai/comma-api/-/comma-api-1.4.0.tgz#680bd9cb8a726d2bbee96c331da4551e6e980b6b"
-  integrity sha512-qHu/d+xMH+vvOP6y/9U5QRyrfO/4piLyAqb3WOU1yo+v6b5dYMzrFJET/qLdz328PRhAQxcacPMY7hHAHDDndQ==
+"@commaai/comma-api@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@commaai/comma-api/-/comma-api-1.5.0.tgz#add983e8c004433d78a806d974701689297fc0ed"
+  integrity sha512-d2+9k2IBJcth9hzRL+sTuPuV8fuPXySpfkB6B01VeOdZ6JVJByv9jcFd5D+7YeLyg/jh0DSKXqjFNb95jNuuSA==
   dependencies:
     babel-runtime "^6.26.0"
     config-request "^0.5.1"
@@ -662,11 +662,6 @@
   version "250230.0.0"
   resolved "https://registry.yarnpkg.com/@commaai/jsc-android/-/jsc-android-250230.0.0.tgz#be98b887ead57d663295850af7424e5e59720433"
   integrity sha512-YSjdlSoAdOoFahQW7FIrUcRQzeuCf4aFVO2qWbLLJGfk+wbre9XXJHHyXDMSaMCwPhIQZmoBiniSiSbsSbGKPQ==
-
-"@commaai/tipsi-stripe@^7.5.6":
-  version "7.5.6"
-  resolved "https://registry.yarnpkg.com/@commaai/tipsi-stripe/-/tipsi-stripe-7.5.6.tgz#aa11d052be2a07ad83170b3939d56a7b08894b80"
-  integrity sha512-ahDMcbjE1ICJoSRTRKfETU7n6w04EpZ0WPDyPyLJMVsZ3IYp7hjI8zu2/HrhRZIFDdBBgg34KpCQIBkU9nKBaw==
 
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"

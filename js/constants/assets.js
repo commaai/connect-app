@@ -30,8 +30,6 @@ export default {
   drawingEon: require('../assets/drawing_eon_01.png'),
   drawingPanda: require('../assets/drawing_panda_01.png'),
   placeholderCar: require('../assets/placeholder_car_01.png'),
-  applePayMark: require('../assets/applepay.png'),
-  googlePayMark: require('../assets/googlepay.png'),
   photoSetupEonVideo: require('../assets/photo_installation_video_01.png'),
   carLogos: carLogos,
   Compass: compass,
