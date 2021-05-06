@@ -247,32 +247,22 @@ class DeviceInfo extends Component {
         </View>
       );
     } else {
-      let primeUpsell = 'Upgrade today!';
-      if (this.isTrialClaimable()) {
-        if (this.claimEndDate()) {
-          primeUpsell = `Claim your trial before ${this.claimEndDate()}`;
-        } else {
-          primeUpsell = 'Claim your trial today!';
-        }
-      }
       return (
         <View style={ Styles.deviceInfoCover }>
           <View
             key='device_cover'
             style={ Styles.deviceInfoCoverPhoto }>
                 { !this.state.isUpdatingSnapshot &&
-                  <TouchableWithoutFeedback onPress={ () => navigate('PrimeSignup', { dongleId: this.dongleId() }) }>
-                    <X.Text
-                      color='white'
-                      size='small'
-                      style={ Styles.deviceInfoCoverMessage }>
-                      { this.isSubscriptionActive() ? (
-                        'Make sure this device is powered on.'
-                      ) : (
-                        `Camera snapshots only available with comma prime. ${ primeUpsell }`
-                      ) }
-                    </X.Text>
-                </TouchableWithoutFeedback>
+                  <X.Text
+                    color='white'
+                    size='small'
+                    style={ Styles.deviceInfoCoverMessage }>
+                    { this.isSubscriptionActive() ? (
+                      'Make sure this device is powered on.'
+                    ) : (
+                      'Camera snapshots only available with comma prime.'
+                    ) }
+                  </X.Text>
                 }
           </View>
         </View>
@@ -567,13 +557,6 @@ class DeviceInfo extends Component {
                   onPress={ this.handleSettingsSetAliasPressed }>
                   Set device nickname
                 </X.Button>
-                { this.isSubscriptionActive() &&
-                  <X.Button size='small' style={ Styles.deviceSettingsPopoverItem }
-                    onPress={ () => Linking.openURL('https://my.comma.ai/') }
-                  >
-                    Manage comma prime in explorer
-                  </X.Button>
-                }
                 <X.Button
                   size='small'
                   style={ Styles.deviceSettingsPopoverItem }

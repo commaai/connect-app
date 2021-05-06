@@ -193,11 +193,7 @@ function mapDispatchToProps(dispatch) {
           dispatch(fetchDeviceSubscription(dongleId))
         ]);
       }).then(([device, deviceSubscription]) => {
-        if (deviceSubscription && deviceSubscription.trial_claimable) {
-          navigation.navigate('PrimeSignup', { dongleId: device.dongle_id });
-        } else {
-          navigation.navigate('AppDrawer');
-        }
+        navigation.navigate('AppDrawer');
       })
     }
   })
