@@ -64,6 +64,9 @@ class SetupEonPairing extends Component {
   }
 
   handleScannedQRCode(e) {
+    if (!e.data) {
+      return;
+    }
     Vibration.vibrate();
 
     this.setState({
@@ -80,10 +83,12 @@ class SetupEonPairing extends Component {
       serial = qrDataSplit[1];
       pairToken = qrDataSplit.slice(2).join('--');
     }
-    if(imei === undefined || serial === undefined) {
+    if (imei === undefined || serial === undefined) {
       this.setState({attemptingPair: false});
+    } else {
+      this.props.pilotPair(imei,serial,pairToken,this.props.navigation)
+        .catch(err => this.setState({ attemptingPair: false, err: err }));
     }
-    this.props.pilotPair(imei,serial,pairToken,this.props.navigation).catch(err => this.setState({attemptingPair: false, err: err}));
   }
 
   render() {
