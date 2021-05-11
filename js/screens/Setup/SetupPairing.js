@@ -64,7 +64,12 @@ class SetupEonPairing extends Component {
   }
 
   handleScannedQRCode(e) {
-    if (!e.data) {
+    let code = null;
+    if (e.data) {
+      code = e.data;
+    } else if (e.barcodes && e.barcodes.length && e.barcodes[0].data) {
+      code = e.barcodes[0].data;
+    } else {
       return;
     }
     Vibration.vibrate();
@@ -74,7 +79,7 @@ class SetupEonPairing extends Component {
     });
 
     let imei, serial, pairToken;
-    let qrDataSplit = e.data.split('--');
+    let qrDataSplit = code.split('--');
     if (qrDataSplit.length === 2) {
       imei = qrDataSplit[0];
       serial = qrDataSplit[1];
@@ -132,8 +137,11 @@ class SetupEonPairing extends Component {
               <RNCamera
                 ref={ ref => this.cameraRef = ref }
                 style={ { flex: 1, width: '119%', marginLeft: '-9.5%' } }
-                onBarCodeRead={ !attemptingPair ? this.handleScannedQRCode : null }
-                barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+                onBarCodeRead={ (!attemptingPair && Platform.OS !== 'android') ? this.handleScannedQRCode : null }
+                barCodeTypes={[ RNCamera.Constants.BarCodeType.qr ]}
+                onGoogleVisionBarcodesDetected={
+                  (!attemptingPair && Platform.OS === 'android') ? this.handleScannedQRCode : null }
+                googleVisionBarcodeType={ RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.QR_CODE }
                 captureAudio={ false } />
             </X.Entrance>
             <View style={ Styles.setupEonPairingInstruction }>
