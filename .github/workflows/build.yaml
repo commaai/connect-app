@@ -36,4 +36,4 @@ jobs:
         if: steps.bundler-cache.outputs.cache-hit != 'true'
         run: bundle install --jobs 4 --retry 3
       - name: Build
-        run: bundle exec fastlane android build
+        run: bundle exec fastlane android test_build

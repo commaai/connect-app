@@ -34,9 +34,9 @@ platform :android do
     upload_to_play_store(track: options[:track], package_name: "ai.comma.connect", json_key_data: ENV['PLAY_STORE_KEY'])
   end
 
-  lane :build do
+  lane :test_build do
     gradle(task: "clean", project_dir: 'android/')
-    gradle(task: "assembleRelease", project_dir: 'android/')
+    gradle(task: "assembleDebug", project_dir: 'android/')
   end
 end
 
