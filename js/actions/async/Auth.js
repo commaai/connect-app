@@ -1,7 +1,6 @@
 // Auth Async Actions
 // ~~~~~~~~~~~~~~~~~~
 
-import { LaunchArguments } from "react-native-launch-arguments";
 import Segment from '@segment/analytics-react-native';
 import * as Sentry from '@sentry/react-native';
 
@@ -130,8 +129,6 @@ export function attemptGithubAuth() {
 export function rehydrateAuth() {
   return async (dispatch, getState) => {
     let { commaUser, googleUser, appleUser, githubUser } = getState().auth;
-    const launchArgs = LaunchArguments.value();
-    const hasJwtArg = launchArgs.hasOwnProperty('jwt');
 
     await dispatch(refreshTerms());
 
@@ -143,9 +140,6 @@ export function rehydrateAuth() {
       });
       Segment.identify(commaUser.id, { username: commaUser.username });
       jwt = commaUser.accessToken;
-    } else if (hasJwtArg) {
-      dispatch(termsAccepted(getState().auth.terms.version));
-      jwt = launchArgs['jwt'];
     }
 
     if (jwt) {

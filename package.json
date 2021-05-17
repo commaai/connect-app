@@ -60,7 +60,6 @@
     "react-native-device-info": "^1.4.1",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-get-random-values": "^1.6.0",
-    "react-native-launch-arguments": "^2.0.0",
     "react-native-localize": "^2.0.2",
     "react-native-permissions": "^2.2.2",
     "react-native-popover-view": "^3.1.1",
