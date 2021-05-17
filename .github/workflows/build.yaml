@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   run-test:
-    runs-on: macOS-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
       - name: Cache ruby dependencies
@@ -21,12 +21,6 @@ jobs:
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Cache pods
-        uses: actions/cache@v1
-        id: pods-cache
-        with:
-          path: ios
-          key: ${{ runner.os }}-podfile-${{ hashFiles('**/Podfile.lock') }}
       - name: Yarn Install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
@@ -37,9 +31,5 @@ jobs:
       - name: Bundle install
         if: steps.bundler-cache.outputs.cache-hit != 'true'
         run: bundle install --jobs 4 --retry 3
-      - name: Pods install
-        if: steps.pods-cache.outputs.cache-hit != 'true'
-        working-directory: ios
-        run: bundle exec pod install
       - name: Build
-        run: bundle exec fastlane ios build_for_testing
+        run: bundle exec fastlane android build_for_testing
