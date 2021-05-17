@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
+      - name: Set up Ruby 2.7
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
       - name: Cache ruby dependencies
         uses: actions/cache@v1
         id: bundler-cache
