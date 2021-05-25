@@ -6,7 +6,6 @@ import Obstruction from 'obstruction';
 
 import X from '../../theme';
 
-import { fetchDeviceSubscription } from '../../actions/async/Devices';
 import { Assets } from '../../constants';
 import Page from '../../components/Page';
 import Styles from './ConfirmStyles';

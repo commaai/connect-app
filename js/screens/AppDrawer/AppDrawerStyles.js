@@ -25,20 +25,6 @@ export default StyleSheet.create({
     marginTop: 18,
     marginBottom: 3,
   },
-  appDrawerPrimeBar: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.25)',
-    borderColor: 'rgba(255, 255, 255, 0.05)',
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    height: 50,
-    paddingLeft: '10%',
-  },
-  appDrawerPrimeBarImage: {
-    height: 18,
-    marginRight: 12,
-    maxWidth: 20,
-  },
   appDrawerButton: {
     alignItems: 'center',
     borderColor: 'rgba(255, 255, 255, 0.05)',

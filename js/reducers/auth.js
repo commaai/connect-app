@@ -79,7 +79,6 @@ export default function auth(state = initialAuthState, action) {
           comma_points: commaUser.points,
           superuser: commaUser.superuser,
           reg_date: commaUser.regdate,
-          prime: commaUser.prime,
           photo: googleUser && googleUser.user.photo,
           first_name: googleUser && googleUser.user.givenName,
           last_name: googleUser && googleUser.user.familyName,

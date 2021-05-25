@@ -22,7 +22,6 @@ import {
   deviceUnpaired,
   deviceSnapshotsUpdated,
   deviceCarHealthUpdated,
-  deviceSubscriptionFetched,
 } from '../Devices';
 
 export function fetchDevices() {
@@ -41,7 +40,6 @@ export function fetchDevices() {
       }, {});
       dispatch(devicesFetched(devicesById));
       dispatch(fetchDeviceLocations());
-      dispatch(fetchDeviceSubscriptions());
     }).catch((err) => {
       console.log('fetchDevices failed', err);
       Sentry.captureException(err);
@@ -61,15 +59,6 @@ export function fetchDeviceLocations() {
   }
 }
 
-export function fetchDeviceSubscriptions() {
-  return (dispatch, getState) => {
-    const { devices } = getState().devices;
-
-    Object.values(devices).map((device) => {
-      dispatch(fetchDeviceSubscription(device.dongle_id));
-    });
-  }
-}
 export function fetchDeviceLocation(dongleId) {
   return (dispatch, getState) => {
     const { devices } = getState().devices;
@@ -85,23 +74,6 @@ export function fetchDeviceLocation(dongleId) {
         console.log('fetchDeviceLocations failed', err);
         dispatch(deviceLocationFetchFailed(dongleId));
     })
-  }
-}
-
-export function fetchDeviceSubscription(dongleId) {
-  return async (dispatch, getState) => {
-    try {
-      const sub = await BillingApi.getSubscription(dongleId);
-      dispatch(deviceSubscriptionFetched(dongleId, sub));
-      return sub;
-    } catch(err) {
-      if (err.status_code === 404) {
-        dispatch(deviceSubscriptionFetched(dongleId, null));
-      } else {
-        console.log(`fetchDeviceSubscription(${dongleId}) failed`, err.message, err.status_code);
-      }
-      return null;
-    }
   }
 }
 

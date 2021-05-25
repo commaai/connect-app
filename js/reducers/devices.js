@@ -17,7 +17,6 @@ import {
   ACTION_DEVICE_UNPAIRED,
   ACTION_DEVICE_SNAPSHOT_UPDATED,
   ACTION_DEVICE_CAR_HEALTH_UPDATED,
-  ACTION_DEVICE_SUBSCRIPTION_FETCHED,
 } from '../actions/Devices';
 
 import {
@@ -36,7 +35,6 @@ const initialDevicesState = {
   deviceLocations: {},
   deviceSnapshots: {},
   activeDeviceLocationFetches: {},
-  subscriptions: {},
 };
 
 export default function devices(state = initialDevicesState, action) {
@@ -129,7 +127,6 @@ export default function devices(state = initialDevicesState, action) {
         devices: removeKey(state.devices, action.payload.dongleId),
         deviceLocations: removeKey(state.deviceLocations, action.payload.dongleId),
         devicesDriveTimeSorted: state.devicesDriveTimeSorted.filter(dongleId => dongleId !== action.payload.dongleId),
-        subscriptions: removeKey(state.subscriptions, action.payload.dongleId)
       }
     case ACTION_DEVICE_SNAPSHOT_UPDATED:
       return {
@@ -146,14 +143,6 @@ export default function devices(state = initialDevicesState, action) {
             carHealth: action.payload.carHealth.pandaState,
           },
         },
-      }
-    case ACTION_DEVICE_SUBSCRIPTION_FETCHED:
-      return {
-        ...state,
-        subscriptions: {
-          ...state.subscriptions,
-          [action.payload.dongleId]: action.payload.subscription
-        }
       }
     case REHYDRATE:
       if (action.key === 'devices') {

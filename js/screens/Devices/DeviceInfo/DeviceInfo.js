@@ -23,7 +23,6 @@ import { selectDrive, fetchDrives } from '../../../actions/async/Drives';
 import {
   fetchDevice,
   fetchDeviceStats,
-  fetchDeviceSubscription,
   fetchDeviceLocation,
   unpairDevice,
   takeDeviceSnapshot,
@@ -65,19 +64,6 @@ class DeviceInfo extends Component {
     return this.props.devices.devices[dongleId];
   }
 
-  subscription() {
-    let sub = this.props.devices.subscriptions[this.dongleId()];
-    if (sub) {
-      return sub;
-    } else {
-      return null;
-    }
-  }
-
-  isSubscriptionActive() {
-    return this.subscription() !== null;
-  }
-
   async componentDidMount() {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     this._handleKeyboardDidHide = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide);
@@ -105,7 +91,6 @@ class DeviceInfo extends Component {
   }
 
   async takeSnapshot() {
-    if (!this.isSubscriptionActive()) { return; }
     this.setState({ isUpdatingSnapshot: true });
     await this.props.takeDeviceSnapshot(this.dongleId());
     this.setState({ isUpdatingSnapshot: false });
@@ -194,14 +179,6 @@ class DeviceInfo extends Component {
     );
   }
 
-  claimEndDate() {
-    if (this.subscription() && this.subscription().trial_claim_end) {
-      return moment.unix(this.subscription().trial_claim_end).format("MMMM Do")
-    } else {
-      return null;
-    }
-  }
-
   renderDeviceCover = () => {
     const { navigate } = this.props.navigation;
     const { snapshotPipState } = this.state;
@@ -209,7 +186,7 @@ class DeviceInfo extends Component {
     const { user } = this.props.auth;
     const snapshot = deviceSnapshots[this.dongleId()];
 
-    if (typeof snapshot !== 'undefined' && this.isSubscriptionActive()) {
+    if (typeof snapshot !== 'undefined') {
       return (
         <View style={ [Styles.deviceInfoCover] }>
           <View
@@ -222,7 +199,7 @@ class DeviceInfo extends Component {
               <X.Button
                 style={ [
                   Styles.deviceInfoCoverBarButton,
-                  (this.isSubscriptionActive() && snapshotPipState !== 'back' && Styles.deviceInfoCoverBarButtonDisabled)
+                  (snapshotPipState !== 'back' && Styles.deviceInfoCoverBarButtonDisabled)
                 ] }
                 size='small'
                 color='white'
@@ -233,11 +210,10 @@ class DeviceInfo extends Component {
               <X.Button
                 style={ [
                   Styles.deviceInfoCoverBarButton,
-                  (this.isSubscriptionActive() && snapshotPipState !== 'front' && Styles.deviceInfoCoverBarButtonDisabled)
+                  (snapshotPipState !== 'front' && Styles.deviceInfoCoverBarButtonDisabled)
                 ] }
                 size='small'
                 color='white'
-                isDisabled={ !this.isSubscriptionActive() }
                 activeOpacity={ snapshotPipState === 'front' ? 1.0 : 0.8 }
                 onPress={ () => this.setState({ snapshotPipState: 'front' })}>
                 Interior Camera
@@ -256,12 +232,9 @@ class DeviceInfo extends Component {
                   <X.Text
                     color='white'
                     size='small'
-                    style={ Styles.deviceInfoCoverMessage }>
-                    { this.isSubscriptionActive() ? (
-                      'Make sure this device is powered on.'
-                    ) : (
-                      'Camera snapshots only available with comma prime.'
-                    ) }
+                    style={ Styles.deviceInfoCoverMessage }
+                  >
+                    Make sure this device is powered on.
                   </X.Text>
                 }
           </View>
@@ -490,10 +463,6 @@ class DeviceInfo extends Component {
     return item;
   }
 
-  isTrialClaimable() {
-    return this.subscription() && this.subscription().trial_claimable;
-  }
-
   render() {
     const { deviceSettingsIsOpen, isEditingTitle, editedDeviceTitle } = this.state;
     const { devices } = this.props.devices;
@@ -621,7 +590,6 @@ function mapDispatchToProps(dispatch) {
       await dispatch(fetchDeviceStats(dongleId));
       await dispatch(fetchDeviceLocation(dongleId));
       await dispatch(fetchDrives(dongleId));
-      await dispatch(fetchDeviceSubscription(dongleId));
     },
     setDeviceAlias: (dongleId, alias) => dispatch(setDeviceAlias(dongleId, alias)),
     unpairDevice: (dongleId) => dispatch(unpairDevice(dongleId)),

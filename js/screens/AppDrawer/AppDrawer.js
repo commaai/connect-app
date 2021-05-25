@@ -59,20 +59,6 @@ class AppDrawer extends Component {
           ) : null }
         </View>
         <View style={ Styles.appDrawerNavigation }>
-          { auth.user.prime && (
-            <View>
-              <View style={ Styles.appDrawerPrimeBar }>
-                <X.Image
-                  source={ Assets.commaWhite }
-                  style={ Styles.appDrawerPrimeBarImage } />
-                <X.Text
-                  color='white'
-                  size='small'>
-                  comma prime
-                </X.Text>
-              </View>
-            </View>
-          ) }
           <X.Button
             color='borderless'
             size='full'

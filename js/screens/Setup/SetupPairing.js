@@ -12,7 +12,7 @@ import { Assets } from '../../constants';
 import X from '../../theme';
 import Styles from './SetupStyles';
 import { Page, Alert, Spinner } from '../../components';
-import { pilotPair, fetchDevices, fetchDevice, fetchDeviceSubscription } from '../../actions/async/Devices';
+import { pilotPair, fetchDevices, fetchDevice } from '../../actions/async/Devices';
 
 const PERMISSION_CAMERA = Platform.select({
   android: PERMISSIONS.ANDROID.CAMERA,
@@ -203,9 +203,8 @@ function mapDispatchToProps(dispatch) {
         dispatch(fetchDevices());
         return Promise.all([
           dispatch(fetchDevice(dongleId)),
-          dispatch(fetchDeviceSubscription(dongleId))
         ]);
-      }).then(([device, deviceSubscription]) => {
+      }).then(([device]) => {
         navigation.navigate('AppDrawer');
       })
     }

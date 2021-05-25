@@ -17,17 +17,6 @@ export const ACTION_DEVICE_STATS_FETCHED = 'ACTION_DEVICE_STATS_FETCHED';
 export const ACTION_DEVICE_UNPAIRED = 'ACTION_DEVICE_UNPAIRED';
 export const ACTION_DEVICE_SNAPSHOT_UPDATED = 'ACTION_DEVICE_SNAPSHOT_UPDATED';
 export const ACTION_DEVICE_CAR_HEALTH_UPDATED = 'ACTION_DEVICE_CAR_HEALTH_UPDATED';
-export const ACTION_DEVICE_SUBSCRIPTION_FETCHED = 'ACTION_DEVICE_SUBSCRIPTION_FETCHED';
-
-export function deviceSubscriptionFetched(dongleId, subscription) {
-  return {
-    type: ACTION_DEVICE_SUBSCRIPTION_FETCHED,
-    payload: {
-      dongleId,
-      subscription,
-    }
-  }
-}
 
 export function resetDevices() {
   return {
