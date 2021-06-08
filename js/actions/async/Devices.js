@@ -77,14 +77,14 @@ export function fetchDeviceLocation(dongleId) {
   }
 }
 
-export function pilotPair(imei, serial, pairToken) {
+export function pilotPair(pairToken) {
   return async dispatch => {
     try {
-      const resp = await DevicesApi.pilotPair(imei, serial, pairToken);
+      const resp = await DevicesApi.pilotPair(pairToken);
       return JSON.parse(resp).dongle_id;
     } catch(err) {
       Sentry.captureException(err);
-      console.log('pilotPair failed', {imei, serial, pairToken}, err);
+      console.log('pilotPair failed', { pairToken }, err);
       throw err;
     }
   }

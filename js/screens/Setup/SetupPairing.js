@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import qs from 'query-string';
 import { View, Vibration, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
@@ -78,32 +79,31 @@ class SetupEonPairing extends Component {
       attemptingPair: true,
     });
 
-    let imei, serial, pairToken;
-    let qrDataSplit = code.split('--');
-    if (qrDataSplit.length === 2) {
-      imei = qrDataSplit[0];
-      serial = qrDataSplit[1];
-    } else if (qrDataSplit.length >= 3) {
-      imei = qrDataSplit[0];
-      serial = qrDataSplit[1];
-      pairToken = qrDataSplit.slice(2).join('--');
+    let pairToken;
+    try {
+      if (code.startsWith('https://')) {
+        pairToken = qs.parse(code.split('?')[1]).pair;
+      } else {
+        let qrDataSplit = code.split('--');
+        pairToken = qrDataSplit.slice(2).join('--');
+      }
+    } catch (err) {
+      this.setState({ pairError: `Could not parse QR: ${err.message}` });
+      return;
     }
-    if (imei === undefined || serial === undefined) {
-      this.setState({attemptingPair: false});
+
+    if (pairToken) {
+      this.props.pilotPair(pairToken, this.props.navigation)
+        .catch(err => this.setState({ attemptingPair: false, pairError: `Unable to pair: ${err.message}` }));
     } else {
-      this.props.pilotPair(imei,serial,pairToken,this.props.navigation)
-        .catch(err => this.setState({ attemptingPair: false, err: err }));
+      this.setState({ attemptingPair: false, pairError: 'Invalid QR code detected' });
     }
   }
 
   render() {
     const { navigate } = this.props.navigation;
-    const {
-      wantsCameraPermissions,
-      hasCameraPermissions,
-      deniedCameraPermission,
-      attemptingPair,
-    } = this.state;
+    const { wantsCameraPermissions, hasCameraPermissions, deniedCameraPermission, attemptingPair,
+      pairError } = this.state;
 
     if (attemptingPair) {
       return (
@@ -111,6 +111,17 @@ class SetupEonPairing extends Component {
           <Spinner spinnerMessage='Pairing Device...' />
         </View>
       )
+    } else if (pairError) {
+      return (
+        <Page headerIconLeftAsset={ Assets.iconChevronLeft } headerIconLeftAction={ () => navigate('AppDrawer') }>
+          <View style={ Styles.setupEonPairingContainer }>
+            <X.Entrance style={ { height: '100%' } }>
+              <Alert title='Error' message={ pairError } confirmButtonAction={ () => this.setState({ pairError: null }) }
+                confirmButtonTitle='Try again' />
+            </X.Entrance>
+          </View>
+        </Page>
+      );
     } else if (deniedCameraPermission) {
       return (
         <Page
@@ -198,8 +209,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return ({
-    pilotPair: function(imei,serial,pairToken,navigation) {
-      return dispatch(pilotPair(imei,serial,pairToken)).then((dongleId) => {
+    pilotPair: function(pairToken, navigation) {
+      return dispatch(pilotPair(pairToken)).then((dongleId) => {
         dispatch(fetchDevices());
         return Promise.all([
           dispatch(fetchDevice(dongleId)),
