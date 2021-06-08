@@ -180,7 +180,6 @@ export function refreshTerms() {
     try {
       const resp = await fetch('https://chffrdist.blob.core.windows.net/connect/terms.json?t=' + Date.now());
       const terms = (await resp.json());
-      console.log({terms})
       dispatch(termsRefreshed(terms));
       console.log('terms refreshed');
     } catch(error) {

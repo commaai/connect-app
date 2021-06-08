@@ -51,6 +51,7 @@ if (!__DEV__) {
 
 import { AppRegistry } from 'react-native';
 import App from './js/App';
+import ShareView from './js/screens/ShareView/';
 
 AppRegistry.registerComponent("connect", () => App);
-
+// AppRegistry.registerComponent("ShareMenuModuleComponent", () => ShareView);

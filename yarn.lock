@@ -6818,6 +6818,11 @@ react-native-screens@^2.18.1:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
 
+react-native-share-menu@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-share-menu/-/react-native-share-menu-5.0.4.tgz#886828bc9d99fabc826e259a1ab8ee372f7d8686"
+  integrity sha512-0tDcqKuA96VZtMcXrE8weu40iN79bbvnVRv++P04xCQutjYHWcCqJ3KPHdw8Beil4zreh02bQhUfLQnsjjkq1g==
+
 react-native-svg-transformer@^0.12.1:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/react-native-svg-transformer/-/react-native-svg-transformer-0.12.1.tgz#9546b65f5829e9f85c2951186a67e72e9a4c79ab"
