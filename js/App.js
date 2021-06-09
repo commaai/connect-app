@@ -6,20 +6,19 @@
  * @flow
  */
 
-import React, { Component, Platform } from 'react';
-import { AppState, StatusBar } from 'react-native';
+import React, { Component } from 'react';
+import { AppState, StatusBar, Linking } from 'react-native';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
-import { persistStore, autoRehydrate } from 'redux-persist'
-import FilesystemStorage from 'redux-persist-filesystem-storage'
+import { persistStore } from 'redux-persist'
 import reduxPerfMiddleware from './utils/reduxPerfMiddleware';
 import RootReducer from './reducers';
 import { rehydrateAuth } from './actions/async/Auth';
-import { fetchDevices } from './actions/async/Devices';
-import { resetAuth } from './actions/Auth';
 import { watchPosition } from './utils/location';
 import NavAppContainer from './navigators/app';
+import ShareMenu from 'react-native-share-menu';
+import { setShareState } from './actions/share';
 
 // Redux
 function createAppStore(shouldAutoRehydrate = true) {
@@ -58,15 +57,47 @@ export default class App extends Component {
       this.initStore(err, newState)
     });
     this._handleAppStateChange = this._handleAppStateChange.bind(this);
+
+    this.shareListener = null;
+    this.shareCallback = this.shareCallback.bind(this);
+    this.linkingCallback = this.linkingCallback.bind(this);
   }
 
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
     watchPosition(this.store.dispatch);
+
+    ShareMenu.getInitialShare(this.shareCallback);
+    this.shareListener = ShareMenu.addNewShareListener(this.shareCallback);
+    Linking.getInitialURL()
+      .then((url) => this.linkingCallback({ url }))
+      .catch(console.log);
+    Linking.addEventListener('url', this.linkingCallback);
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);
+
+    if (this.shareListener) {
+      this.shareListener.remove();
+    }
+  }
+
+  shareCallback(share) {
+    if (share && share.data) {
+      console.log("share", share);
+      this.store.dispatch(setShareState(share));
+    }
+  }
+
+  linkingCallback(link) {
+    console.log(link);
+    if (link && link.url) {
+      this.store.dispatch(setShareState({
+        data: link.url,
+        mimeType: 'application/geo',
+      }));
+    }
   }
 
   _handleAppStateChange(appState) {

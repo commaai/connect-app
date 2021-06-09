@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, LogBox } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
+
 import { rehydrateAuth } from '../../actions/async/Auth';
 import X from '../../theme';
 import { Spinner } from '../../components';
@@ -16,7 +17,7 @@ class AppLoader extends Component {
 
   componentDidMount() {
     const { commaUser, terms, acceptedTermsVersion } = this.props.auth;
-    console.log({terms, acceptedTermsVersion})
+    console.log({ terms: terms.version, acceptedTermsVersion })
     if(commaUser) {
       if (terms && terms.version > acceptedTermsVersion) {
         this.props.navigation.navigate('Terms');

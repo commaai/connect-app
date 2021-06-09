@@ -7,6 +7,7 @@ import auth from './auth';
 import drives from './drives';
 import location from './location';
 import devices from './devices';
+import share from './share';
 
 const persistConfig = (key, options) => ({
     key,
@@ -20,6 +21,7 @@ const RootReducer = combineReducers({
   drives: persistReducer(persistConfig('drives', { blacklist: ['isFetchingDrives'] }), drives),
   location,
   devices: persistReducer(persistConfig('devices', { blacklist: ['isFetchingDevices', 'activeDeviceLocationFetches']}), devices),
+  share,
 });
 
 export default RootReducer;

@@ -65,6 +65,7 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^2.18.1",
+    "react-native-share-menu": "^5.0.4",
     "react-native-svg": "^9.3.7",
     "react-native-video": "^5.0.2",
     "react-navigation": "^4.3.9",

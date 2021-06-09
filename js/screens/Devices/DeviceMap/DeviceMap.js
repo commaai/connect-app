@@ -438,6 +438,7 @@ class DeviceMap extends Component {
             maxZoomLevel={19}
             ref={ ref => this.camRef = ref }
           />
+          <MapboxGL.UserLocation />
         </MapboxGL.MapView>
         <View style={ Styles.mapHeader }>
           <X.Button
