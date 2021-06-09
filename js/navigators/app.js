@@ -23,7 +23,7 @@ class AppContainerNavigator extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.share && this.props.share) {
+    if ((!prevProps.share || !prevProps.share.data) && (this.props.share && this.props.share.data)) {
       this.navContainer.dispatch(NavigationActions.navigate({ routeName: 'Share' }));
     }
   }

@@ -12,6 +12,12 @@ class ShareView extends Component {
     this.state = {};
   }
 
+  componentDidUpdate() {
+    if (!this.props.share || !this.props.share.data) {
+      this.props.navigation.navigate('DeviceMap');
+    }
+  }
+
   render() {
     let share;
     if (this.state.share && this.state.share.data) {
@@ -22,7 +28,6 @@ class ShareView extends Component {
     }
 
     if (!share) {
-      this.props.navigation.navigate('DeviceMap');
       return null;
     }
 
@@ -33,6 +38,7 @@ class ShareView extends Component {
         <Text>
           { share.data }
         </Text>
+        <Button title="dismiss" onPress={ () => this.props.dispatch(resetShareState()) }></Button>
         {/* <Button
           title="Dismiss"
           onPress={() => {
