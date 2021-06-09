@@ -1,6 +1,11 @@
 import { Platform } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { userLocationUpdated }  from '../actions/location';
+
+Geolocation.setRNConfiguration({
+  authorizationLevel: 'whenInUse',
+});
+
 let watchId = null;
 
 export function watchPosition(dispatch) {

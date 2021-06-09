@@ -1,10 +1,10 @@
 // Navigators
 import React, { Component } from 'react';
 import Segment from '@segment/analytics-react-native';
+import { connect } from 'react-redux';
 import AppSwitchNavigator from './AppSwitchNavigator';
 import * as NavigationService from './service';
 import { createAppContainer, NavigationActions } from 'react-navigation';
-import ShareMenu from 'react-native-share-menu';
 
 const AppContainer = createAppContainer(AppSwitchNavigator);
 
@@ -16,25 +16,14 @@ class AppContainerNavigator extends Component {
 
     this.navigationStateChange = this.navigationStateChange.bind(this);
     this.getActiveRouteName = this.getActiveRouteName.bind(this);
-
-    this.shareListener = null;
-    this.shareCallback = this.shareCallback.bind(this);
   }
 
   componentDidMount() {
-    ShareMenu.getInitialShare(this.shareCallback);
-    this.shareListener = ShareMenu.addNewShareListener(this.shareCallback);
+    this.componentDidUpdate({});
   }
 
-  componentWillUnmount() {
-    if (this.shareListener) {
-      this.shareListener.remove();
-    }
-  }
-
-  shareCallback(share) {
-    if (share && share.data) {
-      console.log("share", share);
+  componentDidUpdate(prevProps) {
+    if (!prevProps.share && this.props.share) {
       this.navContainer.dispatch(NavigationActions.navigate({ routeName: 'Share' }));
     }
   }
@@ -68,4 +57,11 @@ class AppContainerNavigator extends Component {
   }
 }
 
-export default AppContainerNavigator;
+function mapStateToProps(state) {
+  const { share } = state;
+  return {
+    share,
+  };
+}
+
+export default connect(mapStateToProps)(AppContainerNavigator);

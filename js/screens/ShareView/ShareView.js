@@ -1,20 +1,39 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { Text, View, Button } from "react-native";
-import {ShareMenuReactView} from 'react-native-share-menu';
+import { ShareMenuReactView } from 'react-native-share-menu';
+import { withNavigation } from 'react-navigation';
+import { setShareState, resetShareState } from '../../actions/share';
 
 class ShareView extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {};
   }
 
   render() {
-    // if (!this.state.share) {
-    //   return null;
-    // }
+    let share;
+    if (this.state.share && this.state.share.data) {
+      share = this.state.share;
+    }
+    if (this.props.share && this.props.share.data) {
+      share = this.props.share;
+    }
+
+    if (!share) {
+      this.props.navigation.navigate('DeviceMap');
+      return null;
+    }
+
+    console.log(share);
 
     return (
       <View>
-        <Button
+        <Text>
+          { share.data }
+        </Text>
+        {/* <Button
           title="Dismiss"
           onPress={() => {
             ShareMenuReactView.dismissExtension();
@@ -47,10 +66,17 @@ class ShareView extends Component {
         />
         { this.state.share.mimeType === "text/plain" &&
           <Text>{ this.state.share.data }</Text>
-        }
+        } */}
       </View>
     );
   }
 }
 
-export default ShareView;
+function mapStateToProps(state) {
+  const { share } = state;
+  return {
+    share,
+  };
+}
+
+export default connect(mapStateToProps)(withNavigation(ShareView));
