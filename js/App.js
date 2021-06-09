@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppState, StatusBar } from 'react-native';
+import { AppState, StatusBar, Linking } from 'react-native';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
@@ -60,6 +60,7 @@ export default class App extends Component {
 
     this.shareListener = null;
     this.shareCallback = this.shareCallback.bind(this);
+    this.linkingCallback = this.linkingCallback.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +69,10 @@ export default class App extends Component {
 
     ShareMenu.getInitialShare(this.shareCallback);
     this.shareListener = ShareMenu.addNewShareListener(this.shareCallback);
+    Linking.getInitialURL()
+      .then((url) => this.linkingCallback({ url }))
+      .catch(console.log);
+    Linking.addEventListener('url', this.linkingCallback);
   }
 
   componentWillUnmount() {
@@ -82,6 +87,16 @@ export default class App extends Component {
     if (share && share.data) {
       console.log("share", share);
       this.store.dispatch(setShareState(share));
+    }
+  }
+
+  linkingCallback(link) {
+    console.log(link);
+    if (link && link.url) {
+      this.store.dispatch(setShareState({
+        data: link.url,
+        mimeType: 'application/geo',
+      }));
     }
   }
 
