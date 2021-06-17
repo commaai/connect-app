@@ -231,8 +231,6 @@ PODS:
     - React
   - react-native-get-random-values (1.6.0):
     - React-Core
-  - react-native-launch-arguments (2.0.0):
-    - React
   - react-native-mapbox-gl (8.1.0):
     - "@react-native-mapbox-gl-mapbox-static (~> 5.9.0)"
     - Mapbox-iOS-SDK (~> 5.9.0)
@@ -383,7 +381,6 @@ DEPENDENCIES:
   - react-native-camera (from `../node_modules/react-native-camera`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
-  - react-native-launch-arguments (from `../node_modules/react-native-launch-arguments`)
   - "react-native-mapbox-gl (from `../node_modules/@react-native-mapbox-gl/maps`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-video (from `../node_modules/react-native-video`)
@@ -474,8 +471,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
-  react-native-launch-arguments:
-    :path: "../node_modules/react-native-launch-arguments"
   react-native-mapbox-gl:
     :path: "../node_modules/@react-native-mapbox-gl/maps"
   react-native-safe-area-context:
@@ -565,7 +560,6 @@ SPEC CHECKSUMS:
   react-native-camera: f432fcf1b32b528bbf7c3543d3e3b1deb0c5b72a
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-get-random-values: f0fc24a5887a3341589515a86282a574407b59e4
-  react-native-launch-arguments: f218fbbf86570d5828668bd7365d015061de42b8
   react-native-mapbox-gl: eec7e5be5b874cfceb79fcfe24d595411015153a
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   react-native-video: 0bb76b6d6b77da3009611586c7dbf817b947f30e
