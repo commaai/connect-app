@@ -16,6 +16,7 @@ class AppLoader extends Component {
 
   componentDidMount() {
     const { commaUser, terms, acceptedTermsVersion } = this.props.auth;
+
     console.log({terms, acceptedTermsVersion})
     if(commaUser) {
       if (terms && terms.version > acceptedTermsVersion) {
@@ -26,6 +27,18 @@ class AppLoader extends Component {
     } else {
       this.props.navigation.navigate('AuthIntro');
     }
+
+    fetch('https://raw.githubusercontent.com/commaai/connect/master/motd', {
+      method: 'GET',
+    }).then((resp) => {
+      if (resp.ok) {
+        resp.json().then((json) => {
+          if (json && json.eol === true) {
+            this.props.navigation.navigate('MOTD');
+          }
+        }).catch(() => {});
+      }
+    }).catch(() => {});
   }
 
   render() {

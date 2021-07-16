@@ -42,7 +42,6 @@
     "@turf/centroid": "^6.0.2",
     "@turf/helpers": "^6.1.4",
     "comma-x-native": "https://github.com/commaai/comma-x-native.git#master",
-    "config-request": "^0.5.1",
     "joi-browser": "^13.4.0",
     "lottie-ios": "3.1.8",
     "lottie-react-native": "^3.5.0",
